@@ -27,6 +27,10 @@ This is the backend for the Flask React project.
    ```
 
    ```bash
+   flask db downgrade
+   ```
+
+   ```bash
    flask db upgrade
    ```
 
