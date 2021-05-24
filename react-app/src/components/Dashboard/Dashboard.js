@@ -1,9 +1,17 @@
 import React from 'react';
+import { useState } from 'react'
 
 import './Dashboard.css';
 
 
 function Dashboard() {
+    const [listForm, setListForm] = useState(false);
+    const [newList, setNewList] = useState('');
+
+    const addList = () => {
+        setListForm(!listForm)
+    }
+
     return (
         <>
             <div className="dashboard-container">
@@ -37,6 +45,7 @@ function Dashboard() {
                             <button className="portfolio-timeline-options btn">1M</button>
                             <button className="portfolio-timeline-options btn">1Y</button>
                             <button className="portfolio-timeline-options btn">ALL</button>
+
                         </div>
                         <div className="buying-power">
                             <span>Buying Power</span>
@@ -73,13 +82,42 @@ function Dashboard() {
                                 </div>
                             </div>
 
-                            <div className="all-stocks-header">
-                                <span>Lists</span>
-                                <button className="btn" type="button">
-                                    <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
-                                    </svg>
-                                </button>
+                            <div className="all-stocks__list-container">
+
+                                <div className="all-stocks__list-header">
+                                    <span>Lists</span>
+                                    <button className="btn" type="button" onClick={addList}>
+                                        <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div className="all-stocks__list-each">
+                                    {listForm &&
+                                        <form className="new-list-form">
+                                            
+                                            <input
+                                                name='list'
+                                                placeholder="List Name"
+                                                value={newList}
+                                                onChange={e => setNewList(e.target.value)}
+                                            >
+                                            </input>
+                                            <footer>
+                                                <button className="list-form-btn" type="button">
+                                                    Cancel
+                                                </button>
+                                                <button className="list-form-btn" type="submit">
+                                                    Create List
+                                                </button>
+
+                                            </footer>
+                                        </form>
+
+                                    }
+
+                                </div>
                             </div>
 
                         </div>
