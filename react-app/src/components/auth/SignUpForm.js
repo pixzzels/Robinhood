@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { login } from "../../store/session";
+import './Form.css';
 
 const SignUpForm = () => {
+  const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -19,6 +22,12 @@ const SignUpForm = () => {
       await dispatch(signUp(firstName, lastName, email, password));
     }
   };
+
+  const demoUser = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data.errors) setErrors(data.errors);
+  }
 
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -45,55 +54,69 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        <label>First Name</label>
-        <input
-          type="text"
-          name="first_name"
-          onChange={updateFirstName}
-          value={firstName}
-        ></input>
-      </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="last_name"
-          onChange={updateLastName}
-          value={lastName}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    <div className='form-wrapper'>
+      <h2>Welcome To Robinhood</h2>
+
+      <form onSubmit={onSignUp}>
+        <div>
+          <label></label>
+          <input
+            type="text"
+            name="first_name"
+            onChange={updateFirstName}
+            value={firstName}
+            placeholder="First name"
+          ></input>
+        </div>
+        <div>
+          <label></label>
+          <input
+            type="text"
+            name="last_name"
+            onChange={updateLastName}
+            value={lastName}
+            placeholder="Last name"
+          ></input>
+        </div>
+        <div>
+          <label></label>
+          <input
+            type="text"
+            name="email"
+            onChange={updateEmail}
+            value={email}
+            placeholder="Email"
+          ></input>
+        </div>
+        <div>
+          <label></label>
+          <input
+            type="password"
+            name="password"
+            onChange={updatePassword}
+            value={password}
+            placeholder="Password"
+          ></input>
+        </div>
+        <div>
+          <label></label>
+          <input
+            type="password"
+            name="repeat_password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+            placeholder="Confirm password"
+          ></input>
+        </div>
+        <button type="submit">Sign Up</button>
+        <button type="submit" onClick={demoUser}>Demo User</button>
+        <div>Have an account?
+          <a href="/login" className="redirect-link"> Log in</a>
+        </div>
+      </form>
+
+    </div>
   );
 };
 

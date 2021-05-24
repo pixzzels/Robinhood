@@ -1,0 +1,6 @@
+.form-wrapper{
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(30, 1fr)
+}
