@@ -1,42 +1,71 @@
 .nav-wrapper {
-    border: 2px solid red;
-
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(11, 1fr) 140px;
     grid-template-rows: 1fr;
     height: 3.5em;
-    padding: 2px;
+    width: 100%;
+    padding: 0 24px;
+    padding-top: 2px;
+    box-shadow: 0px 0 5px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    background-color: white;
+
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link > * {
+    text-decoration: none;
+    color:black;
+    font-size: 1.2em;
+}
+
+.greens > *:hover {
+    color: limegreen;  
 }
 
 #home-link{
-  border: 2px solid red;
-
   grid-column: 1/3;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  position: absolute;
 }
 
 #logo-black{
-  height: 80px;
+  height: 30px;
   width: auto;
 }
 
 #contact-link{
   grid-column: 4/5;
-
+  font-weight: bold;
 }
 
 #about-link{
-  grid-column: 5/6;
-
+  grid-column: 5/7;
+  font-weight: bold;
+  margin-right: 30px;
 }
 
 #login-link{
   grid-column: 11/12;
+  font-weight: 900;
+  margin-left: 30px;
 }
 
 #signup-link{
   grid-column: 12/13;
+  font-weight: 900;
+  margin: 5px 0px;
+  justify-content: center;
+  background-color: #00C805;
+  border-radius: 30px;
 }
+
+#signup-link:hover {
+    background-color: #00B405;
+}
+
+/* #signup-link > * {
+  height: 10px;
+} */

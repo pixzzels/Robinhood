@@ -2,5 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 * {
-  font-family:Capsule Sans Display;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body, ul, div, nav {
+    padding: 0px;
+    margin: 0px;
+}
+
+button:hover {
+    cursor: pointer;
 }

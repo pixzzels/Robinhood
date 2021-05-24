@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
-import logo from '../../images/logo-black-rm.png';
+import logo from '../../images/logo-black-small.png';
 
 const NavBar = () => {
-  const user = useSelector(state => state.session.user);
+  // const user = useSelector(state => state.session.user);
 
-  const logoutLink = (
-    <>
-      <LogoutButton />
-    </>
-  )
+  // const logoutLink = (
+  //   <>
+  //     <LogoutButton />
+  //   </>
+  // )
 
-  let linkDisplay;
-  user ? linkDisplay = logoutLink : linkDisplay = ""
+  // let linkDisplay;
+  // user ? linkDisplay = logoutLink : linkDisplay = ""
 
   return (
     <nav className="nav-wrapper">
@@ -26,19 +26,19 @@ const NavBar = () => {
       </div>
 
       {/* links to profile ? drop down ??? */}
-      <div className="nav-link" id="contact-link">
+      <div className="nav-link greens" id="contact-link">
         <NavLink to="/contactus" exact={true} activeClassName="active">
           Contact us
         </NavLink>
       </div>
 
-      <div className="nav-link" id="about-link">
+      <div className="nav-link greens" id="about-link">
         <NavLink to="/whoweare" exact={true} activeClassName="active">
           Who we are
         </NavLink>
       </div>
 
-      <div className="nav-link" id="login-link">
+      <div className="nav-link greens" id="login-link">
         <NavLink to="/login" exact={true} activeClassName="active">
           Login
         </NavLink>
@@ -49,9 +49,9 @@ const NavBar = () => {
           Sign Up
         </NavLink>
       </div>
-      <div>
+      {/* <div>
         {linkDisplay}
-      </div>
+      </div> */}
     </nav>
   );
 }
