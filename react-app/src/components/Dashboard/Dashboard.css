@@ -1,3 +1,24 @@
 .dashboard-container {
-    color: red;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 135.5px;
+    padding: 36px 0px 0px;
+    position: relative;
+}
+
+.portfolio-container {
+    border: 1px solid green;
+    width: 40vh;
+    height: 800px;
+    /* margin: 20px; */
+    padding: 0px 6px;
+}
+
+.watchlist-container {
+    border: 1px solid blue;
+    width: 30vh;
+    height: 500px;
+    position: sticky;
+    top: 50px;
+    padding: 24px;
 }

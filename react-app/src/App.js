@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import SplashPage from "./components/SplashPage";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/stocks" exact={true} >
           <h1>Edit this later</h1>
+        </ProtectedRoute>
+        <ProtectedRoute path="/dashboard" exact={true} >
+          <Dashboard />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
