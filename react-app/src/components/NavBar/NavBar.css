@@ -1,12 +1,15 @@
 .nav-wrapper {
-    border: 2px solid red;
-
     display: grid;
     grid-template-columns: repeat(11, 1fr) 140px;
     grid-template-rows: 1fr;
     height: 3.5em;
-    padding: 2px;
-    margin: 0 24px;
+    width: 100%;
+    padding: 0 24px;
+    padding-top: 2px;
+    box-shadow: 0px 0 5px rgba(0, 0, 0, 0.4);
+    position: fixed;
+    background-color: white;
+
 }
 
 .nav-link {
@@ -25,7 +28,6 @@
 }
 
 #home-link{
-  border: 2px solid red;
   grid-column: 1/3;
 }
 
