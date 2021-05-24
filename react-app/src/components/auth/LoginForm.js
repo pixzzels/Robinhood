@@ -45,41 +45,41 @@ const LoginForm = () => {
       </div>
 
       <form className='form-container' onSubmit={onLogin}>
-        <h2 className='form-text__container'>Welcome back</h2>
+        <h2 className='form-text'>Welcome to Robinhood</h2>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
           ))}
         </div>
 
-        <div className='form-fill__container'>
+        <div>
           <div>
             <label htmlFor="email">Email</label>
-            <input
-              name="email"
-              type="text"
-              value={email}
-              onChange={updateEmail}
-            />
           </div>
+          <input
+            name="email"
+            type="text"
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div>
           <div>
             <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              value={password}
-              onChange={updatePassword}
-            />
           </div>
+          <input
+            name="password"
+            type="password"
+            value={password}
+            onChange={updatePassword}
+          />
         </div>
 
-        <div className="form-btn__container">
-          <button type="submit">Sign In</button>
-          <button type="submit" onClick={demoUser}>Demo User</button>
-          <div>Don't have an account?
+        <div className='redirect-text'>Don't have an account?
           <a href="/sign-up" className="redirect-link"> Sign up</a>
-          </div>
         </div>
+        <button className='form-btn' type="submit">Sign In</button>
+        <button className='form-btn' type="submit" onClick={demoUser}>Demo User</button>
 
       </form>
 

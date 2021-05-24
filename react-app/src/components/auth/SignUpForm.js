@@ -61,7 +61,7 @@ const SignUpForm = () => {
       </div>
 
       <form className='form-container' onSubmit={onSignUp}>
-        <h2 className='form-text__container'>Welcome to Robinhood</h2>
+        <h2 className='form-text'>Welcome to Robinhood</h2>
         <div>
           <label></label>
           <input
@@ -113,11 +113,11 @@ const SignUpForm = () => {
             placeholder="Confirm password"
           ></input>
         </div>
-        <button type="submit">Sign Up</button>
-        <button type="submit" onClick={demoUser}>Demo User</button>
-        <div>Have an account?
+        <div className='redirect-text'>Have an account?
           <a href="/login" className="redirect-link"> Log in</a>
         </div>
+        <button className='form-btn' type="submit">Sign Up</button>
+        <button className='form-btn' type="submit" onClick={demoUser}>Demo User</button>
 
       </form>
 

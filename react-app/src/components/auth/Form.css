@@ -21,22 +21,68 @@
 .form-container{
   grid-column: 2/3;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 25px;
+  margin-left: 18px;
+}
+
+.form-text{
+  font-size: 1.3em;
+  font-weight: 900;
+}
+
+input{
+  width: 30em;
+  height: 2.5em;
+  border-radius: 4px;
+  border: 1px rgb(228, 228, 228) solid;
+  margin: 10px 0px;
+  transition: all 0.1s ease;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(34, 221, 66, 0.7);
+}
+
+label{
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.redirect-text{
+  color: black;
+  font-weight: 900;
+  font-size: 13px;
+  margin: 5px 0px 80px 0px;
+}
+
+.redirect-link{
+  color: #00C805;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.redirect-link:hover{
+  color: #00A303;
 }
 
 
-
-.form-text__container{
-  grid-row: 1/2;
+.form-btn{
+  border: none;
+  border-radius: 5px;
+  background-color: #00C805;
+  color: white;
+  font-weight: bolder;
+  width: 9.5em;
+  padding: 1em 1.1em;
+  margin-top: 10px;
+  
 }
 
-.form-fill__container{
-  grid-row: 2/4;
-}
-
-.form-btn__container{
-  grid-row: 4/5;
+.form-btn:hover{
+  background-color: #00B803;
 }
