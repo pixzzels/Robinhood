@@ -5,10 +5,22 @@
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
     height: 3.5em;
+    padding: 2px;
 }
 
 #home-link{
+  border: 2px solid red;
+
   grid-column: 1/3;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  position: absolute;
+}
+
+#logo-black{
+  height: 80px;
+  width: auto;
 }
 
 #contact-link{

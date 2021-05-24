@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
+import logo from '../../images/logo-black-rm.png';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
-  const logo = require("../../images/logo-black.png")
-
 
   const logoutLink = (
     <>
@@ -22,7 +21,7 @@ const NavBar = () => {
     <nav className="nav-wrapper">
       <div className="nav-link" id="home-link">
         <NavLink to="/" exact={true} activeClassName="active">
-          <img src={logo} alt='logo'></img>
+          <img src={logo} alt='logo' id='logo-black'></img>
         </NavLink>
       </div>
 
