@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import './Form.css';
+import formImg from "../../images/login-img.png"
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -39,38 +40,49 @@ const LoginForm = () => {
 
   return (
     <div className='form-wrapper'>
-      <h2>Welcome To Robinhood</h2>
+      <div className='form-image__container'>
+        <img alt='login image' className='form-image' src={formImg}></img>
+      </div>
 
-      <form onSubmit={onLogin}>
+      <form className='form-container' onSubmit={onLogin}>
+        <h2 className='form-text__container'>Welcome back</h2>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
           ))}
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            type="text"
-            value={email}
-            onChange={updateEmail}
-          />
+
+        <div className='form-fill__container'>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              name="email"
+              type="text"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            value={password}
-            onChange={updatePassword}
-          />
+
+        <div className="form-btn__container">
           <button type="submit">Sign In</button>
           <button type="submit" onClick={demoUser}>Demo User</button>
           <div>Don't have an account?
           <a href="/sign-up" className="redirect-link"> Sign up</a>
           </div>
         </div>
+
       </form>
+
     </div>
   );
 };

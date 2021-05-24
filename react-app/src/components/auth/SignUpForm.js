@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { login } from "../../store/session";
 import './Form.css';
+import formImg from "../../images/login-img.png"
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -55,9 +56,12 @@ const SignUpForm = () => {
 
   return (
     <div className='form-wrapper'>
-      <h2>Welcome To Robinhood</h2>
+      <div className='form-image__container'>
+        <img alt='login image' className='form-image' src={formImg}></img>
+      </div>
 
-      <form onSubmit={onSignUp}>
+      <form className='form-container' onSubmit={onSignUp}>
+        <h2 className='form-text__container'>Welcome to Robinhood</h2>
         <div>
           <label></label>
           <input
@@ -114,6 +118,7 @@ const SignUpForm = () => {
         <div>Have an account?
           <a href="/login" className="redirect-link"> Log in</a>
         </div>
+
       </form>
 
     </div>
