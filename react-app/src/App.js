@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
+import SplashPage from "./components/SplashPage";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -15,7 +16,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -29,6 +30,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path="/" exact={true}>
+          <SplashPage />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -36,13 +40,13 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path="/users" exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} >
-          <h1>My Home Page</h1>
+        <ProtectedRoute path="/stocks" exact={true} >
+          <h1>Edit this later</h1>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
