@@ -1,0 +1,8 @@
+.nav-wrapper {
+    border: 2px solid red;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    height: 3.5em;
+}

@@ -1,4 +1,5 @@
-import './SplashPage.css'
+import React from 'react';
+import './SplashPage.css';
 
 function SplashPage() {
   return (
