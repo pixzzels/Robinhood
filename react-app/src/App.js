@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import SplashPage from "./components/SplashPage";
+import Dashboard from "./components/Dashboard";
 import PageNotFound from "./components/PageNotFound";
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/stocks" exact={true} >
           <h1>Edit this later</h1>
+        </ProtectedRoute>
+        <ProtectedRoute path="/dashboard" exact={true} >
+          <Dashboard />
         </ProtectedRoute>
         <Route>
           <PageNotFound />

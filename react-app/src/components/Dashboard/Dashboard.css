@@ -1,0 +1,33 @@
+.dashboard-container {
+    margin: 0px 40.5px;
+    padding: 36px 0px 0px;
+    position: relative;
+}
+
+.div-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px -6px;
+}
+
+.grey {
+    background-color: rgb(240, 240, 240);
+}
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* -------------------------------------------------------------- */
+
+.btn {
+    background-color: #FFFFFF;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
