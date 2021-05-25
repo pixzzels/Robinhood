@@ -9,9 +9,18 @@ import './Dashboard.css';
 function Dashboard() {
     const [listForm, setListForm] = useState(false);
     const [newList, setNewList] = useState('');
+    const [bpDivExpand, setbpDivExpand] = useState(false);
 
     const addList = () => {
         setListForm(!listForm)
+    }
+
+    const buyingPowerExpand = () => {
+        setbpDivExpand(!bpDivExpand)
+    }
+
+    const bpLearnMore = () => {
+        
     }
 
     return (
@@ -42,19 +51,44 @@ function Dashboard() {
 
                         </div>
                         <div className="portfolio-timeline-bar">
-                            <button className="portfolio-timeline-options btn">1D</button>
-                            <button className="portfolio-timeline-options btn">1W</button>
-                            <button className="portfolio-timeline-options btn">1M</button>
-                            <button className="portfolio-timeline-options btn">1Y</button>
-                            <button className="portfolio-timeline-options btn">ALL</button>
+                            <button className="portfolio-timeline-options btn tlbtn">1D</button>
+                            <button className="portfolio-timeline-options btn tlbtn">1W</button>
+                            <button className="portfolio-timeline-options btn tlbtn">1M</button>
+                            <button className="portfolio-timeline-options btn tlbtn">1Y</button>
+                            <button className="portfolio-timeline-options btn tlbtn">ALL</button>
 
                         </div>
-                        <div className="buying-power">
-                            <span>Buying Power</span>
-                            <span>$3034.76</span>
-                        </div>
+                        <button className="buying-power-container-btn" type="button" onClick={buyingPowerExpand}>
+                            <div className={"buying-power-header " + (bpDivExpand ? 'grey' : '')}>
+                                <span>Buying Power</span>
+                                {/* <span>$3034.76</span> */}
+                                <span className={"buying-power-number " + (bpDivExpand ? 'hidden' : '')}>$3034.76</span>
+                            </div>
+                        </button>
+                            {bpDivExpand &&
+                                <div className="buying-power-add grey">
+                                    <div className="buying-power-mini-container">
+                                        <div className="buying-power__2">
+                                            <span>Brokerage Power</span>
+                                            <span>$3034.76</span>
+                                        </div>
+                                        <div className="buying-power__2">
+                                            <span>Buying Power</span>
+                                            <span>$3034.76</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="buying-power__info">
+                                        Buying Power represents the total value of stocks you can purchase.
+                                        <button 
+                                        className="buying-power__learn-more-btn"
+                                        type="button"
+                                        onClick={bpLearnMore}
+                                        >Learn More</button>
+                                    </div>
+                                </div>
+                            }
                     </div>
-
 
                     <div className="watchlist-container">
                         <div className="all-stocks-container">
@@ -98,8 +132,9 @@ function Dashboard() {
                                 <div className="all-stocks__list-each">
                                     {listForm &&
                                         <form className="new-list-form">
-                                            
+
                                             <input
+                                                className="new-list-input"
                                                 name='list'
                                                 placeholder="List Name"
                                                 value={newList}
