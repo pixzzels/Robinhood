@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addOneList, loadAllList } from '../../store/watchlist';
 import List from '../List';
+import StockList from '../StockList';
 import './Watchlist.css';
 
 function Watchlist() {
@@ -37,32 +38,25 @@ function Watchlist() {
   return (
     < div className="watchlist-container" >
 
-      <div className="all-stocks-header">
-        <span>Stocks</span>
-        <button className="all-stocks-header-btn btn">
-          <svg fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.5 10.5H3.5V13.5H6.5V10.5Z" fill="grey"></path>
-            <path d="M13.5 10.5H10.5V13.5H13.5V10.5Z" fill="grey"></path>
-            <path d="M17.5 10.5H20.5V13.5H17.5V10.5Z" fill="grey"></path>
-          </svg>
-        </button>
+      <div className="watchlist__stocks-wrapper">
+
+        <div className="watchlist__stock-header">
+          <span>Stocks</span>
+          <button className="all-stocks-header-btn btn">
+            <svg fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 10.5H3.5V13.5H6.5V10.5Z" fill="grey"></path>
+              <path d="M13.5 10.5H10.5V13.5H13.5V10.5Z" fill="grey"></path>
+              <path d="M17.5 10.5H20.5V13.5H17.5V10.5Z" fill="grey"></path>
+            </svg>
+          </button>
+        </div>
+
+        <StockList />
       </div>
 
-      <div className="all-stock__stock">
-        <div className="stock-name-shares-owned">
-          <span>APPL</span>
-          <span>3 Shares</span>
-        </div>
-        <div className="all-stock__graph-container">:)</div>
-        <div className="all-stock_current-price">
-          <span>$127.02</span>
-          <span>-3.29%</span>
-        </div>
-      </div>
 
-      <div className="all-stocks__list-container">
-
-        <div className="all-stocks__list-header">
+      <div className="watchlist__list-wrapper">
+        <div className="watchlist__list-header">
           <span>Lists</span>
           <button className="btn" type="button" onClick={addList}>
             <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +65,7 @@ function Watchlist() {
           </button>
         </div>
 
-        <div className="all-stocks__list-each">
+        <div>
           {listForm &&
 
             <form className="new-list-form" onSubmit={handleListSubmit}>
@@ -91,16 +85,11 @@ function Watchlist() {
           }
         </div>
 
-
         {allLists && allLists.map((list) => {
           return (
-            <>
-              <List list={list} />
-            </>
+            <List list={list} />
           )
         })}
-
-
       </div>
 
     </div >

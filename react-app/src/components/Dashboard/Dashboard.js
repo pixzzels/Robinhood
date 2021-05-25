@@ -8,16 +8,18 @@ function Dashboard() {
 
 	return (
 		<>
-			<div className="dashboard-container">
+			<div className="dashboard-container__wrapper">
 				{/* <h1>Hello Dashboard</h1> */}
-				<div className="div-row">
+				<div className="dashboard__portfolio-wrapper">
 
 					<Portfolio />
-					<Watchlist />
 
 				</div>
+				<div className="dashboard__watchlist-wrapper">
+					<Watchlist />
+				</div>
+
 			</div>
-			<button>Testing Here</button>
 		</>
 	)
 }
