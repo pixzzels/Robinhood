@@ -17,7 +17,7 @@ export const addOneList = (listName) => async (dispatch) => {
   const { name, user_id } = listName;
   // console.log("test", name, user_id)
 
-  const response = await csrfFetch(`/api/dashboard/watchlist`, {
+  const response = await csrfFetch(`/api/dashboard/watchlist/add`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
