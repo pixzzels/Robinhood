@@ -2,12 +2,18 @@ import { csrfFetch } from './csrf';
 
 
 /* -----action verbs-------------------------------------------------- */
-const ADD_LIST = "dashboard/ADD_LIST";
+const ADD_LIST = "watchlist/ADD_LIST";
+const LOAD_LIST = "watchlist/LOAD_LIST";
 
 
 /* -----action creator-------------------------------------------------- */
 const addList = (list) => ({
   type: ADD_LIST,
+  list
+})
+
+const loadList = (list) => ({
+  type: LOAD_LIST,
   list
 })
 
@@ -34,10 +40,28 @@ export const addOneList = (listName) => async (dispatch) => {
   return data;
 }
 
+export const loadAllList = () => async (dispatch) => {
+  // console.log("HELLO WORLD")
+
+  const response = await fetch(`/api/dashboard/watchlist`, {
+    headers: { 'Content-Type': 'application/json' }
+  })
+
+  if (!response.ok) {
+    throw response
+  }
+
+  const data = await response.json();
+
+  console.log("DATA", data)
+  dispatch(loadList(data));
+  return data;
+}
+
 
 
 /* -----reducer-------------------------------------------------- */
-const initialState = [];
+const initialState = {};
 
 const listReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -48,6 +72,11 @@ const listReducer = (state = initialState, action) => {
       };
       return newState;
 
+    case LOAD_LIST:
+      const newState2 = {
+        ...state
+      }
+      return newState2;
     default:
       return state;
   }

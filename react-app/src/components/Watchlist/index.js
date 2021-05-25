@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addOneList } from '../../store/watchlist';
+import { addOneList, loadAllList } from '../../store/watchlist';
 import './Watchlist.css';
 
 function Watchlist() {
   const dispatch = useDispatch();
   const user_id = useSelector(state => state.session.user.id)
 
+  const allLists = useSelector(state => state.watchlist)
+
+  // console.log("Watchlist", allLists)
+
   const [listForm, setListForm] = useState(false);
   const [newList, setNewList] = useState('');
 
   // console.log('new list!', newList)
+
+  useEffect(() => {
+    dispatch(loadAllList())
+  }, [dispatch])
 
   const addList = () => {
     setListForm(!listForm)
@@ -18,7 +26,7 @@ function Watchlist() {
 
   const handleListSubmit = (e) => {
     e.preventDefault();
-    console.log("hello")
+    // console.log("hello")
     const name = newList;
     // console.log("=====", name, user_id)
     dispatch(addOneList({ name, user_id }));
