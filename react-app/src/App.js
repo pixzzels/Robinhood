@@ -30,8 +30,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar isloaded={loaded}/>
-      {loaded && (
         <Switch>
           <Route path="/" exact={true}>
             <SplashPage />
@@ -42,24 +40,16 @@ function App() {
           <Route path="/sign-up" exact={true}>
             <SignUpForm />
           </Route>
-          {/* <ProtectedRoute path="/users" exact={true} >
-            <UsersList />
-          </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId" exact={true} >
-            <User />
-          </ProtectedRoute> */}
           <ProtectedRoute path="/stocks" exact={true} >
             <h1>Edit this later</h1>
           </ProtectedRoute>
           <ProtectedRoute path="/dashboard" exact={true} >
-            {/* <NavBar /> */}
             <Dashboard />
           </ProtectedRoute>
           <Route>
             <PageNotFound />
           </Route>
         </Switch>
-      )}
     </BrowserRouter>
   );
 }

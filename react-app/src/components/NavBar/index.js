@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <nav className="nav-wrapper">
       <div className="nav-link" id="home-link">
-        <NavLink to="/" exact={true} activeClassName="active">
+        <NavLink to="/dashboard" exact={true} activeClassName="active">
           <img src={blackleaf} alt='black leaf logo' id='blackleaf'></img>
         </NavLink>
       </div>
