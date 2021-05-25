@@ -10,45 +10,6 @@
     margin: 0px -6px;
 }
 
-.portfolio-container {
-    /* border: 1px solid green; */
-    width: 80vh;
-    height: 800px;
-    /* margin: 20px; */
-    padding: 0px 6px;
-}
-
-.portfolio-timeline-bar {
-    margin-top: 15px;
-    border-bottom: 1px solid rgb(227,233,237);
-
-}
-
-.buying-power-container-btn {
-    background-color: #FFFFFF;
-    border: none;
-    width: 100%;
-    font-size: 15px;
-}
-
-.buying-power-container-btn:hover {
-    background-color: rgb(240, 240, 240);
-}
-
-.buying-power-header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(227,233,237);
-    padding: 24px 24px;
-}
-
-.buying-power-add {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 24px;
-
-}
-
 .grey {
     background-color: rgb(240, 240, 240);
 }
@@ -57,166 +18,16 @@
     display: none;
 }
 
-.buying-power-mini-container {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-
-}
-
-.buying-power__info {
-    padding-left: 36px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: left;
-    width: 50%;
-}
-
-.buying-power__learn-more-btn {
-    border: 0px;
-    font-weight: bold;
-    font-size: 15px;
-    color: rgb(124, 201, 10);
-}
-
-.buying-power__2 {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.deposit-funds-btn {
-    background-color: #00C804;
-    border: 0px;
-    color: white;
-    font-weight: bold;
-    padding: 0px 48px;
-    border-radius: 3px;
-    height: 48px;
-}
-
 .bold {
     font-weight: bold;
 }
 
-.deposit-funds-form {
-    margin: 20px;
-}
-
-.depost-funds-form__input {
-    width: 100%;
-}
-
-
-/* ------------------------------------------------------------------ */
-
-.total-investment {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 0px 0px 12px;
-    border-bottom: 1px dotted grey;
-}
-
-.watchlist-container {
-    /* border: 1px solid blue; */
-    width: auto;
-    height: 500px;
-    position: sticky;
-    top: 50px;
-    margin-right: 24px;
-
-    box-shadow: 5px 5px 10px 5px #b6b6b6;
-    border-top: 1px solid rgb(209, 209, 209);
-
-}
-
-
-.all-stocks-header {
-    display: flex;
-    /* flex-direction: row; */
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    padding: 4px 24px 0px;
-    border-bottom: 1px solid rgb(227,233,237);
-}
+/* -------------------------------------------------------------- */
 
 .btn {
     background-color: #FFFFFF;
     border: none;
     font-size: 15px;
     font-weight: bold;
-}
+  }
 
-.btn:hover {
-    background-color: pink;
-}
-
-.all-stock__stock {
-    padding: 0px 24px;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    font-size: 13px;
-    line-height: 20px;
-    border-bottom: 1px solid rgb(227,233,237);
-
-}
-
-.stock-name-shares-owned {
-    display: flex;
-    flex-direction: column;
-}
-
-.all-stock__graph-container {
-    width: 70px;
-
-    /* border: 1px solid red; */
-}
-
-.all-stock_current-price {
-    display: flex;
-    flex-direction: column;
-}
-
-.all-stocks__list-header {
-    display: flex;
-    /* flex-direction: row; */
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    padding: 4px 24px 0px;
-    border-bottom: 1px solid rgb(227,233,237);
-}
-
-/* -----FORM------------------------------------------------------ */
-
-.new-list-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.new-list-input {
-    width: auto;
-}
-
-.list-form-btn {
-    background-color: none;
-    border: 1px solid  rgb(227,233,237);
-    border-radius: 3px;
-    font-size: 13px;
-    padding: 0px 24px;
-    height: 36px;
-}
-
-.list-form-btn:hover {
-    background-color: rgb(130, 231, 130);
-}
-
-.tlbtn {
-    margin: 0px 12px;
-    padding: 2px 0px 12px;
-}
