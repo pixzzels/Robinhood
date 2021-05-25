@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
+// import UsersList from "./components/UsersList";
+// import User from "./components/User";
 import { authenticate } from "./store/session";
 import SplashPage from "./components/SplashPage";
 import Dashboard from "./components/Dashboard";
 import PageNotFound from "./components/PageNotFound";
+import StockDetail from "./components/StockDetail/index";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -40,8 +40,8 @@ function App() {
           <Route path="/sign-up" exact={true}>
             <SignUpForm />
           </Route>
-          <ProtectedRoute path="/stocks" exact={true} >
-            <h1>Edit this later</h1>
+          <ProtectedRoute path="/stocks/:ticker" exact={true} >
+            <StockDetail />
           </ProtectedRoute>
           <ProtectedRoute path="/dashboard" exact={true} >
             <Dashboard />
