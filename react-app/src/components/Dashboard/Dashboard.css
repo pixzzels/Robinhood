@@ -1,24 +1,33 @@
 .dashboard-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 0px 135.5px;
+    margin: 0px 40.5px;
     padding: 36px 0px 0px;
     position: relative;
 }
 
-.portfolio-container {
-    border: 1px solid green;
-    width: 40vh;
-    height: 800px;
-    /* margin: 20px; */
-    padding: 0px 6px;
+.div-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px -6px;
 }
 
-.watchlist-container {
-    border: 1px solid blue;
-    width: 30vh;
-    height: 500px;
-    position: sticky;
-    top: 50px;
-    padding: 24px;
+.grey {
+    background-color: rgb(240, 240, 240);
 }
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* -------------------------------------------------------------- */
+
+.btn {
+    background-color: #FFFFFF;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+  }
+

@@ -1,0 +1,89 @@
+.portfolio-container {
+  /* border: 1px solid green; */
+  width: 80vh;
+  height: 800px;
+  /* margin: 20px; */
+  padding: 0px 6px;
+}
+
+.total-investment {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0px 0px 12px;
+  border-bottom: 1px dotted grey;
+}
+
+.portfolio-timeline-bar {
+  margin-top: 15px;
+  border-bottom: 1px solid rgb(227,233,237);
+}
+
+.buying-power-container-btn {
+  background-color: #FFFFFF;
+  border: none;
+  width: 100%;
+  font-size: 15px;
+}
+
+.buying-power-container-btn:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.buying-power-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(227,233,237);
+  padding: 24px 24px;
+}
+
+.buying-power-add {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 24px;
+}
+
+.buying-power-mini-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.buying-power__info {
+  padding-left: 36px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: left;
+  width: 50%;
+}
+
+.buying-power__learn-more-btn {
+  border: 0px;
+  font-weight: bold;
+  font-size: 15px;
+  color: rgb(124, 201, 10);
+}
+
+.buying-power__2 {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.deposit-funds-btn {
+  background-color: #00C804;
+  border: 0px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 48px;
+  border-radius: 3px;
+  height: 48px;
+}
+
+.deposit-funds-form {
+  margin: 20px;
+}
+
+.depost-funds-form__input {
+  width: 100%;
+}
