@@ -10,6 +10,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import SplashPage from "./components/SplashPage";
 import Dashboard from "./components/Dashboard";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -52,6 +53,9 @@ function App() {
         <ProtectedRoute path="/dashboard" exact={true} >
           <Dashboard />
         </ProtectedRoute>
+        <Route>
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
