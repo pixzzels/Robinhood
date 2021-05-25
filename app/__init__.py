@@ -33,12 +33,9 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-<<<<<<< HEAD
 app.register_blueprint(watchlist_routes, url_prefix='/api/dashboard/watchlist')
 
-=======
 app.register_blueprint(dashboard_routes, url_prefix='/api/dashboard')
->>>>>>> c7756589088988a510340b4a6bed0b500ac3fb0d
 db.init_app(app)
 Migrate(app, db)
 
