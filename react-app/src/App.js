@@ -30,33 +30,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path="/" exact={true}>
-          <SplashPage />
-        </Route>
-        <Route path="/login" exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/stocks" exact={true} >
-          <h1>Edit this later</h1>
-        </ProtectedRoute>
-        <ProtectedRoute path="/dashboard" exact={true} >
-          <Dashboard />
-        </ProtectedRoute>
-        <Route>
-          <PageNotFound />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route path="/" exact={true}>
+            <SplashPage />
+          </Route>
+          <Route path="/login" exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path="/stocks" exact={true} >
+            <h1>Edit this later</h1>
+          </ProtectedRoute>
+          <ProtectedRoute path="/dashboard" exact={true} >
+            <Dashboard />
+          </ProtectedRoute>
+          <Route>
+            <PageNotFound />
+          </Route>
+        </Switch>
     </BrowserRouter>
   );
 }

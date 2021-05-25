@@ -116,3 +116,9 @@
   height: 400px;
   width: auto;
 }
+
+#footer-container {
+  height: 20em;
+  color: white;
+  background-color: black;
+}

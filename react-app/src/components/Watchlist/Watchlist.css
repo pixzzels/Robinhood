@@ -2,9 +2,10 @@
   /* border: 1px solid blue; */
   width: auto;
   height: 500px;
-  position: sticky;
+  position: fixed;
   top: 50px;
-  margin-right: 24px;
+  margin-top: 60px;
+  margin-left: 800px;
 
   box-shadow: 5px 5px 10px 5px #b6b6b6;
   border-top: 1px solid rgb(209, 209, 209);
