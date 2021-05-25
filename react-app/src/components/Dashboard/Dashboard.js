@@ -31,10 +31,11 @@ function Dashboard() {
     }
 
     const depositFunds = () => {
-        setShowDepositModal(!showDepositModal)
+        // post request
+        // to add funds
     }
 
-    
+
     return (
         <>
             <div className="dashboard-container">
@@ -97,19 +98,19 @@ function Dashboard() {
                                         </button>
                                     {showDepositModal &&
                                         (<Modal onClose={() => setShowDepositModal(false)}>
-                                            <h2>Deposit Funds</h2>
-                                            <form className="deposit-funds-form">
+                                            <form className="deposit-funds-form" onSubmit={depositFunds}>
+                                                <h2>Deposit Funds</h2>
                                                 <label htmlFor="amount">
                                                     Amount
                                                 </label>
-                                                <input 
-                                                type="text"
-                                                name="amount"
+                                                <input
+                                                    className="depost-funds-form__input"
+                                                    type="number"
+                                                    name="amount"
+                                                    placeholder="$200.00"
                                                 >
                                                 </input>
-                                                <button
-                                                type="submit"
-                                                onClick={depositFunds}>
+                                                <button type="submit">
                                                     Deposit
                                                 </button>
                                             </form>

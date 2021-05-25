@@ -6,7 +6,7 @@
 
 .div-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0px -6px;
 }
 
@@ -98,6 +98,14 @@
 
 .bold {
     font-weight: bold;
+}
+
+.deposit-funds-form {
+    margin: 20px;
+}
+
+.depost-funds-form__input {
+    width: 100%;
 }
 
 
