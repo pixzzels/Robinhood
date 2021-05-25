@@ -27,11 +27,14 @@ This is the backend for the Flask React project.
    ```
 
    ```bash
+   (flask seed undo)
    flask db downgrade
    ```
 
    ```bash
    flask db upgrade
+   (flask db migrate)
+   (flask db upgrade)
    ```
 
    ```bash
