@@ -36,29 +36,31 @@ function SplashPage() {
           <div id="c3-message1">
             Built with the latest, cutting edge technology:
           </div>
-          <div className="technology" id="c3-technology1">
-            <img src={python} alt='python logo' className="tech-logo"></img>
-            Python
-          </div>
-          <div className="technology" id="c3-technology2">
-            <img src={react} alt='react logo' className="tech-logo"></img>
-            React
-          </div> 
-          <div className="technology" id="c3-technology3">
-            <img src={redux} alt='redux logo' className="tech-logo"></img>
-            Redux
-          </div>
-          <div className="technology" id="c3-technology4">
-            <img src={flask} alt='flask logo' className="tech-logo"></img>
-            Redux
-          </div>
-          <div className="technology" id="c3-technology5">
-            <img src={postgresql} alt='postgresql logo' className="tech-logo"></img>
-            Redux
-          </div>
-          <div className="technology" id="c3-technology6">
-            <img src={docker} alt='docker logo' className="tech-logo"></img>
-            Redux
+          <div className="technology-wrapper">
+            <div className="technology" id="c3-technology1">
+              <img src={python} alt='python logo' className="tech-logo"></img>
+              Python
+            </div>
+            <div className="technology" id="c3-technology2">
+              <img src={react} alt='react logo' className="tech-logo"></img>
+              React
+            </div> 
+            <div className="technology" id="c3-technology3">
+              <img src={redux} alt='redux logo' className="tech-logo"></img>
+              Redux
+            </div>
+            <div className="technology" id="c3-technology4">
+              <img src={flask} alt='flask logo' className="tech-logo"></img>
+              Flask
+            </div>
+            <div className="technology" id="c3-technology5">
+              <img src={postgresql} alt='postgresql logo' className="tech-logo"></img>
+              Postgresql
+            </div>
+            <div className="technology" id="c3-technology6">
+              <img src={docker} alt='docker logo' className="tech-logo"></img>
+              Docker
+            </div>
           </div>
         </div>
 

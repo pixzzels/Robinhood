@@ -76,17 +76,26 @@
 }
 
 #c3-message__wrapper {
-  grid-column: 2 / 7 ;
+  grid-column: 2 / 9 ;
   grid-row: 2 / 5 ;
   font-weight: bold;
-  display: flex;
-  /* flex-direction: column; */
-  flex-wrap: row-wrap;
 }
 
 #c3-message1 {
   font-size: 32px;
   padding-bottom: 20px;
+}
+
+.technology-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.technology {
+  font-size: 30px;
+  padding: 30px 30px;
+  display: flex;
+  align-items: center;
 }
 
 #shapes-wrapper {
@@ -96,12 +105,9 @@
   grid-row: 1 / 7;
 }
 
-.technology {
-  font-size: 18px;
-}
 
 .tech-logo {
-  height: 50px;
+  height: 70px;
   width: auto;
   padding-right: 10px;
 }
