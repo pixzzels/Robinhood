@@ -3,55 +3,22 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
-import logo from '../../images/logo-black-small.png';
+import blackleaf from '../../images/black-leaf.PNG';
 
 const NavBar = () => {
-  // const user = useSelector(state => state.session.user);
-
-  // const logoutLink = (
-  //   <>
-  //     <LogoutButton />
-  //   </>
-  // )
-
-  // let linkDisplay;
-  // user ? linkDisplay = logoutLink : linkDisplay = ""
+  const user = useSelector(state => state.session.user);
 
   return (
     <nav className="nav-wrapper">
       <div className="nav-link" id="home-link">
         <NavLink to="/" exact={true} activeClassName="active">
-          <img src={logo} alt='logo' id='logo-black'></img>
+          <img src={blackleaf} alt='black leaf logo' id='blackleaf'></img>
         </NavLink>
       </div>
 
-      {/* links to profile ? drop down ??? */}
-      <div className="nav-link greens" id="contact-link">
-        <NavLink to="/contactus" exact={true} activeClassName="active">
-          Contact us
-        </NavLink>
-      </div>
-
-      <div className="nav-link greens" id="about-link">
-        <NavLink to="/whoweare" exact={true} activeClassName="active">
-          Who we are
-        </NavLink>
-      </div>
-
-      <div className="nav-link greens" id="login-link">
-        <NavLink to="/login" exact={true} activeClassName="active">
-          Login
-        </NavLink>
-      </div>
-
-      <div className="nav-link" id="signup-link">
-        <NavLink to="/sign-up" exact={true} activeClassName="active">
-          Sign Up
-        </NavLink>
-      </div>
-      {/* <div>
-        {linkDisplay}
-      </div> */}
+      <>
+      <LogoutButton/>
+      </>
     </nav>
   );
 }
