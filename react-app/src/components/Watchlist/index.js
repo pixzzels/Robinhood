@@ -6,18 +6,17 @@ import './Watchlist.css';
 function Watchlist() {
   const dispatch = useDispatch();
   const user_id = useSelector(state => state.session.user.id)
-
-  const allLists = useSelector(state => state.watchlist)
-
-  // console.log("Watchlist", allLists)
+  const allLists = useSelector(state => {
+    const lists = Object.values(state.watchlist)
+    return lists
+  })
 
   const [listForm, setListForm] = useState(false);
   const [newList, setNewList] = useState('');
-
-  // console.log('new list!', newList)
+  // console.log("Watchlist", allLists)
 
   useEffect(() => {
-    dispatch(loadAllList())
+    dispatch(loadAllList(user_id))
   }, [dispatch])
 
   const addList = () => {
@@ -26,11 +25,13 @@ function Watchlist() {
 
   const handleListSubmit = (e) => {
     e.preventDefault();
-    // console.log("hello")
     const name = newList;
-    // console.log("=====", name, user_id)
     dispatch(addOneList({ name, user_id }));
   }
+
+  if (!allLists) return null;
+
+
 
   return (
     < div className="watchlist-container" >

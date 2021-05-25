@@ -1,6 +1,3 @@
-import { csrfFetch } from './csrf';
-
-
 /* -----action verbs-------------------------------------------------- */
 const ADD_LIST = "watchlist/ADD_LIST";
 const LOAD_LIST = "watchlist/LOAD_LIST";
@@ -23,7 +20,8 @@ export const addOneList = (listName) => async (dispatch) => {
   const { name, user_id } = listName;
   // console.log("test", name, user_id)
 
-  const response = await csrfFetch(`/api/dashboard/watchlist/add`, {
+  // POST
+  const response = await fetch(`/api/watchlist/add`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -40,10 +38,11 @@ export const addOneList = (listName) => async (dispatch) => {
   return data;
 }
 
-export const loadAllList = () => async (dispatch) => {
+// GET
+export const loadAllList = (userId) => async (dispatch) => {
   // console.log("HELLO WORLD")
 
-  const response = await fetch(`/api/dashboard/watchlist`, {
+  const response = await fetch(`/api/watchlist/${userId}`, {
     headers: { 'Content-Type': 'application/json' }
   })
 
@@ -53,7 +52,7 @@ export const loadAllList = () => async (dispatch) => {
 
   const data = await response.json();
 
-  console.log("DATA", data)
+  // console.log("DATA", data)
   dispatch(loadList(data));
   return data;
 }
@@ -64,19 +63,24 @@ export const loadAllList = () => async (dispatch) => {
 const initialState = {};
 
 const listReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case ADD_LIST:
-      const newState = {
+      newState = {
         ...state,
         [action.list.id]: action.list
       };
       return newState;
 
     case LOAD_LIST:
-      const newState2 = {
-        ...state
+      newState = {}
+      action.list.forEach((oneList) => {
+        newState[oneList.id] = oneList
+      })
+      return {
+        ...newState, ...state
       }
-      return newState2;
+
     default:
       return state;
   }
