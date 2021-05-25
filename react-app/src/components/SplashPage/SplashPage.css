@@ -45,9 +45,18 @@
   text-decoration: none;
 }
 
+#splash-signup__link:hover {
+  background-color: #2A3137;
+}
+
 #trade-gif_wrapper {
-  grid-column: 7 / 13;
-  grid-row: 8 / 12;
+  grid-column: 6 / 13;
+  grid-row: 4 / 12;
+}
+
+#trade-gif {
+  height: 550px;
+  width: auto;
 }
 
 #container-2 {
@@ -56,4 +65,48 @@
   align-items: center;
   height: 4.5em;
   border-bottom: 1px solid black;
+}
+
+#container-3 {
+  background-color: #F0EBE6;
+  height: 30em;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+
+#c3-message__wrapper {
+  grid-column: 2 / 7 ;
+  grid-row: 2 / 5 ;
+  font-weight: bold;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: row-wrap;
+}
+
+#c3-message1 {
+  font-size: 32px;
+  padding-bottom: 20px;
+}
+
+#shapes-wrapper {
+  padding-top: 30px;
+  padding-left: 40px;
+  grid-column: 9 / 13;
+  grid-row: 1 / 7;
+}
+
+.technology {
+  font-size: 18px;
+}
+
+.tech-logo {
+  height: 50px;
+  width: auto;
+  padding-right: 10px;
+}
+
+#shapes-img {
+  height: 400px;
+  width: auto;
 }
