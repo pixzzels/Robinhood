@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addOneList } from '../../store/watchlist';
 import './Watchlist.css';
 
 function Watchlist() {
+  const dispatch = useDispatch();
+  const user_id = useSelector(state => state.session.user.id)
+
   const [listForm, setListForm] = useState(false);
   const [newList, setNewList] = useState('');
 
+  // console.log('new list!', newList)
+
   const addList = () => {
     setListForm(!listForm)
+  }
+
+  const handleListSubmit = (e) => {
+    e.preventDefault();
+    console.log("hello")
+    const name = newList;
+    // console.log("=====", name, user_id)
+    dispatch(addOneList({ name, user_id }));
   }
 
   return (
@@ -29,9 +44,7 @@ function Watchlist() {
             <span>APPL</span>
             <span>3 Shares</span>
           </div>
-          <div className="all-stock__graph-container">
-            :)
-                    </div>
+          <div className="all-stock__graph-container">:)</div>
           <div className="all-stock_current-price">
             <span>$127.02</span>
             <span>-3.29%</span>
@@ -51,8 +64,8 @@ function Watchlist() {
 
           <div className="all-stocks__list-each">
             {listForm &&
-              <form className="new-list-form">
 
+              <form className="new-list-form" onSubmit={handleListSubmit}>
                 <input
                   className="new-list-input"
                   name='list'
@@ -62,19 +75,14 @@ function Watchlist() {
                 >
                 </input>
                 <footer>
-                  <button className="list-form-btn" type="button">
-                    Cancel
-                                    </button>
-                  <button className="list-form-btn" type="submit">
-                    Create List
-                                    </button>
-
+                  <button className="list-form-btn" type="button">Cancel</button>
+                  <button className="list-form-btn" type="submit">Create List</button>
                 </footer>
               </form>
-
             }
-
           </div>
+
+
         </div>
 
       </div>
