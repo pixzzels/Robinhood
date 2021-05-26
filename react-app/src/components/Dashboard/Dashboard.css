@@ -1,6 +1,6 @@
 .dashboard-container__wrapper {
     margin: 0px 40.5px;
-    padding: 36px 0px 0px;
+    padding: 80px 0px 0px;
     position: relative;
     
     display: grid;
@@ -8,6 +8,7 @@
     grid-template-rows: 1fr;
     height: 100vh;
     
+    /* position: relative; */
 }
 
 .dashboard__portfolio-wrapper {
