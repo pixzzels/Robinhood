@@ -4,8 +4,7 @@
   width: 100vw;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  padding: 0px 60px;
-  margin: 10px;
+  padding: 20px 60px;
 }
 
 .error-image__container{
