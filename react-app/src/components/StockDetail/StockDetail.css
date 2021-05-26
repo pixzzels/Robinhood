@@ -85,26 +85,3 @@
     width: 300px;
     border: 1px solid red;
 }
-
-.news-container a {
-    text-decoration: none;
-    color: black;
-}
-
-.news-story {
-    width: 41em;
-    border: 1px solid red;
-}
-
-#story-origin, #story-content {
-    font-size: 13px;
-}
-
-#story-content {
-    color: grey;
-}
-
-#story-title {
-    font-size: 15px;
-    font-weight: bold;
-}
