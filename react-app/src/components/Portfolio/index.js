@@ -80,7 +80,7 @@ function Portfolio() {
               Deposit Funds
                                 </button>
             {showDepositModal &&
-              (<Modal onClose={() => setShowDepositModal(false)}>
+              (<Modal className="deposit-modal" onClose={() => setShowDepositModal(false)}>
                 <form className="deposit-funds-form" onSubmit={depositFunds}>
                   <h2>Deposit Funds</h2>
                   <label htmlFor="amount">
