@@ -29,25 +29,48 @@ def stock_history(symbol):
 
         # attributes = ['1y']
 
+        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/{date_range}/?token={iex_api_key}'
+        # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/date/20210526/?token={iex_api_key}'
+        api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range=1m&token={iex_api_key}'
+        df = requests.get(api_url).json()
+        prices = []
+        # for i in range(len(df)):
+        #     if date_range == '1m':
+        #         if df[i]['minute'][-1] == '0' or df[i]['minute'][-1] == '5' :
+        #             # prices.append(df[i]['average'])
+        #             print(df[i]['minute'][-1])
+        #     prices.append(df[i]['minute'])
+        # pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(df)
+        # if df:
+        #     finished = True
+        print('--------------\n')
+        print(len(df['chart']))
 
-        for i in attributes:
-            date_range = i
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-            # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/{date_range}/?token={iex_api_key}'
-            # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/date/20210526/?token={iex_api_key}'
-            api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range={date_range}&token={iex_api_key}'
-            df = requests.get(api_url).json()
-            prices = []
-            # for i in range(len(df)):
-            #     if date_range == '1m':
-            #         if df[i]['minute'][-1] == '0' or df[i]['minute'][-1] == '5' :
-            #             # prices.append(df[i]['average'])
-            #             print(df[i]['minute'][-1])
-            #     prices.append(df[i]['minute'])
-            # pp = pprint.PrettyPrinter(indent=4)
-            # pp.pprint(df)
-            print('--------------\n')
-            print(len(df['chart']))
+
+        # for i in attributes:
+        #     finished = False
+        #     while finished == False:
+        #         date_range = i
+        #         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        #         # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/{date_range}/?token={iex_api_key}'
+        #         # api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/chart/date/20210526/?token={iex_api_key}'
+        #         api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range=2m&token={iex_api_key}'
+        #         df = requests.get(api_url).json()
+        #         prices = []
+        #         # for i in range(len(df)):
+        #         #     if date_range == '1m':
+        #         #         if df[i]['minute'][-1] == '0' or df[i]['minute'][-1] == '5' :
+        #         #             # prices.append(df[i]['average'])
+        #         #             print(df[i]['minute'][-1])
+        #         #     prices.append(df[i]['minute'])
+        #         # pp = pprint.PrettyPrinter(indent=4)
+        #         # pp.pprint(df)
+        #         if df:
+        #             finished = True
+        #         print('--------------\n')
+        #         print(len(df['chart']))
     get_latest_updates(symbol)
 
 
