@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addOneList } from '../../store/watchlist';
+import { addOneList, loadAllList } from '../../store/watchlist';
+import List from '../List';
+import StockList from '../StockList';
 import './Watchlist.css';
 
 function Watchlist() {
   const dispatch = useDispatch();
   const user_id = useSelector(state => state.session.user.id)
+  const allLists = useSelector(state => {
+    const lists = Object.values(state.watchlist)
+    return lists
+  })
 
   const [listForm, setListForm] = useState(false);
   const [newList, setNewList] = useState('');
+  // console.log("Watchlist", allLists)
 
-  // console.log('new list!', newList)
+  useEffect(() => {
+    dispatch(loadAllList(user_id))
+  }, [dispatch])
 
   const addList = () => {
     setListForm(!listForm)
@@ -18,17 +27,20 @@ function Watchlist() {
 
   const handleListSubmit = (e) => {
     e.preventDefault();
-    console.log("hello")
     const name = newList;
-    // console.log("=====", name, user_id)
     dispatch(addOneList({ name, user_id }));
   }
 
+  if (!allLists) return null;
+
+
+
   return (
     < div className="watchlist-container" >
-      <div className="all-stocks-container">
 
-        <div className="all-stocks-header">
+      <div className="watchlist__stocks-wrapper">
+
+        <div className="watchlist__stock-header">
           <span>Stocks</span>
           <button className="all-stocks-header-btn btn">
             <svg fill="none" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -39,53 +51,47 @@ function Watchlist() {
           </button>
         </div>
 
-        <div className="all-stock__stock">
-          <div className="stock-name-shares-owned">
-            <span>APPL</span>
-            <span>3 Shares</span>
-          </div>
-          <div className="all-stock__graph-container">:)</div>
-          <div className="all-stock_current-price">
-            <span>$127.02</span>
-            <span>-3.29%</span>
-          </div>
-        </div>
-
-        <div className="all-stocks__list-container">
-
-          <div className="all-stocks__list-header">
-            <span>Lists</span>
-            <button className="btn" type="button" onClick={addList}>
-              <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
-              </svg>
-            </button>
-          </div>
-
-          <div className="all-stocks__list-each">
-            {listForm &&
-
-              <form className="new-list-form" onSubmit={handleListSubmit}>
-                <input
-                  className="new-list-input"
-                  name='list'
-                  placeholder="List Name"
-                  value={newList}
-                  onChange={e => setNewList(e.target.value)}
-                >
-                </input>
-                <footer>
-                  <button className="list-form-btn" type="button">Cancel</button>
-                  <button className="list-form-btn" type="submit">Create List</button>
-                </footer>
-              </form>
-            }
-          </div>
-
-
-        </div>
-
+        <StockList />
       </div>
+
+
+      <div className="watchlist__list-wrapper">
+        <div className="watchlist__list-header">
+          <span>Lists</span>
+          <button className="btn" type="button" onClick={addList}>
+            <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div>
+          {listForm &&
+
+            <form className="new-list-form" onSubmit={handleListSubmit}>
+              <input
+                className="new-list-input"
+                name='list'
+                placeholder="List Name"
+                value={newList}
+                onChange={e => setNewList(e.target.value)}
+              >
+              </input>
+              <footer>
+                <button className="list-form-btn" type="button">Cancel</button>
+                <button className="list-form-btn" type="submit">Create List</button>
+              </footer>
+            </form>
+          }
+        </div>
+
+        {allLists && allLists.map((list) => {
+          return (
+            <List list={list} />
+          )
+        })}
+      </div>
+
     </div >
   )
 }
