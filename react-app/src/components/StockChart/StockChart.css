@@ -30,6 +30,21 @@
 #description {
     font-size: 15px;
     padding-top: 10px;
+    margin-bottom: 15px;
+    padding-right: 50px;
+}
+
+.company-info-container {
+    display: flex;
+}
+
+.company-info-container > * {
+    padding-right: 70px;
+    font-size: 13px;
+}
+
+.info-label {
+    font-weight: bold;
 }
 
 #hr {
@@ -38,6 +53,22 @@
     border: 1px solid rgba(211, 211, 211, 0.5);
 }
 
+
 .statistics-container {
+    padding-top: 50px;
     padding-left: 25px;
+}
+
+#statistics-title {
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+#statistics {
+    display: flex;
+}
+
+#statistics > * {
+    padding-right: 70px;
+    font-size: 13px;
 }

@@ -24,6 +24,7 @@
 
 .buy-sell__wrapper {
     grid-column: 9 / 13;
+    position: sticky;
     height: 400px;
     width: 300px;
     border: 1px solid red;
