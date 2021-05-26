@@ -28,17 +28,21 @@ function Watchlist() {
   const handleListSubmit = (e) => {
     e.preventDefault();
     const name = newList;
+    setListForm(!listForm)
     dispatch(addOneList({ name, user_id }));
+  }
+
+  const handleListCancel = (e) => {
+    e.preventDefault();
+    setListForm(!listForm)
   }
 
   if (!allLists) return null;
 
-
-
   return (
-    < div className="watchlist-container" >
+    <div className="watchlist-container">
 
-      <div className="watchlist__stocks-wrapper">
+      {/* <div className="watchlist__stocks-wrapper">
 
         <div className="watchlist__stock-header">
           <span>Stocks</span>
@@ -52,13 +56,14 @@ function Watchlist() {
         </div>
 
         <StockList />
-      </div>
+      </div> */}
 
 
       <div className="watchlist__list-wrapper">
+
         <div className="watchlist__list-header">
           <span>Lists</span>
-          <button className="btn" type="button" onClick={addList}>
+          <button className="add-btn" type="button" onClick={addList}>
             <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
             </svg>
@@ -67,10 +72,10 @@ function Watchlist() {
 
         <div>
           {listForm &&
-
             <form className="new-list-form" onSubmit={handleListSubmit}>
+              {/* <button>emoji</button> */}
               <input
-                className="new-list-input"
+                className='list-input'
                 name='list'
                 placeholder="List Name"
                 value={newList}
@@ -78,8 +83,8 @@ function Watchlist() {
               >
               </input>
               <footer>
-                <button className="list-form-btn" type="button">Cancel</button>
-                <button className="list-form-btn" type="submit">Create List</button>
+                <button className="list-cancel-btn list-form-btn" type="button" onClick={handleListCancel}>Cancel</button>
+                <button className="list-create-btn list-form-btn" type="submit">Create List</button>
               </footer>
             </form>
           }
@@ -90,6 +95,7 @@ function Watchlist() {
             <List list={list} />
           )
         })}
+
       </div>
 
     </div >
