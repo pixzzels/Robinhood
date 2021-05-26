@@ -1,0 +1,30 @@
+.detail-page__wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding-top: 150px;
+}
+
+.stock-wrapper {
+    grid-column: 3 / 9;
+}
+
+#stock-name, #curr-price {
+    font-size: 32px;
+}
+
+#price-change {
+    font-size: 13px;
+}
+
+.stock-chart-bar {
+    padding-top: 160px;
+}
+
+
+
+.buy-sell__wrapper {
+    grid-column: 9 / 13;
+    height: 400px;
+    width: 300px;
+    border: 1px solid red;
+}

@@ -1,0 +1,43 @@
+.stock-chart__wrapper {
+    height: 200px;
+    width: 675px;
+}
+
+.stock-chart-bar {
+    padding-left: 25px;
+}
+
+.stock-timeline-options {
+    background: none;
+    border: none;
+    padding-right: 20px;
+}
+
+.stock-timeline-options:hover {
+    color: #00C805;
+}
+
+.about-container {
+    margin-top: 50px;
+    padding-left: 25px;
+}
+
+#about {
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+#description {
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+#hr {
+    width: 650px;
+    margin-right: 85px;
+    border: 1px solid rgba(211, 211, 211, 0.5);
+}
+
+.statistics-container {
+    padding-left: 25px;
+}
