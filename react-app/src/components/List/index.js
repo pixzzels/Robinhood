@@ -10,17 +10,23 @@ function List({ list }) {
     const dispatch = useDispatch()
     const [showDropdown, setShowDropdown] = useState(false);
     const [editForm, setEditForm] = useState(false);
-    const [inputField, setInputField] = useState("");
+    const [inputField, setInputField] = useState(list.name);
 
     const [editBtn, setEditBtn] = useState(true);
     const [deleteBtn, setDeleteBtn] = useState(true);
 
+
+    // delete list
     const deleteList = () => {
-        const watchlistId = list.id
-        setShowDropdown(false)
-        dispatch(removeOneList(watchlistId))
+        let result = window.confirm("Are you sure you want to delete this list? It will remove all stocks associated with the list")
+        if (result) {
+            const watchlistId = list.id
+            setShowDropdown(false)
+            dispatch(removeOneList(watchlistId))
+        }
     }
 
+    // submit edit form
     const handleEditSubmit = () => {
         const id = list.id
         const name = inputField
@@ -28,18 +34,21 @@ function List({ list }) {
         dispatch(updateOneList({ id, name }))
     }
 
+    // show/hide list options dropdown
     const handleDropdown = () => {
         setShowDropdown(!showDropdown)
         setEditBtn(true)
         setDeleteBtn(true)
     }
 
+    // show edit form
     const updateList = () => {
         setEditForm(!editForm)
         setEditBtn(false)
         setDeleteBtn(false)
     }
 
+    // hide edit form
     const handleCancel = () => {
         setEditForm(!editForm)
         setEditBtn(true)
