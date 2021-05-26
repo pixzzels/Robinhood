@@ -59,7 +59,7 @@ function List({ list }) {
     return (
         <div className="one-list">
             <h2 className='single-list-txt'>{list.name}</h2>
-            <button type="button" onClick={handleDropdown}>
+            <button className="dot-btn" type="button" onClick={handleDropdown}>
                 <i className="fas fa-ellipsis-h"></i>
             </button>
             {showDropdown &&

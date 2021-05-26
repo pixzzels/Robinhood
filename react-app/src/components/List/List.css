@@ -17,6 +17,12 @@
   font-weight: 500;
   letter-spacing: .02em;
 }
+/* --------------------EDITS--------------------- */
+
+.dot-btn {
+  border: 0px;
+  background-color: white;
+}
 
 /* --------------------MODAL--------------------- */
 /* DELETE #modal LATER */

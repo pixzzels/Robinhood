@@ -44,7 +44,7 @@ function Watchlist() {
   return (
     <div className="watchlist-container">
 
-      {/* <div className="watchlist__stocks-wrapper">
+      <div className="watchlist__stocks-wrapper">
 
         <div className="watchlist__stock-header">
           <span>Stocks</span>
@@ -58,7 +58,7 @@ function Watchlist() {
         </div>
 
         <StockList />
-      </div> */}
+      </div>
 
 
       <div className="watchlist__list-wrapper">
