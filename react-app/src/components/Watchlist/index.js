@@ -65,7 +65,7 @@ function Watchlist() {
           <span>Lists</span>
           <button className="add-btn" type="button" onClick={addList}>
             <svg fill="none" height="16" role="img" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
+              <path className="plus-btn" d="M7.125 8.875V14H8.875V8.875H14V7.125H8.875V2H7.125V7.125H2V8.875H7.125Z" fill="black"></path>
             </svg>
           </button>
         </div>
@@ -73,15 +73,17 @@ function Watchlist() {
         <div>
           {listForm &&
             <form className="new-list-form" onSubmit={handleListSubmit}>
-              {/* <button>emoji</button> */}
-              <input
-                className='list-input'
-                name='list'
-                placeholder="List Name"
-                value={newList}
-                onChange={e => setNewList(e.target.value)}
-              >
-              </input>
+              <div>
+                <button>emoji</button>
+                <input
+                  className='list-input'
+                  name='list'
+                  placeholder="List Name"
+                  value={newList}
+                  onChange={e => setNewList(e.target.value)}
+                >
+                </input>
+              </div>
               <footer>
                 <button className="list-cancel-btn list-form-btn" type="button" onClick={handleListCancel}>Cancel</button>
                 <button className="list-create-btn list-form-btn" type="submit">Create List</button>
