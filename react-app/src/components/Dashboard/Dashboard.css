@@ -1,7 +1,6 @@
 .dashboard-container__wrapper {
     margin: 0px 40.5px;
     padding: 100px 0px 0px;
-    /* position: relative; */
     
     display: grid;
     grid-template-columns: repeat(3, 1fr);
