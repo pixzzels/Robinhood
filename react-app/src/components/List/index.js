@@ -11,7 +11,6 @@ function List({ list }) {
         setShowDropdown(!showDropdown)
     }
 
-
     return (
         <div className="one-list">
             <h2 className='single-list-txt'>{list.name}</h2>

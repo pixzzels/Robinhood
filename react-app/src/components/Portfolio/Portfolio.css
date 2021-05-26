@@ -91,7 +91,7 @@
 
 /* -------MODAL-------------------------------------------------- */
 
-.deposit-modal #modal {
+#modal {
   position: fixed;
   top: 0;
   right: 0;
@@ -102,7 +102,7 @@
   align-items: center;
 }
 
-.deposit-modal #modal-background {
+#modal-background {
   position: fixed;
   top: 0;
   right: 0;
@@ -111,7 +111,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.deposit-modal #modal-content {
+#modal-content {
   position: absolute;
   background-color:white;
   border-radius: 10px;
