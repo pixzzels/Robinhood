@@ -11,15 +11,19 @@ function Dashboard() {
 		<>
 			<NavBar />
 			<div className="dashboard-container">
-				{/* <h1>Hello Dashboard</h1> */}
-				<div className="div-row">
+				<div className="dashboard-container__wrapper">
+					{/* <h1>Hello Dashboard</h1> */}
+					<div className="dashboard__portfolio-wrapper">
 
-					<Portfolio />
-					<Watchlist />
+						<Portfolio />
 
+					</div>
+					<div className="dashboard__watchlist-wrapper">
+						<Watchlist />
+					</div>
 				</div>
+
 			</div>
-			<button>Testing Here</button>
 		</>
 	)
 }

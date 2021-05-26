@@ -1,17 +1,28 @@
 .watchlist-container {
   /* border: 1px solid blue; */
   width: auto;
-  height: 500px;
-  position: fixed;
+  height: 80vh;
+  position: sticky;
   top: 50px;
-  margin-top: 60px;
-  margin-left: 800px;
-
+  margin-right: 24px;
   box-shadow: 5px 5px 10px 5px #b6b6b6;
   border-top: 1px solid rgb(209, 209, 209);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  /* height: 100vh; */
 }
 
-.all-stocks-header {
+.watchlist__stocks-wrapper {
+  grid-row: 1/2;
+}
+
+.watchlist__list-wrapper {
+  grid-row: 2/3;
+}
+
+.watchlist__list-header {
   display: flex;
   /* flex-direction: row; */
   justify-content: space-between;
@@ -20,6 +31,17 @@
   padding: 4px 24px 0px;
   border-bottom: 1px solid rgb(227,233,237);
 }
+
+.watchlist__stock-header {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 4px 24px 0px;
+  border-bottom: 1px solid rgb(227,233,237);
+}
+
 
 .btn {
   background-color: #FFFFFF;
@@ -32,41 +54,7 @@
   background-color: pink;
 }
 
-.all-stock__stock {
-  padding: 0px 24px;
-  display: flex;
-  align-items: center;
-  height: 60px;
-  font-size: 13px;
-  line-height: 20px;
-  border-bottom: 1px solid rgb(227,233,237);
-}
 
-.stock-name-shares-owned {
-  display: flex;
-  flex-direction: column;
-}
-
-.all-stock__graph-container {
-  width: 70px;
-
-  /* border: 1px solid red; */
-}
-
-.all-stock_current-price {
-  display: flex;
-  flex-direction: column;
-}
-
-.all-stocks__list-header {
-  display: flex;
-  /* flex-direction: row; */
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  padding: 4px 24px 0px;
-  border-bottom: 1px solid rgb(227,233,237);
-}
 
 /* -----FORM------------------------------------------------------ */
 

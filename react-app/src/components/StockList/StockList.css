@@ -1,0 +1,26 @@
+
+.all-stock__stock {
+    padding: 0px 24px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-size: 13px;
+    line-height: 20px;
+    border-bottom: 1px solid rgb(227,233,237);
+  }
+  
+  .stock-name-shares-owned {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .all-stock__graph-container {
+    width: 70px;
+  
+    /* border: 1px solid red; */
+  }
+  
+  .all-stock_current-price {
+    display: flex;
+    flex-direction: column;
+  }
