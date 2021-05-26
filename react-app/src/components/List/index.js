@@ -4,9 +4,9 @@ import './List.css';
 function List({ list }) {
 
     return (
-        <div className="one-list-container">
-            <div className="one-list__img"></div>
-            <h2>{list.name}</h2>
+        <div className="one-list">
+            {/* <div className="one-list__img"></div> */}
+            <h2 className='single-list-txt'>{list.name}</h2>
         </div>
     )
 }
