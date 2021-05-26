@@ -5,7 +5,7 @@
   border-radius: 1px;
   
   overflow: scroll;
-  position: sticky;
+  position: fixed;
   
   display: grid;
   grid-template-columns: 1fr;
