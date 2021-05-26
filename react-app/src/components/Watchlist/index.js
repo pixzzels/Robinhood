@@ -14,8 +14,8 @@ function Watchlist() {
   })
 
   const [listForm, setListForm] = useState(false);
-  const [newList, setNewList] = useState('');
-  // console.log("Watchlist", allLists)
+  const [inputField, setInputField] = useState("")
+
 
   useEffect(() => {
     dispatch(loadAllList(user_id))
@@ -27,13 +27,15 @@ function Watchlist() {
 
   const handleListSubmit = (e) => {
     e.preventDefault();
-    const name = newList;
+    const name = inputField;
     setListForm(!listForm)
+    setInputField("")
     dispatch(addOneList({ name, user_id }));
   }
 
   const handleListCancel = (e) => {
     e.preventDefault();
+    setInputField("")
     setListForm(!listForm)
   }
 
@@ -79,8 +81,8 @@ function Watchlist() {
                   className='list-input'
                   name='list'
                   placeholder="List Name"
-                  value={newList}
-                  onChange={e => setNewList(e.target.value)}
+                  value={inputField}
+                  onChange={e => setInputField(e.target.value)}
                 >
                 </input>
               </div>

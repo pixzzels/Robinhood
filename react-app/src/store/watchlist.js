@@ -2,6 +2,7 @@
 const ADD_LIST = "watchlist/ADD_LIST";
 const LOAD_LIST = "watchlist/LOAD_LIST";
 const REMOVE_LIST = "watchlist/REMOVE_LIST";
+const UPDATE_LIST = "watchlist/UPDATE_LIST";
 
 
 /* -----action creator-------------------------------------------------- */
@@ -21,10 +22,13 @@ const removeList = (listId) => {
     listId
   }
 }
-// ({
-//   type: REMOVE_LIST,
-//   listId
-// })
+
+const updateList = (list) => ({
+  type: UPDATE_LIST,
+  list
+})
+
+
 
 
 /* -----thunk-------------------------------------------------- */
@@ -66,14 +70,12 @@ export const loadAllList = (userId) => async (dispatch) => {
 
   const data = await response.json();
 
-  // console.log("DATA", data)
   dispatch(loadList(data));
   return data;
 }
 
 // POST DELETE
 export const removeOneList = (id) => async (dispatch) => {
-  // const { listId } = id
 
   const response = await fetch(`/api/watchlist/delete/${id}`, {
     method: "DELETE",
@@ -84,10 +86,32 @@ export const removeOneList = (id) => async (dispatch) => {
     throw response
   }
 
-  // const listId2 = await response.json();
-  // console.log("backend", listId2)
   dispatch(removeList(id))
 }
+
+// PUT UPDATE
+
+export const updateOneList = (newList) => async (dispatch) => {
+  const { name, id } = newList
+
+  const response = await fetch(`/api/watchlist/update/${id}`, {
+
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name, id
+    })
+  })
+
+  if (!response.ok) {
+    throw response
+  }
+
+  const data = await response.json();
+  dispatch(addList(data));
+  return data;
+}
+
 
 
 /* -----reducer-------------------------------------------------- */
@@ -104,7 +128,7 @@ const listReducer = (state = initialState, action) => {
       };
       return newState;
 
-    case LOAD_LIST:
+    case LOAD_LIST: {
       newState = {}
       action.list.forEach((oneList) => {
         newState[oneList.id] = oneList
@@ -112,11 +136,20 @@ const listReducer = (state = initialState, action) => {
       return {
         ...newState, ...state
       }
+    }
 
-    case REMOVE_LIST:
+    case REMOVE_LIST: {
       newState = { ...state };
       delete newState[action.listId];
       return newState;
+    }
+
+    case UPDATE_LIST: {
+      return {
+        ...state,
+        [action.list.id]: action.list
+      }
+    }
 
     default:
       return state;
