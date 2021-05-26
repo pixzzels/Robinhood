@@ -18,7 +18,7 @@ function StockDetail() {
                     <div className="chart-container">
                         <StockChart />
                         <div className="stock-chart-bar">
-                            <button className="stock-timeline-options btn tlbtn">2D</button>
+                            <button className="stock-timeline-options btn tlbtn">1D</button>
                             <button className="stock-timeline-options btn tlbtn">1W</button>
                             <button className="stock-timeline-options btn tlbtn">1M</button>
                             <button className="stock-timeline-options btn tlbtn">3M</button>
