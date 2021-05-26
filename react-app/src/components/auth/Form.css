@@ -25,18 +25,19 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding-left: 25px;
-  margin-left: 18px;
+  padding-left: 30px;
+  margin-left: 22px;
 }
 
 .form-text{
-  font-size: 1.3em;
-  font-weight: 900;
+  font-size: 1.33em;
+  font-weight: 500;
+  letter-spacing: .03em;
 }
 
 input{
-  width: 30em;
-  height: 2.5em;
+  width: 35em;
+  height: 2.7em;
   border-radius: 4px;
   border: 1px rgb(228, 228, 228) solid;
   margin: 10px 0px;
@@ -45,18 +46,19 @@ input{
 
 input:focus {
   outline: none;
-  box-shadow: 0 0 0 1px rgba(34, 221, 66, 0.7);
+  box-shadow: 0 0 0 .5px rgb(24, 214, 56);
 }
 
 label{
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .redirect-text{
   color: black;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 13px;
+  letter-spacing: .025em;
   margin: 5px 0px 80px 0px;
 }
 
@@ -70,17 +72,26 @@ label{
   color: #00A303;
 }
 
+.home-link{
+  color: #00C805;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.home-link:hover{
+  color: #00A303;
+}
 
 .form-btn{
   border: none;
   border-radius: 5px;
   background-color: #00C805;
   color: white;
-  font-weight: bolder;
+  font-weight: 700;
+  letter-spacing: .02em;
   width: 9.5em;
   padding: 1em 1.1em;
   margin-top: 10px;
-  
 }
 
 .form-btn:hover{

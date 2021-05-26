@@ -1,0 +1,18 @@
+.one-list{
+  /* border: 1px solid blue; */
+  /* height: 8vh; */
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.one-list:hover{
+  background-color: #d1cdcd4b;
+}
+
+.single-list-txt{
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
