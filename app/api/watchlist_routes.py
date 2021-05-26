@@ -35,10 +35,10 @@ def add_watchlist():
     return watchlist.to_dict()
 
 
-@watchlist_routes.route("/<int:listId>", methods=["DELETE"])
+@watchlist_routes.route("/delete/<int:listId>", methods=["DELETE"])
 @login_required
 def remove_watchlist(listId):
-    print("TESTING HELLO WORKING?")
+    # print("TESTING HELLO WORKING?")
     watchlist = Watchlist.query.get(listId)
 
     db.session.delete(watchlist)

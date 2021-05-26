@@ -73,10 +73,9 @@ export const loadAllList = (userId) => async (dispatch) => {
 
 // POST DELETE
 export const removeOneList = (id) => async (dispatch) => {
-  const { listId } = id
-  console.log("first~~", listId)
+  // const { listId } = id
 
-  const response = await fetch(`/api/watchlist/${id}`, {
+  const response = await fetch(`/api/watchlist/delete/${id}`, {
     method: "DELETE",
     headers: { 'Content-Type': 'application/json' },
   })
@@ -87,7 +86,7 @@ export const removeOneList = (id) => async (dispatch) => {
 
   // const listId2 = await response.json();
   // console.log("backend", listId2)
-  dispatch(removeList(listId))
+  dispatch(removeList(id))
 }
 
 

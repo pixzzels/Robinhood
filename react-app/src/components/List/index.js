@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import removeOneList from '../../store/watchlist';
+import { removeOneList } from '../../store/watchlist';
 import { Modal } from '../../context/Modal';
 
 import './List.css';
@@ -20,9 +20,8 @@ function List({ list }) {
     }
 
     const deleteList = (watchlistId) => {
-        const listId = watchlistId
-        console.log("frontend", listId)
-        dispatch(removeOneList({ listId }))
+        // const listId = watchlistId
+        dispatch(removeOneList(watchlistId))
     }
 
     return (
