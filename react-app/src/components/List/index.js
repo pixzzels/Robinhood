@@ -32,14 +32,16 @@ function List({ list }) {
                 <i className="fas fa-ellipsis-h"></i>
             </button>
             {showDropdown &&
-                <Modal onClose={() => setShowDropdown(false)}>
-                    <button>
-                        Edit list
+                <div>
+                    <Modal onClose={() => setShowDropdown(false)}>
+                        <button>
+                            Edit list
                     </button>
-                    <button type="button" onClick={() => deleteList(list.id)}>
-                        Delete list
+                        <button type="button" onClick={() => deleteList(list.id)}>
+                            Delete list
                     </button>
-                </Modal>
+                    </Modal>
+                </div>
             }
         </div>
     )

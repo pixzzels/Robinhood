@@ -91,29 +91,47 @@
 
 /* -------MODAL-------------------------------------------------- */
 
-#modal {
+.deposit-modal {
+  /* border: 3px solid red;
+  height: 100px;
+  background-color: green; */
+}
+
+.deposit-modal-content {
+  /* border: 3px solid blue; */
+  
   position: fixed;
+  margin: 130px 280px;
+  padding: 40px;
+  border-radius: 4px;
+  
+  background-color:rgb(245, 245, 245);
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-#modal-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+
+
+/* MODAL BUTTONS */
+
+.deposit-btn{
+  border: none;
+  border-radius: 5px;
+  background-color: #00C805;
+  color: white;
+  font-weight: 700;
+  letter-spacing: .02em;
+  width: 9.5em;
+
+  padding: 1em;
+  margin: 10px 10px;
 }
 
-#modal-content {
-  position: absolute;
-  background-color:white;
-  border-radius: 10px;
-
+.deposit-btn:hover{
+  background-color: #00B803;
 }
