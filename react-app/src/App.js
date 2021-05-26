@@ -11,6 +11,7 @@ import SplashPage from "./components/SplashPage";
 import Dashboard from "./components/Dashboard";
 import PageNotFound from "./components/PageNotFound";
 import StockDetail from "./components/StockDetail/index";
+import NavBar from "./components/NavBar";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -28,8 +29,23 @@ function App() {
     return null;
   }
 
+  let component;
+
+  if (user != null) {
+    component = (
+      <NavBar />
+    )
+  } else {
+    component = (
+      <>
+      </>
+    )
+  }
+
+
   return (
     <BrowserRouter>
+      {component}
         <Switch>
           <Route path="/" exact={true}>
             <SplashPage />
