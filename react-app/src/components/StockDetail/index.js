@@ -27,11 +27,9 @@ function StockDetail() {
                         </div>
                     </div>
 
-                    <hr id="hr"></hr>
-                        
                     <div className="about-container">
-                        <div id="about">About</div>
-                        <hr id="hr"></hr>
+                        <div id="about-title">About</div>
+                        {/* <hr id="hr"></hr> */}
                         <div id="description">
                             Apple, Inc. engages in the design, manufacture, and sale of smartphones, personal computers, tablets, wearables and accessories, and other variety of related services. It operates through the following geographical segments: Americas, Europe, Greater China, Japan, and Rest of Asia Pacific. 
                         </div>
@@ -53,7 +51,6 @@ function StockDetail() {
 
                     <div className="statistics-container">
                         <div id="statistics-title">Key Statistics</div>
-                        <hr id="hr"></hr>
                         <div id="statistics">
                             <div>
                                 <div className="info-label">Market Cap</div>

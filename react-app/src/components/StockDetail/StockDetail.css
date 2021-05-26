@@ -19,7 +19,11 @@
 
 .stock-chart-bar {
     padding-top: 160px;
-    padding-left: 25px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+    margin-left: 25px;
+    border-bottom: 1px solid rgb(227,233,237);
+    width: 650px;
 }
 
 .stock-timeline-options {
@@ -37,9 +41,12 @@
     padding-left: 25px;
 }
 
-#about, #statistics-title, #news-title {
+#about-title, #statistics-title, #news-title {
     font-size: 24px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    width: 650px;
+    border-bottom: 1px solid rgb(227,233,237);
 }
 
 #description {
@@ -60,12 +67,6 @@
 
 .info-label {
     font-weight: bold;
-}
-
-#hr {
-    width: 650px;
-    margin-right: 85px;
-    border: 1px solid rgba(211, 211, 211, 0.5);
 }
 
 #statistics {

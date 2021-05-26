@@ -4,7 +4,6 @@ function NewsStory() {
     return(
         <div className="news-container">
             <div id="news-title">News</div>
-            <hr id="hr"></hr>
             <a href="story-link-here">
                 <div className="news-story">
                     <div id="story-origin">Origin</div>
