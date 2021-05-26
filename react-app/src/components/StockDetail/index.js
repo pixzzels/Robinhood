@@ -3,6 +3,10 @@ import NavBar from "../NavBar/index";
 
 function StockDetail() {
 
+    const handleClick = async () => {
+            await fetch('/api/stock/history/AAPL')
+
+        }
 
     return(
         <>
@@ -19,7 +23,7 @@ function StockDetail() {
                     <div>Chart</div>
                     <div>Days of Week / Years</div>
                 </div>
-                    
+
                 <div className="about-container">
                     <div>About</div>
                     <div id="description">
@@ -33,7 +37,11 @@ function StockDetail() {
                     <div id="statistics">Market Cap, Price-Earnings Ratio etc</div>
                 </div>
 
-                
+                <button onClick={handleClick}>
+                    Testing
+                </button>
+
+
 
             </div>
         </>
