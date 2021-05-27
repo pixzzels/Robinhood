@@ -48,6 +48,7 @@ function StockDetail() {
 
     const companyInfo = stock[symbol]['company_info']
     const companyStatistics = stock[symbol]['company_statistics']
+    const news = stock[symbol]['company_news']
 
     return(
         <>
@@ -115,8 +116,8 @@ function StockDetail() {
                             </div>
                         </div>
                     </div>
-
-                    <NewsStory symbol={symbol}/>
+                    
+                    <NewsStory news={news} symbol={symbol}/>
                 </div>
 
                 <div className="buy-sell__wrapper">
