@@ -7,3 +7,5 @@ class Stock(db.Model):
     name = db.Column(db.String, nullable = False)
     ticker = db.Column(db.String, nullable = False, unique = True)
     market_price = db.Column(db.Float, nullable = False)
+
+    # transaction = db.relationship("Transaction", back_populates="Stocks")
