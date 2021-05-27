@@ -13,6 +13,10 @@
     margin-left: 40px;
 }
 
+.active {
+    color: #00c805;
+}
+
 /*-----FORM----------------------------------------------*/
 .underline {
     border-bottom: 1px solid rgb(227, 233, 237);

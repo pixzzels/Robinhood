@@ -108,7 +108,7 @@ export const updateOneList = (newList) => async (dispatch) => {
   }
 
   const data = await response.json();
-  dispatch(addList(data));
+  dispatch(updateList(data));
   return data;
 }
 
@@ -119,7 +119,7 @@ const initialState = {};
 
 const listReducer = (state = initialState, action) => {
   let newState;
-  console.log('al;dfasdf', action)
+  // console.log('al;dfasdf', action)
   switch (action.type) {
     case ADD_LIST:
       newState = {

@@ -9,6 +9,18 @@ class Transaction(db.Model):
     order_price = db.Column(db.Integer, nullable = False)
     order_volume = db.Column(db.Integer, nullable = False)
     order_type = db.Column(db.Integer, nullable = True)
+    time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
+
 
     user = db.relationship('User')
     stock = db.relationship('Stock')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "stock_id": self.stock_id,
+            "order_price": self.order_price,
+            "order_volume": self.order_volume,
+            "order_type": self.order_type,
+        }
