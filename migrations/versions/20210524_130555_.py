@@ -24,7 +24,6 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('user_id')
     )
     # ### end Alembic commands ###
 
