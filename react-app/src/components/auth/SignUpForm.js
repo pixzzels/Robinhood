@@ -51,7 +51,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -114,9 +114,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div className='redirect-text'>Have an account?
-          <a href="/login" className="redirect-link"> Log in </a>
+          <a href="/login" className="redirect-link"> Sign In </a>
           <span>or</span>
-          <a href="/" className="home-link"> Home</a>
+          <a href="/" className="home-link"> Go Home</a>
         </div>
         <button className='form-btn' type="submit">Sign Up</button>
         <button className='form-btn' type="submit" onClick={demoUser}>Demo User</button>

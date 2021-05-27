@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './SplashPage.css';
 import SplashNav from '../SplashNav/index';
+import Footer from '../Footer/index';
 import splash from '../../images/splash.png';
 import python from '../../images/python.png';
 import react from '../../images/react.png';
@@ -25,6 +26,7 @@ function SplashPage() {
             <NavLink to="/sign-up" exact={true} id="splash-signup__link" activeClassName="active">
                 Sign Up
             </NavLink>
+            <div id="disclaimer">*Robinhood is connected to stocks from the S&P 500 and is NOT intended for professional use of any kind.</div>
           </div>
           <div id="splash-vid__wrapper">
             <img src={splash} alt='trade video' id='splash-vid'></img>
@@ -38,7 +40,7 @@ function SplashPage() {
         <div id="container-3">
           <div id="c3-message__wrapper">
             <div id="c3-message1">
-              Built with the latest, cutting edge technology:
+              Built with the latest, cutting edge technologies:
             </div>
             <div className="technology-wrapper">
               <div className="technology" id="c3-technology1">
@@ -73,15 +75,7 @@ function SplashPage() {
           </div>
         </div>
 
-        <div id="footer-container"> 
-          <div>
-            This clone of Robinhood uses historical data and is no way intended for professional use of any kind.
-          </div>
-
-          <div>
-            Insert link to git repo and everyone's contacts
-          </div>
-        </div>
+        <Footer />
       </div >
     </>
   )
