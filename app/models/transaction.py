@@ -12,3 +12,13 @@ class Transaction(db.Model):
 
     user = db.relationship('User')
     stock = db.relationship('Stock')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "stock_id": self.stock_id,
+            "order_price": self.order_price,
+            "order_volume": self.order_volume,
+            "order_type": self.order_type
+        }
