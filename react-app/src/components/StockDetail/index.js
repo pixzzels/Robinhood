@@ -4,6 +4,12 @@ import StockChart from "../StockChart/index";
 import NewsStory from "../News/index";
 
 function StockDetail() {
+
+    const handleClick = async () => {
+        await fetch('/api/stock/bids/AAPL')
+    }
+
+
     return(
         <>
             <NavBar />
@@ -78,6 +84,9 @@ function StockDetail() {
                     BUY N SELL GOES HERE
                 </div>
             </div>
+            <button onClick={handleClick}>
+                testing
+            </button>
         </>
     )
 }
