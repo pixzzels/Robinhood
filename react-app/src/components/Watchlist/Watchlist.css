@@ -91,12 +91,13 @@
   background-color: none;
   border: 1px solid  rgb(227,233,237);
   border-radius: 4px;
-  font-size: 13px;
-  padding: 0px 24px;
-  height: 36px;
-  margin: 5px;
+
   font-size: 13px;
   font-weight: 700;
+
+  padding: 0px 24px;
+  margin: 5px;
+  height: 36px;
 }
 
 /* cancel button */

@@ -58,52 +58,66 @@ function List({ list }) {
 
 	return (
 		<div className="one-list">
-			<h2 className='single-list-txt'>{list.name}</h2>
-			<button className="edit-btn" type="button" onClick={handleDropdown}>
-				<i className="fas fa-ellipsis-h"></i>
-			</button>
-			<button className="edit-btn">
-				<i class="fas fa-chevron-down"></i>
-			</button>
+
+			<div className='list-text-container'>
+				<button className='text-emoji'>:)</button>
+				<h2 className='single-list-txt'>{list.name}</h2>
+			</div>
+
+			<div className='list-all-btns-container'>
+				<button className="edit-btn" type="button" onClick={handleDropdown}>
+					<i className="fas fa-ellipsis-h"></i>
+				</button>
+				<button className="edit-btn">
+					<i class="fas fa-chevron-down"></i>
+				</button>
+			</div>
+
 			{showDropdown &&
-				<div>
-					<Modal onClose={() => setShowDropdown(false)}>
-						<div className='list-edit-modal'>
-							<div className="button-flex-container">
+				<div className='edit-options-dropdown'>
+					{/* <Modal onClose={() => setShowDropdown(false)}> */}
+					<div className='list-edit-modal'>
+						<div className="button-flex-container">
 
-								<div className="edit-form-btn-container">
-									{editBtn && <i class="fas fa-cog"></i>}
-									{editBtn && <button className="edit-form-btn-style" type="button" onClick={updateList}>Edit list</button>}
-								</div>
-
-								{editForm &&
-									<form className="new-list-form" onSubmit={handleEditSubmit}>
-										<div>
-											<button>emoji</button>
-											<input
-												className='list-input'
-												name='list'
-												placeholder="List Name"
-												value={inputField}
-												onChange={e => setInputField(e.target.value)}
-											>
-											</input>
-										</div>
-										<footer>
-											<button className="list-cancel-btn list-form-btn" type="button" onClick={handleCancel}>Cancel</button>
-											<button className="list-create-btn list-form-btn" type="submit">Save</button>
-										</footer>
-									</form>
-								}
-
-								<div className="edit-form-btn-container">
-									{editBtn && <i class="far fa-times-circle"></i>}
-									{deleteBtn && <button className="edit-form-btn-style" type="button" onClick={deleteList}>Delete list</button>}
-								</div>
-
+							<div className="edit-form-btn-container">
+								{editBtn && <i class="fas fa-cog"></i>}
+								{editBtn && <button className="edit-form-btn-style" type="button" onClick={updateList}>Edit list</button>}
 							</div>
+
+							{editForm &&
+								<Modal>
+									<div className='edit-modal-content'>
+										<form className="edit-list-form" onSubmit={handleEditSubmit}>
+											<div>
+												<h2 className='edit-list-txt'>Edit List</h2>
+												<button>emoji</button>
+												<input
+													className='list-input'
+													name='list'
+													placeholder="List Name"
+													value={inputField}
+													onChange={e => setInputField(e.target.value)}
+												>
+												</input>
+											</div>
+											<footer>
+												<button className="list-cancel-btn edit-form-btn" type="button" onClick={handleCancel}>Cancel</button>
+												<button className="list-create-btn edit-form-btn" type="submit">Save</button>
+											</footer>
+										</form>
+									</div>
+								</Modal>
+
+							}
+
+							<div className="edit-form-btn-container">
+								{editBtn && <i class="far fa-times-circle"></i>}
+								{deleteBtn && <button className="edit-form-btn-style" type="button" onClick={deleteList}>Delete list</button>}
+							</div>
+
 						</div>
-					</Modal>
+					</div>
+					{/* </Modal> */}
 				</div>
 			}
 		</div>
