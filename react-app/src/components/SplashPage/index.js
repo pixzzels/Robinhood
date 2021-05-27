@@ -11,6 +11,7 @@ import flask from '../../images/flask.png';
 import postgresql from '../../images/postgresql.png';
 import docker from '../../images/docker.png';
 import shapes from '../../images/shapes.png';
+import video from '../../images/trade.mp4';
 
 
 
@@ -29,7 +30,10 @@ function SplashPage() {
             <div id="disclaimer">*Robinhood is connected to stocks from the S&P 500 and is NOT intended for professional use of any kind.</div>
           </div>
           <div id="splash-vid__wrapper">
-            <img src={splash} alt='trade video' id='splash-vid'></img>
+            {/* <video controlslist="nodownload nofullscreen noremoteplayback" loop preload="auto" playsinline muted autoPlay id="video"> */}
+              <img src={splash} alt='trade video' id='splash-vid'></img>
+              {/* <source src={video} type="video/mp4"></source> */}
+            {/* </video> */}
           </div>
         </div>
 

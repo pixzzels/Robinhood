@@ -64,17 +64,18 @@
   padding-left: 20px;
   grid-column: 6 / 13;
   grid-row: 4 / 12;
-}
-
-#splash-vid {
-  height: 550px;
+  /* background-image: url("../../images/trade.mp4"); */
 }
 
 #splash-vid {
   height: 600px;
   width: auto;
-  /* background-image: url("../../images/trade.mp4"); */
 }
+
+/* #video {
+  object-fit: contain;
+  position: absolute;
+} */
 
 #container-2 {
   display: flex;
