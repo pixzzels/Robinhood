@@ -4,6 +4,12 @@ import StockChart from "../StockChart/index";
 import NewsStory from "../News/index";
 
 function StockDetail() {
+
+    const handleClick = async () => {
+        await fetch('/api/stock/bids/AAPL')
+    }
+
+
     return(
         <>
             <NavBar />
@@ -31,7 +37,7 @@ function StockDetail() {
                         <div id="about-title">About</div>
                         {/* <hr id="hr"></hr> */}
                         <div id="description">
-                            Apple, Inc. engages in the design, manufacture, and sale of smartphones, personal computers, tablets, wearables and accessories, and other variety of related services. It operates through the following geographical segments: Americas, Europe, Greater China, Japan, and Rest of Asia Pacific. 
+                            Apple, Inc. engages in the design, manufacture, and sale of smartphones, personal computers, tablets, wearables and accessories, and other variety of related services. It operates through the following geographical segments: Americas, Europe, Greater China, Japan, and Rest of Asia Pacific.
                         </div>
                         <div className="company-info-container">
                             <div>
@@ -78,6 +84,9 @@ function StockDetail() {
                     BUY N SELL GOES HERE
                 </div>
             </div>
+            <button onClick={handleClick}>
+                testing
+            </button>
         </>
     )
 }

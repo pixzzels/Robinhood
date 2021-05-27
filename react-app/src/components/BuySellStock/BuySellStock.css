@@ -1,0 +1,137 @@
+.buy-sell-container {
+    box-shadow: 2px 2px 24px 4px #cecbcbb7;
+    border: 1px solid red;
+    border-radius: 4px;
+    width: 276px;
+    /* height: 415px; */
+    position: fixed;
+}
+
+.down-arrow-btn {
+    border: 0px;
+    background-color: white;
+    margin-left: 40px;
+}
+
+/*-----FORM----------------------------------------------*/
+.underline {
+    border-bottom: 1px solid rgb(227, 233, 237);
+}
+.buy-sell-form {
+    padding: 12px 24px 0px;
+    font-size: 13px;
+}
+
+.buy-sell-header {
+    /* margin: 10px; */
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid rgb(227, 233, 237);
+}
+
+.bs-share-select {
+    width: 134px;
+    height: 36px;
+    padding-left: 10px;
+    border-color: rgb(227, 233, 237);
+    box-shadow: 0px 0px 0px transparent;
+    transition: box-shadow .5s;
+}
+
+.bs-share-select:hover {
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
+}
+
+.bs-form-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    /* border: 1px solid green; */
+}
+
+.bs-share-input {
+    width: 82px;
+    text-align: right;
+    background-color: rgb(245, 248, 250);
+    border: 1px solid white;
+}
+
+.bs-share-input:hover {
+    background-color: white;
+    border: 1px solid rgb(227, 233, 237);
+
+}
+
+.bs-submit-btn {
+    margin: 20px 0px;
+    color: white;
+    background-color: rgb(0,200,5);
+    border: 1px solid rgb(0,200,5);
+    height: 48px;
+    width: 100%;
+    border-radius: 5px;
+}
+.bs-submit-btn:hover {
+    background-color: #00b806;
+}
+
+.bs-form-bspower {
+    border-top: 1px solid rgb(227, 233, 237);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #00c805;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+}
+
+/*------Market Price---------------------------------------------*/
+
+.bs-form-inputs-mp:hover {
+    cursor: pointer;
+}
+
+.market-price-info {
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    right: 50px;
+    padding: 24px;
+    background-color: white;
+    height: 395px;
+    width: 290px;
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
+
+}
+
+/*-----Review Transaction Dropdown-------------------------------------------*/
+.review-transaction-buy-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-transaction-buy-btn {
+    background-color: #00C805;
+    color: white; 
+}
+
+.review-transaction-buy-btn:hover {
+    background-color: #00b806;
+
+}
+
+.review-transaction-edit-btn {
+    background-color: white;
+    color: #00C805;
+}
+
+.rtbe-btn {
+    width: 100%;
+    border: 1px solid #00C805;
+    height: 48px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+
+}

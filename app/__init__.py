@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.watchlist_routes import watchlist_routes
 from .api.dash_routes import dashboard_routes
+from .api.stock_routes import stock_routes
 
 from .seeds import seed_commands
 
@@ -34,7 +35,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(watchlist_routes, url_prefix='/api/watchlist')
-
+app.register_blueprint(stock_routes, url_prefix='/api/stock')
 app.register_blueprint(dashboard_routes, url_prefix='/api/dashboard')
 db.init_app(app)
 Migrate(app, db)
