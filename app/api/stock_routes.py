@@ -157,21 +157,21 @@ def company_news(symbol):
 
     return get_company_news(symbol)
 
-@stock_routes.route('/bids/<symbol>')
-# @login_required
-def stock_ask_and_bids(symbol):
+# @stock_routes.route('/bids/<symbol>')
+# # @login_required
+# def stock_ask_and_bids(symbol):
 
-    def get_company_news(symbol):
+#     def get_company_news(symbol):
 
-        print(symbol)
-        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-        api_url = f'https://cloud.iexapis.com/stable/deep/book?symbols={symbol}&token={iex_api_key}'
-        df = requests.get(api_url).json()
-        print(df)
-        stock_bids = {'asks':df['asks'][0], 'bids': df['bids'][0]}
+#         print(symbol)
+#         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+#         api_url = f'https://cloud.iexapis.com/stable/deep/book?symbols={symbol}&token={iex_api_key}'
+#         df = requests.get(api_url).json()
+#         print(df)
+#         stock_bids = {'asks':df['asks'][0], 'bids': df['bids'][0]}
 
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(stock_bids)
-        return jsonify(stock_bids)
+#         pp = pprint.PrettyPrinter(indent=4)
+#         pp.pprint(stock_bids)
+#         return jsonify(stock_bids)
 
-    return get_company_news(symbol)
+#     return get_company_news(symbol)
