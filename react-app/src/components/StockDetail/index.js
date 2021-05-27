@@ -2,6 +2,8 @@ import "./StockDetail.css";
 import NavBar from "../NavBar/index";
 import StockChart from "../StockChart/index";
 import NewsStory from "../News/index";
+import BuySellStock from '../BuySellStock';
+
 
 function StockDetail() {
 
@@ -81,7 +83,7 @@ function StockDetail() {
                 </div>
 
                 <div className="buy-sell__wrapper">
-                    BUY N SELL GOES HERE
+                    <BuySellStock />
                 </div>
             </div>
             <button onClick={handleClick}>

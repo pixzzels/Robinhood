@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Portfolio from '../Portfolio';
 import Watchlist from '../Watchlist'
-import BuySellStock from '../BuySellStock';
-// import NavBar from "../NavBar/index";
 import './Dashboard.css';
 
 
@@ -18,7 +16,7 @@ function Dashboard() {
 				</div>
 
 				<div className="dashboard__watchlist-wrapper">
-					<BuySellStock />
+					<Watchlist />
 				</div>
 
 			</div>
