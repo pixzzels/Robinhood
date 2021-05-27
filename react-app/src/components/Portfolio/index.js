@@ -50,7 +50,7 @@ if (!refresh && cashBalance === 0) {
     newBal = parseInt(newBal) + parseInt(funds)
     setCashBalance(newBal)
     console.log('newBal', newBal)
-    updateCashBalance({ userId, newBal })
+    dispatch(updateCashBalance({ userId, newBal }))
     setShowDepositModal(false)
 
   }

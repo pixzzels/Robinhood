@@ -26,7 +26,7 @@ function BuySellStock({ symbol, price }) {
         const trans = Object.values(state.transaction)
         return trans;
     })
-    // console.log("transactions", transactions)
+    console.log("transactions", transactions)
     
     
     useEffect(() => {
