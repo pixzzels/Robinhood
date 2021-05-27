@@ -10,3 +10,15 @@ def load_portfolio(user_id):
     portfolio = Portfolio.query.get(user_id)
 
     return portfolio.to_dict()
+
+
+@portfolio_routes.route("/update/<int:user_id>", methods=["PUT"])
+@login_required
+def update_portfolio(user_id):
+    portfolio = Portfolio.query.get(user_id)
+
+    portfolio.cash_balance = request.json["cash_balance"]
+    db.session.add(portfolio)
+    db.session.commit()
+
+    return portfolio.to_dict()

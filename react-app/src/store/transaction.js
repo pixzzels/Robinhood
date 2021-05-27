@@ -51,9 +51,14 @@ const initialState = {};
 
 const transactionReducer = (state = initialState, action) => {
   let newState;
-  console.log('al;dfasdf', action)
   switch (action.type) {
-
+    case BUY: {
+      newState = {
+        ...state,
+        [action.reciept.id]: action.reciept
+      };
+      return newState;
+    }
 
     default:
       return state;

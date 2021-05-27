@@ -1,13 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { buyStock } from '../../store/transaction';
-import { loadPortfolio } from '../../store/portfolio';
+import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import './BuySellStock.css'
 
 function BuySellStock() {
 
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
+    const portfolioInfo = useSelector(state => {
+        const portfolio = Object.values(state.portfolio)
+        return portfolio[0]
+    })
+    useEffect(() => {
+        dispatch(loadPortfolio(userId))
+    }, [dispatch])
+
+    // console.log("portfolioInfo", portfolioInfo)
+    // console.log("portfoliocash", portfolioInfo.id)
+
 
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
@@ -15,23 +26,25 @@ function BuySellStock() {
     const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true)
 
-    useEffect(() => {
-        dispatch(loadPortfolio(userId))
-      }, [dispatch])
 
     const sharesOwned = 0
-    const buyingPower = 3034.76;
     const stockSymbol = 'APPL';
 
     const stockId = 52;
     const orderPrice = 126.85;
     const orderType = 1;
+    const estimatedPrice = orderPrice * shares
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares)
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
         dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
+        let cashBalance = portfolioInfo.cash_balance
+        let cash_balance = cashBalance - estimatedPrice
+        dispatch(updateCashBalance({ userId, cash_balance }))
+        // console.log("NEW", cash_balance)
+
     }
 
 
@@ -56,7 +69,6 @@ function BuySellStock() {
     }, []);
 
 
-    const estimatedPrice = orderPrice * shares
 
     return (
         <>
@@ -159,7 +171,7 @@ function BuySellStock() {
                         }
                     </form>
                     <div className="bs-form-bspower">
-                        <span>{buySell ? "$" + buyingPower + " buying power available" : sharesOwned + " Share(s) Available"} </span>
+                        <span>{buySell && portfolioInfo ? "$" + portfolioInfo.cash_balance + " buying power available" : sharesOwned + " Share(s) Available"} </span>
                     </div>
                 </div>
             </div>
