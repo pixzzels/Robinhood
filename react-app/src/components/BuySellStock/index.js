@@ -60,12 +60,12 @@ function BuySellStock({ symbol, price }) {
     const stockSymbol = symbol.toUpperCase();
     const stockId = 52;
 
-    const orderPrice = price.toFixed(2);
+    const orderPrice = parseInt(price.toFixed(2));
     const orderType = 1;
     const estimatedPrice = orderPrice * shares
     
     const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
-    console.log("transfa", stockTransactions)
+    // console.log("transfa", stockTransactions)
     // let stockId;
     // if (stockTransactions[0].stock_id) {
     //     stockId = stockTransactions[0].stock_id.id
@@ -75,10 +75,12 @@ function BuySellStock({ symbol, price }) {
         e.preventDefault();
         let orderVolume = parseInt(shares)
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
-        dispatch(buyStock({ userId, stockSymbol, orderPrice, orderVolume, orderType }))
+        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
 
-        setCashBalance(cashBalance - estimatedPrice)
-        dispatch(updateCashBalance({ userId, cashBalance }))
+        let newBal = cashBalance - estimatedPrice
+        setCashBalance(newBal)
+        // console.log("newBal", newBal)
+        dispatch(updateCashBalance({ userId, newBal }))
         
     }
     
