@@ -1,6 +1,6 @@
 /* -----action verbs-------------------------------------------------- */
-const BUY = "watchlist/BUY";
-const SELL = "watchlist/SELL";
+const BUY = "transaction/BUY";
+const SELL = "transaction/SELL";
 
 
 /* -----action creator-------------------------------------------------- */

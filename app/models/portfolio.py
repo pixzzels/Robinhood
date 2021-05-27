@@ -33,3 +33,12 @@ class Portfolio(db.Model):
     portfolio_stats = db.Column(MutableList.as_mutable(db.ARRAY(db.Integer)), nullable = False)
 
     user = db.relationship('User')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "cash_balance": self.cash_balance,
+            "total_investment": self.total_investment,
+            "portfolio_stats": self.portfolio_stats
+        }

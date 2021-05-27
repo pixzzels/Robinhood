@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { buyStock } from '../../store/transaction';
+import { loadPortfolio } from '../../store/portfolio';
 import './BuySellStock.css'
 
 function BuySellStock() {
@@ -13,6 +14,10 @@ function BuySellStock() {
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
     const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true)
+
+    useEffect(() => {
+        dispatch(loadPortfolio(userId))
+      }, [dispatch])
 
     const sharesOwned = 0
     const buyingPower = 3034.76;
