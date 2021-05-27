@@ -1,24 +1,27 @@
 #footer-container {
-    height: 10em;
+    height: 20em;
     color: white;
     background-color: black;
   }
   
   #disclaimer2 {
-    padding-top: 10px;
+    padding-top: 55px;
     text-align: center;
     text-decoration: underline;
+    letter-spacing: .03em;
+    font-size: 16px;
+    font-weight: 500;
   }
   
   .names-container {
-    padding-top: 30px;
+    padding-top: 50px;
     display: flex;
     justify-content: center;
   }
   
   .name-container {
-    font-size: 30px;
-    padding: 0px 40px;
+    font-size: 24px;
+    padding: 5px 48px;
   }
   
   .connect-container {
@@ -29,5 +32,5 @@
   .connect-container a {
     text-decoration: none;
     color: white;
-    padding: 0px 5px;
+    padding: 10px 5px;
   }

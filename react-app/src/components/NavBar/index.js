@@ -10,15 +10,42 @@ const NavBar = () => {
 
   return (
     <nav className="nav-wrapper">
-      <div className="nav-link" id="home-link">
-        <NavLink to="/dashboard" exact={true} activeClassName="active">
+
+      <div className="portfolio-nav__links">
+        <NavLink to="/dashboard" exact={true} id="home-link" activeClassName="active">
           <img src={blackleaf} alt='black leaf logo' id='blackleaf'></img>
         </NavLink>
       </div>
 
-      <>
-      <LogoutButton/>
-      </>
+      <div className="portfolio-search-container">
+        <form>
+          <input
+            className='portfolio-search'
+            type='text'
+            placeholder='Search'
+            required
+          />
+        </form>
+      </div>
+
+      <div className="right-nav-container">
+        <div className="portfolio-nav__links">
+          <NavLink to="/dashboard" exact={true} id="portfolio-link" activeClassName="active">
+            Portfolio
+          </NavLink>
+        </div>
+
+        <div className="portfolio-nav__links">
+          <NavLink to="/account" exact={true} id="account-link" activeClassName="active">
+            Account
+          </NavLink>
+        </div>
+
+        <>
+          <LogoutButton />
+        </>
+      </div>
+
     </nav>
   );
 }

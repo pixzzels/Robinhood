@@ -2,5 +2,11 @@
     color: black;
     background: none;
     border-style: none;
+    font-size: .82em;
+    font-weight: 800;
+    letter-spacing: .03em;
+}
 
+#logout:hover{
+    color: limegreen;
 }
