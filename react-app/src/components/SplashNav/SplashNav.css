@@ -1,8 +1,8 @@
 .nav-wrapper {
     display: grid;
-    grid-template-columns: repeat(11, 1fr) 140px;
+    grid-template-columns: repeat(12, 1fr) 140px;
     grid-template-rows: 1fr;
-    height: 3.5em;
+    height: 200px;
     width: 100%;
     padding: 0 24px;
     padding-top: 2px;
@@ -37,7 +37,7 @@
 }
 
 #contact-link{
-  grid-column: 4/5;
+  grid-column: 3/5;
   font-weight: bold;
 }
 
@@ -48,15 +48,16 @@
 }
 
 #login-link{
-  grid-column: 11/12;
+  grid-column: 12/12;
   font-weight: 900;
   margin-left: 30px;
 }
 
 #signup-link{
-  grid-column: 12/13;
+  grid-column: 13/13;
   font-weight: 900;
   margin: 5px 0px;
+  /* margin-left: 50px; */
   justify-content: center;
   background-color: #00C805;
   border-radius: 30px;

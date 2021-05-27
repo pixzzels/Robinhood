@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './SplashNav.css';
-import logo from '../../images/logo-black-small.png';
+// import logo from '../../images/logo-black-small.png';
+import logo from '../../images/robinhood-vector-logo.png';
 
 const NavBar = () => {
   // const user = useSelector(state => state.session.user);
@@ -27,15 +28,15 @@ const NavBar = () => {
 
       {/* links to profile ? drop down ??? */}
       <div className="nav-link greens" id="contact-link">
-        <NavLink to="/contactus" exact={true} activeClassName="active">
-          Contact us
-        </NavLink>
+        <a href="https://github.com/pixzzels/Robinhood" target="_blank" exact={true} activeClassName="active">
+          Check Out Our Work
+        </a>
       </div>
 
       <div className="nav-link greens" id="about-link">
-        <NavLink to="/whoweare" exact={true} activeClassName="active">
+        <a href="#footer-container" exact={true} activeClassName="active">
           Who we are
-        </NavLink>
+        </a>
       </div>
 
       <div className="nav-link greens" id="login-link">

@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .one-list:hover{
@@ -15,4 +16,60 @@
   font-size: 14px;
   font-weight: 500;
   letter-spacing: .02em;
+}
+/* --------------------EDITS--------------------- */
+
+.edit-btn {
+  background-color: transparent;
+  border: 0px;
+  padding: 10px;
+}
+
+.edit-btn:hover{
+  color: #00C805;
+}
+
+/* --------------------MODAL--------------------- */
+/* DELETE #modal LATER */
+/* #modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* DELETE #modal-content LATER */
+/* #modal-content {
+  position: absolute;
+  background-color:white;
+  border-radius: 10px;
+} */
+
+.list-edit-modal{
+  height: 200px;
+  width: 200px;
+  border: 4px solid red;
+  background-color: white;
+
+  position: fixed;
+  top: 70px;
+  left: 325px;
+  z-index: 1000005;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* modal global STAY */
+#modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 }

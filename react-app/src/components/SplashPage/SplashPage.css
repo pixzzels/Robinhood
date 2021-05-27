@@ -6,9 +6,9 @@
 
 #container-1 {
   width: 100%;
-  height: 40em;
+  height: 45em;
   /* background-color: #C3F53C; */
-  background-color: #C2FF40;
+  background-color: rgb(195,245,60);
   border-bottom: 1px solid black;
 
   display: grid;
@@ -17,17 +17,22 @@
 }
 
 #message-wrapper {
-  grid-column: 2 / 5;
+  grid-column: 2 / 6;
   grid-row: 6 / 13;
 }
 
+#c1-message1, #c1-message2, #splash-signup__link {
+  margin-left: 30px;
+}
+
 #c1-message1 {
+  padding-top: 40px;
   font-size: 52px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #c1-message2 {
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 50px;
   font-size: 24px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -39,7 +44,7 @@
   margin-top: 20px;
   background-color: black;
   border-radius: 30px;
-  padding: 15px 50px;
+  padding: 13px 40px;
   font-size: 20px;
   color: white;
   text-decoration: none;
@@ -49,14 +54,26 @@
   background-color: #2A3137;
 }
 
-#trade-gif_wrapper {
+#disclaimer {
+  margin-top: 130px;
+  text-decoration: underline;
+}
+
+#splash-vid__wrapper {
+  padding-top: 30px;
+  padding-left: 20px;
   grid-column: 6 / 13;
   grid-row: 4 / 12;
 }
 
-#trade-gif {
+#splash-vid {
   height: 550px;
+}
+
+#splash-vid {
+  height: 600px;
   width: auto;
+  /* background-image: url("../../images/trade.mp4"); */
 }
 
 #container-2 {
@@ -115,10 +132,4 @@
 #shapes-img {
   height: 400px;
   width: auto;
-}
-
-#footer-container {
-  height: 20em;
-  color: white;
-  background-color: black;
 }
