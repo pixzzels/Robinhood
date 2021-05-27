@@ -37,13 +37,13 @@ export const loadPortfolio = (userId) => async (dispatch) => {
 
 
 export const updateCashBalance = (info) => async (dispatch) => {
-  const {userId, cash_balance} = info
+  const {userId, cashBalance} = info
 
   const response = await fetch(`/api/portfolio/update/${userId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      cash_balance
+      cash_balance: cashBalance
     })
   })
 

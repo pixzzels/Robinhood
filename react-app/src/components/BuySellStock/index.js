@@ -7,25 +7,48 @@ import './BuySellStock.css'
 function BuySellStock() {
 
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.session.user.id)
-    const portfolioInfo = useSelector(state => {
-        const portfolio = Object.values(state.portfolio)
-        return portfolio[0]
-    })
-    useEffect(() => {
-        dispatch(loadPortfolio(userId))
-    }, [dispatch])
-
-    // console.log("portfolioInfo", portfolioInfo)
-    // console.log("portfoliocash", portfolioInfo.id)
-
-
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
     const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true)
+    const [cashBalance, setCashBalance] = useState(0)
+    const [isVisible, setIsVisible] = useState(false);
+    const [refresh, setRefresh] = useState(false)
+    const ref = useRef(null);
 
+    const userId = useSelector(state => state.session.user.id)
+    const portfolioInfo = useSelector(state => {
+        const portfolio = Object.values(state.portfolio)
+        return portfolio[0]
+    })
+
+
+    useEffect(() => {
+        dispatch(loadPortfolio(userId))
+    }, [dispatch])
+
+    const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setIsVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, []);
+
+    if (!portfolioInfo) return null;
+    if (!refresh && cashBalance === 0) {
+        console.log("SDFSDFSF")
+        console.log("portfolioInfo.cash_balance", portfolioInfo.cash_balance)
+        setCashBalance(portfolioInfo.cash_balance)
+        setRefresh(true)
+    }
+    // setCashBalance(portfolioInfo.cash_balance)
 
     const sharesOwned = 0
     const stockSymbol = 'APPL';
@@ -40,9 +63,11 @@ function BuySellStock() {
         let orderVolume = parseInt(shares)
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
         dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-        let cashBalance = portfolioInfo.cash_balance
-        let cash_balance = cashBalance - estimatedPrice
-        dispatch(updateCashBalance({ userId, cash_balance }))
+        // setCashBalance(portfolioInfo.cash_balance)
+
+        // let cashBalance = portfolioInfo.cash_balance
+        setCashBalance(cashBalance - estimatedPrice)
+        dispatch(updateCashBalance({ userId, cashBalance }))
         // console.log("NEW", cash_balance)
 
     }
@@ -52,21 +77,8 @@ function BuySellStock() {
         setReviewTransactionDropDown(true)
     }
 
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
 
-    const handleClickOutside = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
-            setIsVisible(false);
-        }
-    };
 
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true);
-        return () => {
-            document.removeEventListener('click', handleClickOutside, true);
-        };
-    }, []);
 
 
 
@@ -138,7 +150,7 @@ function BuySellStock() {
                                 </div>
                                 <div className="bs-form-inputs bold">
                                     <span>Estimated {buySell ? "Cost" : "Credit"}</span>
-                                    <span>${estimatedPrice}</span>
+                                    <span>${(estimatedPrice).toFixed(2)}</span>
                                 </div>
 
                                 {reviewTransactionDropDown && shares > 0 &&
@@ -171,7 +183,7 @@ function BuySellStock() {
                         }
                     </form>
                     <div className="bs-form-bspower">
-                        <span>{buySell && portfolioInfo ? "$" + portfolioInfo.cash_balance + " buying power available" : sharesOwned + " Share(s) Available"} </span>
+                        <span>{buySell ? "$" + cashBalance.toFixed(2) + " buying power available" : sharesOwned + " Share(s) Available"} </span>
                     </div>
                 </div>
             </div>
