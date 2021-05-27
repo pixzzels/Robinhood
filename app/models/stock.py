@@ -15,3 +15,4 @@ class Stock(db.Model):
             "ticker": self.ticker,
             "market_price": self.market_price,
         }
+

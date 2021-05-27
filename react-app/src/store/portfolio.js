@@ -37,13 +37,15 @@ export const loadPortfolio = (userId) => async (dispatch) => {
 
 
 export const updateCashBalance = (info) => async (dispatch) => {
-  const {userId, cashBalance} = info
+  const {userId, newBal} = info
+  console.log("redux", newBal)
 
   const response = await fetch(`/api/portfolio/update/${userId}`, {
+
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      cash_balance: cashBalance
+      cash_balance: newBal
     })
   })
 
@@ -67,10 +69,16 @@ const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
       newState = {}
-      // console.log("portfolio", action.portfolio)
       newState[action.portfolio.id] = action.portfolio
       return {
         ...newState, ...state
+      }
+    }
+
+    case UPDATE: {
+      return {
+        ...state,
+        [action.cashBalance.id]: action.cashBalance
       }
     }
 

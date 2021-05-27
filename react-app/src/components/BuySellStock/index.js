@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { buyStock } from '../../store/transaction';
+import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import './BuySellStock.css'
 
-function BuySellStock() {
+function BuySellStock({ symbol, price }) {
 
     const dispatch = useDispatch();
     const [shares, setShares] = useState(0);
@@ -22,12 +22,21 @@ function BuySellStock() {
         const portfolio = Object.values(state.portfolio)
         return portfolio[0]
     })
-
-
+    const transactions = useSelector(state => {
+        const trans = Object.values(state.transaction)
+        return trans;
+    })
+    // console.log("transactions", transactions)
+    
+    
     useEffect(() => {
         dispatch(loadPortfolio(userId))
     }, [dispatch])
-
+    
+    useEffect(() => {
+        dispatch(loadTransactions(userId))
+    }, [dispatch])
+    
     const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
             setIsVisible(false);
@@ -40,38 +49,41 @@ function BuySellStock() {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-
+    
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
-        console.log("SDFSDFSF")
-        console.log("portfolioInfo.cash_balance", portfolioInfo.cash_balance)
         setCashBalance(portfolioInfo.cash_balance)
         setRefresh(true)
     }
-    // setCashBalance(portfolioInfo.cash_balance)
-
+    
     const sharesOwned = 0
-    const stockSymbol = 'APPL';
-
+    const stockSymbol = symbol.toUpperCase();
     const stockId = 52;
-    const orderPrice = 126.85;
+
+    const orderPrice = parseInt(price.toFixed(2));
     const orderType = 1;
     const estimatedPrice = orderPrice * shares
+    
+    const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
+    // console.log("transfa", stockTransactions)
+    // let stockId;
+    // if (stockTransactions[0].stock_id) {
+    //     stockId = stockTransactions[0].stock_id.id
+    // }
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares)
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
         dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-        // setCashBalance(portfolioInfo.cash_balance)
 
-        // let cashBalance = portfolioInfo.cash_balance
-        setCashBalance(cashBalance - estimatedPrice)
-        dispatch(updateCashBalance({ userId, cashBalance }))
-        // console.log("NEW", cash_balance)
-
+        let newBal = cashBalance - estimatedPrice
+        setCashBalance(newBal)
+        // console.log("newBal", newBal)
+        dispatch(updateCashBalance({ userId, newBal }))
+        
     }
-
+    
     const handleReviewTransaction = () => {
         setReviewTransactionDropDown(true)
     }
@@ -150,7 +162,7 @@ function BuySellStock() {
 
                                 {reviewTransactionDropDown && shares > 0 &&
                                     <>
-                                        <p>You are placing a good for day market order to {buySell ? "buy" : "sell"} {shares} share of {stockSymbol}.</p>
+                                        <p>You are placing a good for day market order to {buySell ? "buy" : "sell"} {shares} share(s) of {stockSymbol}.</p>
                                         <footer className="review-transaction-buy-edit">
                                             <button className="review-transaction-buy-btn rtbe-btn bold" type="submit">{buySell ? "Buy" : "Sell"} </button>
                                             <button className="review-transaction-edit-btn rtbe-btn bold" type="button" onClick={() => setReviewTransactionDropDown(false)}>Edit</button>
@@ -161,7 +173,7 @@ function BuySellStock() {
                                 }
 
                                 {reviewTransactionDropDown && shares === 0 &&
-                                    <p>You must identify the number of shares you would like to purchase.</p>
+                                    <p>Please enter a valid number of shares.</p>
                                 }
 
                                 <button className={"bs-submit-btn bold " + (reviewTransactionDropDown && shares > 0 ? 'hidden' : '')} type="button" onClick={handleReviewTransaction}>

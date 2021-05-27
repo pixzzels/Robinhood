@@ -16,7 +16,7 @@ const sell = (reciept) => ({
 })
 
 const load = (reciept) => ({
-  type: load,
+  type: LOAD,
   reciept
 })
 
@@ -51,7 +51,7 @@ export const buyStock = (info) => async (dispatch) => {
 
 export const loadTransactions = (userId) => async (dispatch) => {
 
-  const response = await fetch(`/api/transaction`)
+  const response = await fetch(`/api/transaction/${userId}`)
 
   if (!response.ok) {
     throw response
@@ -76,6 +76,16 @@ const transactionReducer = (state = initialState, action) => {
         [action.reciept.id]: action.reciept
       };
       return newState;
+    }
+
+    case LOAD: {
+      newState = {}
+      action.reciept.forEach((transaction) => {
+        newState[transaction.id] = transaction
+      })
+      return {
+        ...newState, ...state
+      }
     }
 
     default:
