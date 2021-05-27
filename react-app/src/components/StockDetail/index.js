@@ -116,7 +116,7 @@ function StockDetail() {
                             </div>
                         </div>
                     </div>
-
+                    
                     <NewsStory news={news} symbol={symbol}/>
                 </div>
 
