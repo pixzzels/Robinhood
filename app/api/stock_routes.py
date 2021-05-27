@@ -210,12 +210,34 @@ def stockprices(symbol):
         # pp.pprint(companystats)
         return companystats
 
+    def get_company_news(symbol):
+        companynews = {}
+
+        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/news/last/5?token={iex_api_key}'
+        df = requests.get(api_url).json()
+        # print(df)
+        companynews[symbol] = []
+        for i in range(len(df)):
+            headline = df[i]['headline']
+            source = df[i]['source']
+            url = df[i]['url']
+            summary = df[i]['summary']
+            image = df[i]['image']
+            news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
+            companynews[symbol].append(news)
+
+        # pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(companynews)
+        return companynews
+
     details = get_company_data(symbol)
     stats = get_company_statistics(symbol)
+    news = get_company_news(symbol)
     pp = pprint.PrettyPrinter(indent=4)
     # pp.pprint(details)
     # pp.pprint(stats)
-    company_details[symbol] = {'company_info': details[symbol], 'company_statistics': stats[symbol]}
+    company_details[symbol] = {'company_info': details[symbol], 'company_statistics': stats[symbol], 'company_news': news}
     pp.pprint(company_details)
 
     return jsonify(company_details)
