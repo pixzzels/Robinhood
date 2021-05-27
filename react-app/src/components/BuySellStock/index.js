@@ -27,16 +27,16 @@ function BuySellStock({ symbol, price }) {
         return trans;
     })
     // console.log("transactions", transactions)
-    
-    
+
+
     useEffect(() => {
         dispatch(loadPortfolio(userId))
     }, [dispatch])
-    
+
     useEffect(() => {
         dispatch(loadTransactions(userId))
     }, [dispatch])
-    
+
     const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
             setIsVisible(false);
@@ -49,21 +49,21 @@ function BuySellStock({ symbol, price }) {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-    
+
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
         setCashBalance(portfolioInfo.cash_balance)
         setRefresh(true)
     }
-    
+
     const sharesOwned = 0
     const stockSymbol = symbol.toUpperCase();
     const stockId = 52;
 
     const orderPrice = parseInt(price.toFixed(2));
-    const orderType = 1;
+    let orderType;
     const estimatedPrice = orderPrice * shares
-    
+
     const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
     // console.log("transfa", stockTransactions)
     // let stockId;
@@ -74,16 +74,30 @@ function BuySellStock({ symbol, price }) {
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares)
-        // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
-        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-
-        let newBal = cashBalance - estimatedPrice
-        setCashBalance(newBal)
-        // console.log("newBal", newBal)
-        dispatch(updateCashBalance({ userId, newBal }))
         
+        let newBal;
+        if (buySell === true) {
+            orderType = 1;
+            newBal = cashBalance - estimatedPrice
+            dispatch(updateCashBalance({ userId, newBal }))
+            setCashBalance(newBal)
+        } else {
+            orderType = 2;
+            newBal = cashBalance + estimatedPrice
+            dispatch(updateCashBalance({ userId, newBal }))
+            setCashBalance(newBal)
+        }
+        
+        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
+        setReviewTransactionDropDown(false)
+        setShares(0)
+        setBuySell(true)
+        let input = document.querySelector(".bs-share-input")
+        input.value = ''
+        // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
+
     }
-    
+
     const handleReviewTransaction = () => {
         setReviewTransactionDropDown(true)
     }
@@ -151,7 +165,7 @@ function BuySellStock({ symbol, price }) {
                                             {/* hello */}
                                             <p style={{ fontSize: '13px' }}>
                                                 The consolidated FAKE-time market data for AGTC across all US stock exchanges is:
-                                        </p>
+                                            </p>
                                         </div>
                                     }
                                 </div>
