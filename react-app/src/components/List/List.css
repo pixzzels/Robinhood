@@ -17,7 +17,7 @@
   font-weight: 500;
   letter-spacing: .02em;
 }
-/* --------------------EDITS--------------------- */
+/* --------------------EDITS modal--------------------- */
 
 .edit-btn {
   background-color: transparent;
@@ -50,8 +50,8 @@
 } */
 
 .list-edit-modal{
-  height: 200px;
-  width: 200px;
+  height: 30vh;
+  width: 20vw;
   border: 4px solid red;
   background-color: white;
 
@@ -63,6 +63,45 @@
   justify-content: center;
   align-items: center;
 }
+
+
+
+
+
+
+.edit-form-btn-container{
+  font-size: 17px;
+  margin: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-form-btn-container:hover{
+  color: #00C805;
+}
+
+.edit-form-btn-style{
+  border: none;
+  background-color: transparent;
+  padding-left: 10px;
+  font-weight: 700;
+}
+
+.edit-form-btn-style:hover{
+  color: #00C805;
+}
+
+
+.button-flex-container{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
 
 /* modal global STAY */
 #modal-background {
