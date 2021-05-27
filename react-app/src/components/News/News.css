@@ -5,10 +5,17 @@
 
 .news-story {
     width: 41em;
-    height: 8em;
-    border: 1px solid red;
+    height: 9em;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 0px 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.news-story:hover {
+    background-color: #F5F8FA;
 }
 
 .story-info {
@@ -32,5 +39,6 @@
 }
 
 #story-img {
-    height: 7.8em;
+    height: 7em;
+    padding-left: 8px;
 }
