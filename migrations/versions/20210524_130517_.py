@@ -24,8 +24,6 @@ def upgrade():
     sa.Column('ticker', sa.String(), nullable=False),
     sa.Column('market_price', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('market_price'),
-    sa.UniqueConstraint('name'),
     sa.UniqueConstraint('ticker')
     )
     # ### end Alembic commands ###
