@@ -130,7 +130,7 @@ function StockDetail() {
                 </div>
 
                 <div className="buy-sell__wrapper">
-                    <BuySellStock symbol={symbol} price={companyInfo.price} />
+                    <BuySellStock symbol={symbol} price={companyInfo.price} stockId={companyInfo.stock_id} />
                 </div>
             </div>
             {/* <button onClick={handleClick}>

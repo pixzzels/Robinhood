@@ -4,7 +4,7 @@ import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import './BuySellStock.css'
 
-function BuySellStock({ symbol, price }) {
+function BuySellStock({ symbol, price, stockId }) {
 
     const dispatch = useDispatch();
     const [shares, setShares] = useState(0);
@@ -27,6 +27,7 @@ function BuySellStock({ symbol, price }) {
         return trans;
     })
     // console.log("transactions", transactions)
+    // console.log("stockId",stockId)
 
 
     useEffect(() => {
@@ -56,20 +57,15 @@ function BuySellStock({ symbol, price }) {
         setRefresh(true)
     }
 
-    const sharesOwned = 0
     const stockSymbol = symbol.toUpperCase();
-    const stockId = 52;
 
     const orderPrice = parseInt(price.toFixed(2));
     let orderType;
     const estimatedPrice = orderPrice * shares
 
     const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
-    // console.log("transfa", stockTransactions)
-    // let stockId;
-    // if (stockTransactions[0].stock_id) {
-    //     stockId = stockTransactions[0].stock_id.id
-    // }
+    let sharesOwned = stockTransactions.length
+    
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
