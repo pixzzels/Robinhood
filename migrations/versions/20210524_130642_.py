@@ -25,8 +25,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['stock_id'], ['Stocks.id'], ),
     sa.ForeignKeyConstraint(['watchlist_id'], ['Watchlists.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('stock_id'),
-    sa.UniqueConstraint('watchlist_id')
     )
     # ### end Alembic commands ###
 

@@ -106,13 +106,13 @@ def stockprices():
     # REDUX STORE ROUTE
 
     # const handleClick = async () => {
-    #     await fetch('/api/dashboard/stockinfo', {
-    #         method: 'POST',
-    #         headers: {
-    #             'Content-Type':'application/json'
-    #         },
-    #         body: JSON.stringify({
-    #             stock: ['SNAP', 'AAPL', 'TWTR']
-    #         }),
-    #     })
+        # await fetch('/api/dashboard/stockinfo', {
+        #     method: 'POST',
+        #     headers: {
+        #         'Content-Type':'application/json'
+        #     },
+        #     body: JSON.stringify({
+        #         stock: ['SNAP', 'AAPL', 'TWTR']
+        #     }),
+        # })
     # }
