@@ -119,7 +119,6 @@ const initialState = {};
 
 const listReducer = (state = initialState, action) => {
   let newState;
-  console.log('al;dfasdf', action)
   switch (action.type) {
     case ADD_LIST:
       newState = {

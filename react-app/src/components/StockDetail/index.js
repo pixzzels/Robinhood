@@ -3,14 +3,51 @@ import NavBar from "../NavBar/index";
 import StockChart from "../StockChart/index";
 import NewsStory from "../News/index";
 import BuySellStock from '../BuySellStock';
+import * as stockReducer from '../../store/stock'
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
 
 
 function StockDetail() {
+    const dispatch = useDispatch();
+    const ticker = useParams();
+    const symbol = ticker['ticker']
+    const [dateRange, setDateRange] = useState('1D')
+    const setDate = (e) => setDateRange(e.target.value)
 
-    const handleClick = async () => {
-        await fetch('/api/stock/bids/AAPL')
+    const stock = useSelector(state => state.stock.currentStock)
+
+    useEffect(()=> {
+        dispatch(stockReducer.getStockCompany(symbol))
+    }, [dispatch, symbol])
+
+    if(!stock) {
+        return null
     }
 
+    function nFormatter(num, digits) {
+        var si = [
+          { value: 1, symbol: "" },
+          { value: 1E3, symbol: "k" },
+          { value: 1E6, symbol: "M" },
+          { value: 1E9, symbol: "G" },
+          { value: 1E12, symbol: "T" },
+          { value: 1E15, symbol: "P" },
+          { value: 1E18, symbol: "E" }
+        ];
+        var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+        var i;
+        for (i = si.length - 1; i > 0; i--) {
+          if (num >= si[i].value) {
+            break;
+          }
+        }
+        return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+    }
+
+    const companyInfo = stock[symbol]['company_info']
+    const companyStatistics = stock[symbol]['company_statistics']
 
     return(
         <>
@@ -18,20 +55,20 @@ function StockDetail() {
             <div className="detail-page__wrapper">
                 <div className="stock-wrapper">
                     <div className="info-container">
-                        <div id="stock-name">Apple</div>
-                        <div id="curr-price">$122.45</div>
-                        <div id="price-change">Price Change</div>
+                        <div id="stock-name">{companyInfo.company_name}</div>
+                        <div id="curr-price">${(companyInfo.price).toFixed(2)}</div>
+                        <div id="price-change">{(companyInfo.change).toFixed(2)}({((companyInfo.priceChange)*100).toFixed(2)})%</div>
                     </div>
 
                     <div className="chart-container">
-                        <StockChart />
+                        <StockChart dateRange={dateRange} symbol={symbol}/>
                         <div className="stock-chart-bar">
-                            <button className="stock-timeline-options btn tlbtn">1D</button>
-                            <button className="stock-timeline-options btn tlbtn">1W</button>
-                            <button className="stock-timeline-options btn tlbtn">1M</button>
-                            <button className="stock-timeline-options btn tlbtn">3M</button>
-                            <button className="stock-timeline-options btn tlbtn">1Y</button>
-                            <button className="stock-timeline-options btn tlbtn">5Y</button>
+                            <button onClick={setDate} value={'1D'} className="stock-timeline-options btn tlbtn">1D</button>
+                            <button onClick={setDate} value={'1W'} className="stock-timeline-options btn tlbtn">1W</button>
+                            <button onClick={setDate} value={'1M'} className="stock-timeline-options btn tlbtn">1M</button>
+                            <button onClick={setDate} value={'3M'} className="stock-timeline-options btn tlbtn">3M</button>
+                            <button onClick={setDate} value={'1Y'} className="stock-timeline-options btn tlbtn">1Y</button>
+                            <button onClick={setDate} value={'5Y'} className="stock-timeline-options btn tlbtn">5Y</button>
                         </div>
                     </div>
 
@@ -39,20 +76,20 @@ function StockDetail() {
                         <div id="about-title">About</div>
                         {/* <hr id="hr"></hr> */}
                         <div id="description">
-                            Apple, Inc. engages in the design, manufacture, and sale of smartphones, personal computers, tablets, wearables and accessories, and other variety of related services. It operates through the following geographical segments: Americas, Europe, Greater China, Japan, and Rest of Asia Pacific.
+                            {companyInfo.description}
                         </div>
                         <div className="company-info-container">
                             <div>
                                 <div className="info-label">CEO</div>
-                                <div>Timothy Donald Cook</div>
+                                <div>{companyInfo.ceo}</div>
                             </div>
                             <div>
                                 <div className="info-label">Employees</div>
-                                <div>147,000</div>
+                                <div>{companyInfo.employees}</div>
                             </div>
                             <div>
                                 <div className="info-label">Headquarters</div>
-                                <div>Cupertino, California</div>
+                                <div>{companyInfo.headquarters}</div>
                             </div>
                         </div>
                     </div>
@@ -62,33 +99,33 @@ function StockDetail() {
                         <div id="statistics">
                             <div>
                                 <div className="info-label">Market Cap</div>
-                                <div>2.14T</div>
+                                <div>{nFormatter((companyStatistics.market_cap),3)}</div>
                             </div>
                             <div>
                                 <div className="info-label">Price-Earnings Ratio</div>
-                                <div>28.48</div>
+                                <div>{nFormatter((companyStatistics.pe_ratio),2) }</div>
                             </div>
                             <div>
                                 <div className="info-label">Dividend Yield</div>
-                                <div>0.65</div>
+                                <div>{(companyStatistics.div_yield).toFixed(4)*100}</div>
                             </div>
                             <div>
                                 <div className="info-label">Average Volume</div>
-                                <div>94.75M</div>
+                                <div>{nFormatter((companyStatistics.avg_volume),3)}</div>
                             </div>
                         </div>
                     </div>
 
-                    <NewsStory />
+                    <NewsStory symbol={symbol}/>
                 </div>
 
                 <div className="buy-sell__wrapper">
                     <BuySellStock />
                 </div>
             </div>
-            <button onClick={handleClick}>
+            {/* <button onClick={handleClick}>
                 testing
-            </button>
+            </button> */}
         </>
     )
 }
