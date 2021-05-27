@@ -9,7 +9,7 @@ import * as stockReducer from '../../store/stock'
 
 function StockChart({dateRange, symbol, history}) {
   const dispatch = useDispatch();
-  console.log(history[symbol][dateRange])
+  // console.log(history[symbol][dateRange])
   // useEffect(()=> {
   //   // dispatch(stockReducer.getStockHistory(symbol))
   // }, [dispatch])

@@ -9,7 +9,7 @@ const NavBar = () => {
   const user = useSelector(state => state.session.user);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  console.log('user', user)
+  // console.log('user', user)
 
   const handleDropdown = () => {
     setShowDropdown(!showDropdown)

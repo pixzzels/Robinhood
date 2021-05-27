@@ -167,7 +167,6 @@ stock_routes = Blueprint('stock', __name__)
 @stock_routes.route('/companyinfo/<symbol>')
 # @login_required
 def stockprices(symbol):
-    print(symbol)
     company_details = {symbol: {}}
 
 
@@ -175,7 +174,6 @@ def stockprices(symbol):
         company_details = {}
 
         stock = Stock.query.filter_by(ticker=symbol).first()
-        print('stock', stock)
         if stock == None:
             iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
             api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/quote?token={iex_api_key}'

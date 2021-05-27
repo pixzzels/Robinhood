@@ -15,8 +15,6 @@ watchlist_routes = Blueprint("Watchlists", __name__)
 @login_required
 def load_watchlist(user_id):
     watchlists = Watchlist.query.filter(Watchlist.user_id == user_id).all()
-    # print("watchlist", watchlists)
-    print(jsonify([watchlist.to_dict() for watchlist in watchlists]))
     return jsonify([watchlist.to_dict() for watchlist in watchlists])
 
 
