@@ -1,7 +1,6 @@
 .dashboard-container__wrapper {
     margin: 0px 40.5px;
-    padding: 80px 0px 0px;
-    position: relative;
+    padding: 100px 0px 0px;
     
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -30,13 +29,4 @@
 .bold {
     font-weight: bold;
 }
-
-/* -------------------------------------------------------------- */
-
-.btn {
-    background-color: #FFFFFF;
-    border: none;
-    font-size: 15px;
-    font-weight: bold;
-  }
 

@@ -114,7 +114,9 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div className='redirect-text'>Have an account?
-          <a href="/login" className="redirect-link"> Log in</a>
+          <a href="/login" className="redirect-link"> Log in </a>
+          <span>or</span>
+          <a href="/" className="home-link"> Home</a>
         </div>
         <button className='form-btn' type="submit">Sign Up</button>
         <button className='form-btn' type="submit" onClick={demoUser}>Demo User</button>
