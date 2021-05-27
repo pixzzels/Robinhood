@@ -2,6 +2,7 @@ import './News.css';
 import news from "../../images/news.jpg";
 
 function NewsStory() {
+    
     return(
         <div className="news-container">
             <div id="news-title">News</div>
