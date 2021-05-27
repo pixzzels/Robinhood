@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './SplashPage.css';
 import SplashNav from '../SplashNav/index';
-import trade from '../../images/trade.gif';
+import splash from '../../images/splash.png';
 import python from '../../images/python.png';
 import react from '../../images/react.png';
 import redux from '../../images/redux.png';
@@ -26,8 +26,8 @@ function SplashPage() {
                 Sign Up
             </NavLink>
           </div>
-          <div id="trade-gif_wrapper">
-            <img src={trade} alt='trade gif' id='trade-gif'></img>
+          <div id="splash-vid__wrapper">
+            <img src={splash} alt='trade video' id='splash-vid'></img>
           </div>
         </div>
 

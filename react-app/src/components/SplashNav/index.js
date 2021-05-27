@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './SplashNav.css';
-import logo from '../../images/logo-black-small.png';
+// import logo from '../../images/logo-black-small.png';
+import logo from '../../images/robinhood-vector-logo.png';
 
 const NavBar = () => {
   // const user = useSelector(state => state.session.user);
