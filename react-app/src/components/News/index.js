@@ -1,4 +1,5 @@
 import './News.css';
+import news from "../../images/news.jpg";
 
 function NewsStory() {
     return(
@@ -6,11 +7,13 @@ function NewsStory() {
             <div id="news-title">News</div>
             <a href="story-link-here">
                 <div className="news-story">
-                    <div id="story-origin">Origin</div>
-                    <div id="story-title">Story Title</div>
-                    <div id="story-content">An Apple Store Employee...</div>
+                    <div className="story-info">
+                        <div id="story-origin">Origin</div>
+                        <div id="story-title">Story Title</div>
+                        <div id="story-content">An Apple Store Employee shows the series 5 apple watch during the something with the presentation time cook is the man I love him so much I mean how can you not so yaaaaaa </div>
+                    </div>
                     <div id="story-image">
-                        <img src="" id="story-img"></img>
+                        <img src={news} id="story-img"></img>
                     </div>
                 </div>
             </a>
