@@ -25,6 +25,7 @@ function SplashPage() {
             <NavLink to="/sign-up" exact={true} id="splash-signup__link" activeClassName="active">
                 Sign Up
             </NavLink>
+            <div id="disclaimer">*Robinhood is only seeded with stock information from the S&P 500 and is NOT intended for professional use of any kind.</div>
           </div>
           <div id="trade-gif_wrapper">
             <img src={trade} alt='trade gif' id='trade-gif'></img>
