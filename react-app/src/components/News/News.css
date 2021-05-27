@@ -1,0 +1,36 @@
+.news-container a {
+    text-decoration: none;
+    color: black;
+}
+
+.news-story {
+    width: 41em;
+    height: 8em;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+
+.story-info {
+    padding-left: 3px;
+}
+
+#story-origin, #story-content {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+#story-content {
+    color: grey;
+    overflow: hidden;
+}
+
+#story-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+#story-img {
+    height: 7.8em;
+}

@@ -18,7 +18,7 @@ function List({ list }) {
 
     // delete list
     const deleteList = () => {
-        let result = window.confirm("Are you sure you want to delete this list? It will remove all stocks associated with the list")
+        let result = window.confirm(`Are you sure you want to delete this list? It'll be gone forever!`)
         if (result) {
             const watchlistId = list.id
             setShowDropdown(false)
@@ -59,13 +59,16 @@ function List({ list }) {
     return (
         <div className="one-list">
             <h2 className='single-list-txt'>{list.name}</h2>
-            <button className="dot-btn" type="button" onClick={handleDropdown}>
+            <button className="edit-btn" type="button" onClick={handleDropdown}>
                 <i className="fas fa-ellipsis-h"></i>
+            </button>
+            <button className="edit-btn">
+                <i class="fas fa-chevron-down"></i>
             </button>
             {showDropdown &&
                 <div>
                     <Modal onClose={() => setShowDropdown(false)}>
-                        <div>
+                        <div className='list-edit-modal'>
                             {editBtn && <button type="button" onClick={updateList}>Edit list</button>}
                             {editForm &&
                                 <form className="new-list-form" onSubmit={handleEditSubmit}>
@@ -86,11 +89,10 @@ function List({ list }) {
                                     </footer>
                                 </form>
                             }
+
+                            {deleteBtn && <button type="button" onClick={deleteList}>Delete list</button>}
                         </div>
 
-
-
-                        {deleteBtn && <button type="button" onClick={deleteList}>Delete list</button>}
                     </Modal>
                 </div>
             }
