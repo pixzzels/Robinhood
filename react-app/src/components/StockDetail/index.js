@@ -13,7 +13,7 @@ function StockDetail() {
     const dispatch = useDispatch();
     const ticker = useParams();
     const symbol = ticker['ticker']
-    const [dateRange, setDateRange] = useState('1D')
+    const [dateRange, setDateRange] = useState('1d')
     const setDate = (e) => setDateRange(e.target.value)
 
     const stock = useSelector(state => state.stock.currentStock)
@@ -49,6 +49,7 @@ function StockDetail() {
     const companyInfo = stock[symbol]['company_info']
     const companyStatistics = stock[symbol]['company_statistics']
     const news = stock[symbol]['company_news']
+    const history = stock[symbol]['price_history']
 
     return(
         <>
@@ -62,14 +63,22 @@ function StockDetail() {
                     </div>
 
                     <div className="chart-container">
-                        <StockChart dateRange={dateRange} symbol={symbol}/>
+                        <StockChart dateRange={dateRange} symbol={symbol} history={history}/>
                         <div className="stock-chart-bar">
-                            <button onClick={setDate} value={'1D'} className="stock-timeline-options btn tlbtn">1D</button>
-                            <button onClick={setDate} value={'1W'} className="stock-timeline-options btn tlbtn">1W</button>
-                            <button onClick={setDate} value={'1M'} className="stock-timeline-options btn tlbtn">1M</button>
-                            <button onClick={setDate} value={'3M'} className="stock-timeline-options btn tlbtn">3M</button>
-                            <button onClick={setDate} value={'1Y'} className="stock-timeline-options btn tlbtn">1Y</button>
-                            <button onClick={setDate} value={'5Y'} className="stock-timeline-options btn tlbtn">5Y</button>
+                            {/* <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
+                            <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1W</button>
+                            <button onClick={setDate} value={'1m'} className="stock-timeline-options btn tlbtn">1M</button>
+                            <button onClick={setDate} value={'3m'} className="stock-timeline-options btn tlbtn">3M</button>
+                            <button onClick={setDate} value={'1y'} className="stock-timeline-options btn tlbtn">1Y</button>
+                            <button onClick={setDate} value={'5y'} className="stock-timeline-options btn tlbtn">5Y</button> */}
+
+                            <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
+                            <button onClick={setDate} value={'2d'} className="stock-timeline-options btn tlbtn">1W</button>
+                            <button onClick={setDate} value={'3d'} className="stock-timeline-options btn tlbtn">1M</button>
+                            <button onClick={setDate} value={'4d'} className="stock-timeline-options btn tlbtn">3M</button>
+                            <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1Y</button>
+                            <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">5Y</button>
+
                         </div>
                     </div>
 

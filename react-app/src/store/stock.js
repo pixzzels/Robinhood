@@ -28,6 +28,8 @@ export const getStockCompany = (symbol) => async (dispatch) => {
 
 
 
+
+
 // Reducer
 const initialState = {};
 
@@ -35,10 +37,10 @@ const stockReducer = (state = initialState, action) => {
     let newerState;
     switch (action.type) {
         case SET_STOCK:
-            console.log(action.stock)
+            // console.log(action.stock)
             newerState = { ... state }
             newerState.currentStock = action.stock
-            console.log('newState', newerState)
+            // console.log('newState', newerState)
 
             return newerState
 
