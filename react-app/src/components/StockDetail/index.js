@@ -48,7 +48,6 @@ function StockDetail() {
 
     const companyInfo = stock[symbol]['company_info']
     const companyStatistics = stock[symbol]['company_statistics']
-    console.log("companyInfo", companyInfo)
 
     return(
         <>

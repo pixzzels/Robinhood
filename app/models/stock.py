@@ -9,3 +9,10 @@ class Stock(db.Model):
     market_price = db.Column(db.Float, nullable = False)
 
     # transaction = db.relationship("Transaction", back_populates="Stocks")
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "ticker": self.ticker,
+            "market_price": self.market_price,
+        }

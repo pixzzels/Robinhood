@@ -26,19 +26,17 @@ function BuySellStock({ symbol, price }) {
         const trans = Object.values(state.transaction)
         return trans;
     })
-    console.log("transactions", transactions)
-
-    // const stockTransactions = transactions.filter((transaction)=> transaction.id)
-
-
+    // console.log("transactions", transactions)
+    
+    
     useEffect(() => {
         dispatch(loadPortfolio(userId))
     }, [dispatch])
-
+    
     useEffect(() => {
         dispatch(loadTransactions(userId))
     }, [dispatch])
-
+    
     const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
             setIsVisible(false);
@@ -51,32 +49,39 @@ function BuySellStock({ symbol, price }) {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-
+    
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
         setCashBalance(portfolioInfo.cash_balance)
         setRefresh(true)
     }
-
+    
     const sharesOwned = 0
     const stockSymbol = symbol.toUpperCase();
-
     const stockId = 52;
+
     const orderPrice = price.toFixed(2);
     const orderType = 1;
     const estimatedPrice = orderPrice * shares
+    
+    const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
+    console.log("transfa", stockTransactions)
+    // let stockId;
+    // if (stockTransactions[0].stock_id) {
+    //     stockId = stockTransactions[0].stock_id.id
+    // }
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares)
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
-        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
+        dispatch(buyStock({ userId, stockSymbol, orderPrice, orderVolume, orderType }))
 
         setCashBalance(cashBalance - estimatedPrice)
         dispatch(updateCashBalance({ userId, cashBalance }))
-
+        
     }
-
+    
     const handleReviewTransaction = () => {
         setReviewTransactionDropDown(true)
     }
