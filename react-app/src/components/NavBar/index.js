@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
-import blackleaf from '../../images/black-leaf.PNG';
+import blackleaf from '../../images/robinhood-2.svg';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
