@@ -13,7 +13,7 @@
     margin-left: 40px;
 }
 
-.active {
+.atv-header {
     color: #00c805;
 }
 
@@ -32,6 +32,11 @@
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid rgb(227, 233, 237);
+}
+
+.buy-sell-header:hover {
+    cursor: pointer;
+
 }
 
 .bs-share-select {

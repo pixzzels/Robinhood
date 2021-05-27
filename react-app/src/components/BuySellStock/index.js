@@ -72,26 +72,21 @@ function BuySellStock() {
 
     }
 
-
     const handleReviewTransaction = () => {
         setReviewTransactionDropDown(true)
     }
-
-
-
-
 
 
     return (
         <>
             <div className="buy-sell-container">
                 <div className="buy-sell-header bold">
-                    <span className={(buySell ? 'active' : '')} onClick={() => {
+                    <span className={(buySell ? 'atv-header' : '')} onClick={() => {
                         setBuySell(true)
                         setReviewTransactionDropDown(false)
                     }
                     }>Buy {stockSymbol}</span>
-                    <span className={(buySell === false ? 'active' : '')} onClick={() => {
+                    <span className={(buySell === false ? 'atv-header' : '')} onClick={() => {
                         setBuySell(false)
                         setReviewTransactionDropDown(false)
                     }
