@@ -59,16 +59,33 @@
   border: green;
 }
 
-.add-btn {
-  background-color: #FFFFFF;
+
+
+/* --------------------BUTTONS start--------------------- */
+.non-edit-btn{
+  background-color: transparent;
   border: none;
   font-size: 15px;
   font-weight: bold;
 }
 
+.add-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.add-btn:hover{
+  color: #00C805;
+}
+
 .plus-btn:hover{
   fill:rgb(16, 180, 24)
 }
+/* --------------------BUTTONS end--------------------- */
+
+
 
 .list-form-btn {
   background-color: none;
