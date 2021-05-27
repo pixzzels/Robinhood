@@ -23,7 +23,7 @@ def stock():
 
 
     def get_latest_updates(symbols):
-        print(symbols)
+        # print(symbols)
         for i in symbols:
             ticker = i
             iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
@@ -32,9 +32,9 @@ def stock():
             attributes = ['symbol',
                         'latestPrice',
                         'change']
-            for i in attributes:
-                print(df[i])
-            print('--------------\n')
+            # for i in attributes:
+            #     print(df[i])
+            # print('--------------\n')
     get_latest_updates(stocks)
 
 
@@ -54,12 +54,10 @@ def stockprices():
             prices = []
             for i in range(len(df)):
                 prices.append(df[i]['average'])
-            print(prices)
-            print('--------------\n')
-            print(stockinfo)
+            # print(prices)
+            # print('--------------\n')
+            # print(stockinfo)
             stockinfo[ticker] = {'prices': prices}
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(stockinfo)
         return stockinfo
 
     get_daily_historical_data(stocks)

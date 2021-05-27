@@ -38,7 +38,7 @@ export const loadPortfolio = (userId) => async (dispatch) => {
 
 export const updateCashBalance = (info) => async (dispatch) => {
   const {userId, newBal} = info
-  console.log("redux", newBal)
+  // console.log("redux", newBal)
 
   const response = await fetch(`/api/portfolio/update/${userId}`, {
 
