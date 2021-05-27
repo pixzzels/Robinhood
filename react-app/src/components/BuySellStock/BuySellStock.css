@@ -1,6 +1,6 @@
 .buy-sell-container {
     box-shadow: 2px 2px 24px 4px #cecbcbb7;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     border-radius: 4px;
     width: 276px;
     /* height: 415px; */
@@ -11,6 +11,10 @@
     border: 0px;
     background-color: white;
     margin-left: 40px;
+}
+
+.active {
+    color: #00c805;
 }
 
 /*-----FORM----------------------------------------------*/
