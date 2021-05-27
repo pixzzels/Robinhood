@@ -8,7 +8,6 @@ class Stock(db.Model):
     ticker = db.Column(db.String, nullable = False, unique = True)
     market_price = db.Column(db.Float, nullable = False)
 
-    # transaction = db.relationship("Transaction", back_populates="Stocks")
     def to_dict(self):
         return {
             "id": self.id,
@@ -16,3 +15,4 @@ class Stock(db.Model):
             "ticker": self.ticker,
             "market_price": self.market_price,
         }
+
