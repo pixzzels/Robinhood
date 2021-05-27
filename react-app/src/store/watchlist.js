@@ -108,7 +108,7 @@ export const updateOneList = (newList) => async (dispatch) => {
   }
 
   const data = await response.json();
-  dispatch(addList(data));
+  dispatch(updateList(data));
   return data;
 }
 

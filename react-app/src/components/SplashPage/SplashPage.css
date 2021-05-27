@@ -67,14 +67,15 @@
 }
 
 #splash-vid {
-  height: 550px;
-}
-
-#splash-vid {
   height: 600px;
   width: auto;
-  /* background-image: url("../../images/trade.mp4"); */
+  background-image: url("../../images/trade.png");
 }
+
+/* #video {
+  object-fit: contain;
+  position: absolute;
+} */
 
 #container-2 {
   display: flex;
