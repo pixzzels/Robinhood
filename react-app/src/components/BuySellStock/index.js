@@ -1,46 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { buyStock } from '../../store/transaction';
-import { loadPortfolio } from '../../store/portfolio';
+import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import './BuySellStock.css'
 
 function BuySellStock() {
 
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.session.user.id)
-
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
     const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true)
+    const [cashBalance, setCashBalance] = useState(0)
+    const [isVisible, setIsVisible] = useState(false);
+    const [refresh, setRefresh] = useState(false)
+    const ref = useRef(null);
+
+    const userId = useSelector(state => state.session.user.id)
+    const portfolioInfo = useSelector(state => {
+        const portfolio = Object.values(state.portfolio)
+        return portfolio[0]
+    })
+
 
     useEffect(() => {
         dispatch(loadPortfolio(userId))
-      }, [dispatch])
-
-    const sharesOwned = 0
-    const buyingPower = 3034.76;
-    const stockSymbol = 'APPL';
-
-    const stockId = 52;
-    const orderPrice = 126.85;
-    const orderType = 1;
-
-    const handleTransactionSubmit = (e) => {
-        e.preventDefault();
-        let orderVolume = parseInt(shares)
-        // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
-        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-    }
-
-
-    const handleReviewTransaction = () => {
-        setReviewTransactionDropDown(true)
-    }
-
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
+    }, [dispatch])
 
     const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -55,19 +41,52 @@ function BuySellStock() {
         };
     }, []);
 
+    if (!portfolioInfo) return null;
+    if (!refresh && cashBalance === 0) {
+        console.log("SDFSDFSF")
+        console.log("portfolioInfo.cash_balance", portfolioInfo.cash_balance)
+        setCashBalance(portfolioInfo.cash_balance)
+        setRefresh(true)
+    }
+    // setCashBalance(portfolioInfo.cash_balance)
 
+    const sharesOwned = 0
+    const stockSymbol = 'APPL';
+
+    const stockId = 52;
+    const orderPrice = 126.85;
+    const orderType = 1;
     const estimatedPrice = orderPrice * shares
+
+    const handleTransactionSubmit = (e) => {
+        e.preventDefault();
+        let orderVolume = parseInt(shares)
+        // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
+        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
+        // setCashBalance(portfolioInfo.cash_balance)
+
+        // let cashBalance = portfolioInfo.cash_balance
+        setCashBalance(cashBalance - estimatedPrice)
+        dispatch(updateCashBalance({ userId, cashBalance }))
+        // console.log("NEW", cash_balance)
+
+    }
+
+    const handleReviewTransaction = () => {
+        setReviewTransactionDropDown(true)
+    }
+
 
     return (
         <>
             <div className="buy-sell-container">
                 <div className="buy-sell-header bold">
-                    <span className={(buySell ? 'active' : '')} onClick={() => {
+                    <span className={(buySell ? 'atv-header' : '')} onClick={() => {
                         setBuySell(true)
                         setReviewTransactionDropDown(false)
                     }
                     }>Buy {stockSymbol}</span>
-                    <span className={(buySell === false ? 'active' : '')} onClick={() => {
+                    <span className={(buySell === false ? 'atv-header' : '')} onClick={() => {
                         setBuySell(false)
                         setReviewTransactionDropDown(false)
                     }
@@ -126,7 +145,7 @@ function BuySellStock() {
                                 </div>
                                 <div className="bs-form-inputs bold">
                                     <span>Estimated {buySell ? "Cost" : "Credit"}</span>
-                                    <span>${estimatedPrice}</span>
+                                    <span>${(estimatedPrice).toFixed(2)}</span>
                                 </div>
 
                                 {reviewTransactionDropDown && shares > 0 &&
@@ -159,7 +178,7 @@ function BuySellStock() {
                         }
                     </form>
                     <div className="bs-form-bspower">
-                        <span>{buySell ? "$" + buyingPower + " buying power available" : sharesOwned + " Share(s) Available"} </span>
+                        <span>{buySell ? "$" + cashBalance.toFixed(2) + " buying power available" : sharesOwned + " Share(s) Available"} </span>
                     </div>
                 </div>
             </div>
