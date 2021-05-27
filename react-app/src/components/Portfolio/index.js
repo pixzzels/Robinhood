@@ -25,6 +25,11 @@ function Portfolio() {
     // to add funds
   }
 
+  const handleDepositCancel = (e) => {
+    e.preventDefault();
+    setShowDepositModal(!showDepositModal)
+  }
+
   return (
     <div className="portfolio-container">
       <div className="total-investment">
@@ -77,27 +82,30 @@ function Portfolio() {
               className="deposit-funds-btn"
               onClick={showDepositForm}
             >
-              Deposit Funds
-                                </button>
+              Deposit Funds</button>
             {showDepositModal &&
-              (<Modal onClose={() => setShowDepositModal(false)}>
-                <form className="deposit-funds-form" onSubmit={depositFunds}>
-                  <h2>Deposit Funds</h2>
-                  <label htmlFor="amount">
-                    Amount
-                                        </label>
-                  <input
-                    className="depost-funds-form__input"
-                    type="number"
-                    name="amount"
-                    placeholder="$200.00"
-                  >
-                  </input>
-                  <button type="submit">
-                    Deposit
-                                        </button>
-                </form>
-              </Modal>)
+              <div>
+                <Modal className="deposit-modal" onClose={() => setShowDepositModal(false)}>
+
+                  <div className="deposit-modal-content">
+                    <form className="deposit-funds-form" onSubmit={depositFunds}>
+                      <h2>Deposit Funds</h2>
+                      <label htmlFor="amount">Amount</label>
+                      <input
+                        className="depost-funds-form__input"
+                        type="number"
+                        name="amount"
+                        placeholder="$200.00"
+                      >
+                      </input>
+                      <button className='deposit-btn' type="submit">Deposit</button>
+                      <button className='deposit-btn' type="button" onClick={handleDepositCancel}>Cancel</button>
+                    </form>
+                  </div>
+
+                </Modal>
+              </div>
+
             }
           </div>
 
