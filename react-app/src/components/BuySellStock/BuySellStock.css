@@ -3,7 +3,7 @@
     border: 1px solid red;
     border-radius: 4px;
     width: 276px;
-    height: 415px;
+    /* height: 415px; */
     position: fixed;
 }
 
@@ -68,17 +68,70 @@
     margin: 20px 0px;
     color: white;
     background-color: rgb(0,200,5);
-    border: 0px;
-    height: 45px;
-    width: 220px;
+    border: 1px solid rgb(0,200,5);
+    height: 48px;
+    width: 100%;
     border-radius: 5px;
+}
+.bs-submit-btn:hover {
+    background-color: #00b806;
 }
 
 .bs-form-bspower {
     border-top: 1px solid rgb(227, 233, 237);
     padding-top: 20px;
+    padding-bottom: 20px;
+    color: #00c805;
     font-size: 13px;
     display: flex;
     justify-content: center;
 }
 
+/*------Market Price---------------------------------------------*/
+
+.bs-form-inputs-mp:hover {
+    cursor: pointer;
+}
+
+.market-price-info {
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    right: 50px;
+    padding: 24px;
+    background-color: white;
+    height: 395px;
+    width: 290px;
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
+
+}
+
+/*-----Review Transaction Dropdown-------------------------------------------*/
+.review-transaction-buy-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-transaction-buy-btn {
+    background-color: #00C805;
+    color: white; 
+}
+
+.review-transaction-buy-btn:hover {
+    background-color: #00b806;
+
+}
+
+.review-transaction-edit-btn {
+    background-color: white;
+    color: #00C805;
+}
+
+.rtbe-btn {
+    width: 100%;
+    border: 1px solid #00C805;
+    height: 48px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+
+}
