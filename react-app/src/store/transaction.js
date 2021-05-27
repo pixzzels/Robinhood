@@ -21,7 +21,7 @@ const sell = (reciept) => {
 
 export const buyStock = (info) => async (dispatch) => {
     const { userId, stockId, orderPrice, orderVolume, orderType } = info
-    console.log("backend", "userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
+    // console.log("backend", "userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
 
 
     const response = await fetch(`/api/transaction/buy`, {
