@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Portfolio from '../Portfolio';
 import Watchlist from '../Watchlist'
-// import NavBar from "../NavBar/index";
 import './Dashboard.css';
 
 
