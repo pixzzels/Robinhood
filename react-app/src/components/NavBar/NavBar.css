@@ -10,22 +10,6 @@
     position: fixed;
     background-color: white;
     margin-bottom: 40px;
-
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-}
-
-.nav-link > * {
-    text-decoration: none;
-    color:black;
-    font-size: 1.2em;
-}
-
-.greens > *:hover {
-    color: limegreen;  
 }
 
 #home-link{
@@ -33,9 +17,48 @@
 }
 
 #blackleaf{
-  height: 50px;
+  padding-left: 15px;
+  height: 40px;
 }
 
-#logout {
-  grid-column: 11 / 12;
+#blackleaf:hover{
+  background-color: limegreen;
+}
+
+.portfolio-search-container {
+  grid-column: 3/7;
+}
+
+.portfolio-search{
+  padding: 0px 25px;
+  letter-spacing: .01em;
+}
+
+.right-nav-container {
+  grid-column: 11/14;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.portfolio-nav__links {
+    display: flex;
+    align-items: center;
+    font-size: .65em;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
+.portfolio-nav__links > * {
+    text-decoration: none;
+    color:black;
+    font-size: 1.2em;
+}
+
+#portfolio-link:hover {
+  color: limegreen;
+}
+
+#account-link:hover{
+  color: limegreen;
 }
