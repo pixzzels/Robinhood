@@ -22,7 +22,7 @@
 }
 
 #c1-message1, #c1-message2, #splash-signup__link {
-  margin-left: 30px;
+  margin-left: 3px;
 }
 
 #c1-message1 {
@@ -40,12 +40,13 @@
 
 #splash-signup__link {
   width: 144px;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: .01em;
   margin-top: 20px;
   background-color: black;
   border-radius: 30px;
   padding: 13px 40px;
-  font-size: 20px;
+  font-size: 18px;
   color: white;
   text-decoration: none;
 }
@@ -83,11 +84,14 @@
   align-items: center;
   height: 4.5em;
   border-bottom: 1px solid black;
+  padding: 45px 0px;
+  font-size: 1.1em;
+  letter-spacing: .005em;
 }
 
 #container-3 {
   background-color: #F0EBE6;
-  height: 30em;
+  height: 33em;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -100,8 +104,17 @@
 }
 
 #c3-message1 {
-  font-size: 32px;
-  padding-bottom: 20px;
+  font-size: 36px;
+  font-weight: 500;
+  padding-bottom: 16px;
+  letter-spacing: .01em;
+}
+
+#c3-message2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(105, 105, 105);
+  padding-bottom: 25px;
 }
 
 .technology-wrapper {
@@ -110,24 +123,24 @@
 }
 
 .technology {
-  font-size: 30px;
-  padding: 30px 30px;
+  font-size: 25px;
+  padding: 30px 35px;
   display: flex;
   align-items: center;
 }
 
 #shapes-wrapper {
-  padding-top: 30px;
-  padding-left: 40px;
+  padding-top: 60px;
+  padding-left: 10px;
   grid-column: 9 / 13;
   grid-row: 1 / 7;
 }
 
 
 .tech-logo {
-  height: 70px;
+  height: 60px;
   width: auto;
-  padding-right: 10px;
+  padding-right: 20px;
 }
 
 #shapes-img {
