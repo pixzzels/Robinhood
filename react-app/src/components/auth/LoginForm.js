@@ -76,9 +76,9 @@ const LoginForm = () => {
         </div>
 
         <div className='redirect-text'>Don't have an account?
-          <a href="/sign-up" className="redirect-link"> Sign up </a>
+          <a href="/sign-up" className="redirect-link"> Sign Up </a>
           <span>or</span>
-          <a href="/" className="home-link"> Home</a>
+          <a href="/" className="home-link"> Go Home</a>
         </div>
         <button className='form-btn' type="submit">Sign In</button>
         <button className='form-btn' type="submit" onClick={demoUser}>Demo User</button>
