@@ -8,7 +8,7 @@
   width: 100%;
   height: 40em;
   /* background-color: #C3F53C; */
-  background-color: #C2FF40;
+  background-color: rgb(195,245,60);
   border-bottom: 1px solid black;
 
   display: grid;
@@ -49,14 +49,15 @@
   background-color: #2A3137;
 }
 
-#trade-gif_wrapper {
+#splash-vid__wrapper {
   grid-column: 6 / 13;
   grid-row: 4 / 12;
 }
 
-#trade-gif {
+#splash-vid {
   height: 550px;
   width: auto;
+  /* background-image: url("../../images/trade.mp4"); */
 }
 
 #container-2 {
