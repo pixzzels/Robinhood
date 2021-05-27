@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
-from app.models import User, Stock, Portfolio, Transaction, Watchlist, List
+from app.models import User, Stock, Portfolio, Transaction, Watchlist, List, db
 import requests, json
 import pyEX as p
 import pprint
@@ -11,76 +11,76 @@ stock_routes = Blueprint('stock', __name__)
 
 # c = p.Client(api_token='pk_7f972a2636b841c489f3cf32f9a06575', version='stable')
 
-@stock_routes.route('/history/<symbol>')
-# @login_required
-def stock_history(symbol):
+# @stock_routes.route('/history/<symbol>')
+# # @login_required
+# def stock_history(symbol):
 
 
-    def get_latest_updates(symbol):
+#     def get_latest_updates(symbol):
 
-        # attributes = ['5d',
-        #             '1m',
-        #             '3m',
-        #             '1y',
-        #             '5y']
+#         # attributes = ['5d',
+#         #             '1m',
+#         #             '3m',
+#         #             '1y',
+#         #             '5y']
 
 
-        # REMEMBER TO FIX THIS BEFORE PRODUCTION
+#         # REMEMBER TO FIX THIS BEFORE PRODUCTION
 
-        attributes = ['2d',
-                    '3d',
-                    '4d',
-                    '5d',]
+#         attributes = ['2d',
+#                     '3d',
+#                     '4d',
+#                     '5d',]
 
-        # attributes = ['5d']
+#         # attributes = ['5d']
 
-        stockinfo = {symbol: {}}
+#         stockinfo = {symbol: {}}
 
-        for i in attributes:
-            date_range = i
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-            api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range={date_range}&token={iex_api_key}'
-            df = requests.get(api_url).json()
-            prices = []
-            for i in range(len(df['chart'])):
-                # print(df)
-                # print(df['chart'][i])
-                prices.append(df['chart'][i]['close'])
-                # print(df['chart'][i]['close'])
-                prices.append(df['chart'][i]['high'])
-                prices.append(df['chart'][i]['low'])
-                prices.append(df['chart'][i]['open'])
-            if date_range == '5d':
-                api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/intraday-prices?token={iex_api_key}'
-                temp_df = requests.get(api_url).json()
-                temp = []
-                # print(temp_df)
-                for i in range(len(temp_df)):
-                    temp.append(temp_df[i]['average'])
-                # print('TEMP', temp)
-                # print('PRICES BEFORE APPEND', prices)
-                # temp.reverse()
-                prices = prices + temp
-                # print('PRICES AFTER APPEND', prices)
-                stockinfo[symbol]= {'1d': temp, **stockinfo[symbol]}
+#         for i in attributes:
+#             date_range = i
+#             iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+#             api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range={date_range}&token={iex_api_key}'
+#             df = requests.get(api_url).json()
+#             prices = []
+#             for i in range(len(df['chart'])):
+#                 # print(df)
+#                 # print(df['chart'][i])
+#                 prices.append(df['chart'][i]['close'])
+#                 # print(df['chart'][i]['close'])
+#                 prices.append(df['chart'][i]['high'])
+#                 prices.append(df['chart'][i]['low'])
+#                 prices.append(df['chart'][i]['open'])
+#             if date_range == '5d':
+#                 api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/intraday-prices?token={iex_api_key}'
+#                 temp_df = requests.get(api_url).json()
+#                 temp = []
+#                 # print(temp_df)
+#                 for i in range(len(temp_df)):
+#                     temp.append(temp_df[i]['average'])
+#                 # print('TEMP', temp)
+#                 # print('PRICES BEFORE APPEND', prices)
+#                 # temp.reverse()
+#                 prices = prices + temp
+#                 # print('PRICES AFTER APPEND', prices)
+#                 stockinfo[symbol]= {'1d': temp, **stockinfo[symbol]}
 
-            # print('--------------\n')
-            # print('61', df['chart'])
-            # print('62', prices)
-            # print('--------------\n')
-            # print('64', stockinfo)
-            stockinfo[symbol] = {date_range: prices, **stockinfo[symbol]}
+#             # print('--------------\n')
+#             # print('61', df['chart'])
+#             # print('62', prices)
+#             # print('--------------\n')
+#             # print('64', stockinfo)
+#             stockinfo[symbol] = {date_range: prices, **stockinfo[symbol]}
 
-            # print('--------------\n')
-            # pp.pprint(stockinfo)
-            # print('--------------\n')
+#             # print('--------------\n')
+#             # pp.pprint(stockinfo)
+#             # print('--------------\n')
 
-        return jsonify(stockinfo)
-    # response ='Success'
-    response = get_latest_updates(symbol)
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(response.json)
-    return response
+#         return jsonify(stockinfo)
+#     # response ='Success'
+#     response = get_latest_updates(symbol)
+#     pp = pprint.PrettyPrinter(indent=4)
+#     pp.pprint(response.json)
+#     return response
 
 
 
@@ -131,32 +131,32 @@ def stock_history(symbol):
 
 #     return get_company_statistics(symbol)
 
-@stock_routes.route('/news/<symbol>')
-# @login_required
-def company_news(symbol):
+# @stock_routes.route('/news/<symbol>')
+# # @login_required
+# def company_news(symbol):
 
-    def get_company_news(symbol):
-        companynews = {}
+#     def get_company_news(symbol):
+#         companynews = {}
 
-        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-        api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/news/last/5?token={iex_api_key}'
-        df = requests.get(api_url).json()
-        # print(df)
-        companynews[symbol] = []
-        for i in range(len(df)):
-            headline = df[i]['headline']
-            source = df[i]['source']
-            url = df[i]['url']
-            summary = df[i]['summary']
-            image = df[i]['image']
-            news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
-            companynews[symbol].append(news)
+#         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+#         api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/news/last/5?token={iex_api_key}'
+#         df = requests.get(api_url).json()
+#         # print(df)
+#         companynews[symbol] = []
+#         for i in range(len(df)):
+#             headline = df[i]['headline']
+#             source = df[i]['source']
+#             url = df[i]['url']
+#             summary = df[i]['summary']
+#             image = df[i]['image']
+#             news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
+#             companynews[symbol].append(news)
 
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(companynews)
-        return jsonify(companynews)
+#         pp = pprint.PrettyPrinter(indent=4)
+#         pp.pprint(companynews)
+#         return jsonify(companynews)
 
-    return get_company_news(symbol)
+#     return get_company_news(symbol)
 
 
 
@@ -174,6 +174,24 @@ def stockprices(symbol):
     def get_company_data(symbol):
         company_details = {}
 
+        stock = Stock.query.filter_by(ticker=symbol).first()
+        print('stock', stock)
+        if stock == None:
+            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+            api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/quote?token={iex_api_key}'
+
+            df3 = requests.get(api_url).json()
+            company = df3['companyName']
+            price = df3['latestPrice']
+            if company == '':
+                company = '--'
+
+            if price == '':
+                price = '--'
+            stock = Stock(name=company, ticker=symbol, market_price=price)
+            db.session.add(stock)
+            db.session.commit()
+
         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
         api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/company?token={iex_api_key}'
         df = requests.get(api_url).json()
@@ -186,8 +204,8 @@ def stockprices(symbol):
         ceo = df['CEO']
         employees = df['employees']
         headquarters = df['city'] + ', ' + df['state']
-        company_details[symbol] = {'description': description, 'ceo': ceo, 'employees':employees, 'headquarters': headquarters, 'company_name': df['companyName'], 'price': price, 'change': change, 'priceChange': priceChange}
-
+        company_details[symbol] = {'description': description, 'ceo': ceo, 'employees':employees, 'headquarters': headquarters, 'company_name': df['companyName'], 'price': price, 'change': change, 'priceChange': priceChange, 'stock_id':stock.id}
+        
 
         # pp = pprint.PrettyPrinter(indent=4)
         # pp.pprint(company_details)
@@ -210,12 +228,76 @@ def stockprices(symbol):
         # pp.pprint(companystats)
         return companystats
 
+    def get_company_news(symbol):
+        companynews = {}
+
+        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/news/last/5?token={iex_api_key}'
+        df = requests.get(api_url).json()
+        # print(df)
+        companynews[symbol] = []
+        for i in range(len(df)):
+            headline = df[i]['headline']
+            source = df[i]['source']
+            url = df[i]['url']
+            summary = df[i]['summary']
+            image = df[i]['image']
+            news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
+            companynews[symbol].append(news)
+
+        # pp = pprint.PrettyPrinter(indent=4)
+        # pp.pprint(companynews)
+        return companynews
+
+    def get_latest_updates(symbol):
+
+        # attributes = ['5d',
+        #             '1m',
+        #             '3m',
+        #             '1y',
+        #             '5y']
+
+        # REMEMBER TO FIX THIS BEFORE PRODUCTION
+
+        attributes = ['2d',
+                    '3d',
+                    '4d',
+                    '5d',]
+
+        stockinfo = {symbol: {}}
+
+        for i in attributes:
+            date_range = i
+            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+            api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/batch?types=chart&range={date_range}&token={iex_api_key}'
+            df = requests.get(api_url).json()
+            prices = []
+            for i in range(len(df['chart'])):
+                prices.append(df['chart'][i]['close'])
+                prices.append(df['chart'][i]['high'])
+                prices.append(df['chart'][i]['low'])
+                prices.append(df['chart'][i]['open'])
+            if date_range == '5d':
+                api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/intraday-prices?token={iex_api_key}'
+                temp_df = requests.get(api_url).json()
+                temp = []
+                for i in range(len(temp_df)):
+                    temp.append(temp_df[i]['average'])
+                prices = prices + temp
+                stockinfo[symbol]= {'1d': temp, **stockinfo[symbol]}
+
+            stockinfo[symbol] = {date_range: prices, **stockinfo[symbol]}
+
+        return stockinfo
+
     details = get_company_data(symbol)
     stats = get_company_statistics(symbol)
+    news = get_company_news(symbol)
+    price_history = get_latest_updates(symbol)
     pp = pprint.PrettyPrinter(indent=4)
     # pp.pprint(details)
     # pp.pprint(stats)
-    company_details[symbol] = {'company_info': details[symbol], 'company_statistics': stats[symbol]}
+    company_details[symbol] = {'company_info': details[symbol], 'company_statistics': stats[symbol], 'company_news': news, 'price_history': price_history}
     pp.pprint(company_details)
 
     return jsonify(company_details)

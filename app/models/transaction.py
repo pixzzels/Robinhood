@@ -19,8 +19,9 @@ class Transaction(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "stock_id": self.stock_id,
+            "stock_id": self.stock.to_dict(),
             "order_price": self.order_price,
             "order_volume": self.order_volume,
             "order_type": self.order_type,
+            
         }

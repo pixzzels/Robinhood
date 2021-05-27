@@ -7,3 +7,12 @@ class Stock(db.Model):
     name = db.Column(db.String, nullable = False)
     ticker = db.Column(db.String, nullable = False, unique = True)
     market_price = db.Column(db.Float, nullable = False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "ticker": self.ticker,
+            "market_price": self.market_price,
+        }
+

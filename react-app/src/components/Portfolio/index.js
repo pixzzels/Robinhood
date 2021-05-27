@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import { Modal } from '../../context/Modal';
 import './Portfolio.css'
 
 function Portfolio() {
+  const dispatch = useDispatch();
   const [bpDivExpand, setbpDivExpand] = useState(false);
-  const [fundsForm, setFundsForm] = useState(false);
+  const [funds, setFunds] = useState(0);
+  const [cashBalance, setCashBalance] = useState(0)
+  const [refresh, setRefresh] = useState(false)
   const [showDepositModal, setShowDepositModal] = useState(false);
+  // console.log(funds)
+
+  const userId = useSelector(state => state.session.user.id)
+
+  const portfolioInfo = useSelector(state => {
+    const portfolio = Object.values(state.portfolio)
+    return portfolio[0]
+})
+
+
+  useEffect(() => {
+    dispatch(loadPortfolio(userId))
+}, [dispatch])
+
+if (!portfolioInfo) return null;
+if (!refresh && cashBalance === 0) {
+  setCashBalance(portfolioInfo.cash_balance)
+  setRefresh(true)
+}
 
   const buyingPowerExpand = () => {
     setbpDivExpand(!bpDivExpand)
@@ -20,9 +43,16 @@ function Portfolio() {
     setShowDepositModal(!showDepositModal)
   }
 
-  const depositFunds = () => {
-    // post request
-    // to add funds
+  const depositFunds = (e) => {
+    e.preventDefault();
+    let newBal = portfolioInfo.cash_balance
+
+    newBal = parseInt(newBal) + parseInt(funds)
+    setCashBalance(newBal)
+    console.log('newBal', newBal)
+    updateCashBalance({ userId, newBal })
+    setShowDepositModal(false)
+
   }
 
   const handleDepositCancel = (e) => {
@@ -63,7 +93,7 @@ function Portfolio() {
         <div className={"buying-power-header " + (bpDivExpand ? 'grey' : '')}>
           <span>Buying Power</span>
           {/* <span>$3034.76</span> */}
-          <span className={"buying-power-number " + (bpDivExpand ? 'hidden' : '')}>$3034.76</span>
+          <span className={"buying-power-number " + (bpDivExpand ? 'hidden' : '')}>${cashBalance.toFixed(2)}</span>
         </div>
       </button>
       {bpDivExpand &&
@@ -71,11 +101,11 @@ function Portfolio() {
           <div className="buying-power-mini-container">
             <div className="buying-power__2">
               <span>Brokerage Power</span>
-              <span>$3034.76</span>
+              <span>${cashBalance.toFixed(2)}</span>
             </div>
             <div className="buying-power__2">
               <span>Buying Power</span>
-              <span className="bold">$3034.76</span>
+              <span className="bold">${cashBalance.toFixed(2)}</span>
             </div>
             <button
               type="button"
@@ -96,6 +126,7 @@ function Portfolio() {
                         type="number"
                         name="amount"
                         placeholder="$200.00"
+                        onChange={(e) => setFunds(e.target.value)}
                       >
                       </input>
                       <button className='deposit-btn' type="submit">Deposit</button>
