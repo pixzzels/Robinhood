@@ -24,7 +24,9 @@
   align-items: center;
 }
 
-.text-emoji{
+.check-symbol{
+  height: 20px;
+  width: 20px;
   margin-left: 25px;
   margin-right: 8px;
 }
