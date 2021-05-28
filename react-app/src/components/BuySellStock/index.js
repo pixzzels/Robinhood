@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
+import { addOneList, loadAllList } from '../../store/watchlist';
+import List from '../../components/List';
 import './BuySellStock.css';
 
 function BuySellStock({ symbol, price, stockId }) {
@@ -15,6 +17,8 @@ function BuySellStock({ symbol, price, stockId }) {
     const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [listForm, setListForm] = useState(false);
+    const [inputField, setInputField] = useState("");
     const ref = useRef(null);
 
     const userId = useSelector(state => state.session.user.id);
@@ -22,9 +26,15 @@ function BuySellStock({ symbol, price, stockId }) {
         const portfolio = Object.values(state.portfolio);
         return portfolio[0];
     })
+
     const transactions = useSelector(state => {
         const trans = Object.values(state.transaction);
         return trans;
+    })
+
+    const allLists = useSelector(state => {
+        const lists = Object.values(state.watchlist)
+        return lists
     })
     // console.log("transactions", transactions)
     // console.log("stockId",stockId)
@@ -50,6 +60,29 @@ function BuySellStock({ symbol, price, stockId }) {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
+
+
+    useEffect(() => {
+        dispatch(loadAllList(userId))
+      }, [dispatch])
+    
+      const addList = () => {
+        setListForm(!listForm)
+      }
+    
+      const handleListSubmit = (e) => {
+        e.preventDefault();
+        const name = inputField;
+        setListForm(!listForm)
+        setInputField("")
+        dispatch(addOneList({ name, userId }));
+      }
+    
+      const handleListCancel = (e) => {
+        e.preventDefault();
+        setInputField("")
+        setListForm(!listForm)
+      }
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
@@ -220,9 +253,15 @@ function BuySellStock({ symbol, price, stockId }) {
                         {isVisible &&
                             <div className="add-to-list-div" ref={ref}>
                                 <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button> 
+                                <div id="add-to-lists-container">
+                                    {allLists && allLists.map((list) => {
+                                        return (
+                                            <List list={list} />
+                                        )
+                                    })}
+                                </div>
                             </div>
                         }
-
                     </div>
                 </div>
 

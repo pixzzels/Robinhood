@@ -185,3 +185,8 @@
     border-radius: 5px;
     background-color: #d9dcdf;
 }
+
+#add-to-lists-container {
+    margin-top: 40px;
+    color: black;
+}
