@@ -1,0 +1,26 @@
+.account-page-nav-container {
+    padding-top: 68px;
+    margin: 0px 135.5px;
+    padding-bottom: 12px;
+}
+
+#account-page-user-name {
+    font-size: 32px;
+}
+
+.account-page-option {
+    text-decoration: none;
+    color: black;
+    margin: 0px 12px;
+    padding-bottom: 12px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#apo-1 {
+    margin-left: 0px;
+}
+
+.account-page-option:hover {
+    color: #00C805;
+}
