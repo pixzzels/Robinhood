@@ -64,7 +64,9 @@ function List({ list, checkButton=false }) {
 					</form>
 				}
 				{ !checkButton &&
-					<button className='check-symbol'>:)</button>
+					// <button className='check-symbol'>:)</button>
+					<i className="fa fa-building check-symbol" aria-hidden="true"></i>
+
 				}
 				<h2 className='single-list-txt'>{list.name}</h2>
 			</div>
