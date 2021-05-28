@@ -7,6 +7,8 @@
     font-size: 13px;
     line-height: 20px;
     border-bottom: 1px solid rgb(227,233,237);
+    display: flex;
+    justify-content: space-between;
   }
   
   .stock-name-shares-owned {
@@ -14,11 +16,11 @@
     flex-direction: column;
   }
   
-  .all-stock__graph-container {
-    width: 70px;
+  /* .all-stock__graph-container {
+    width: 120px;
   
-    /* border: 1px solid red; */
-  }
+    border: 1px solid red;
+  } */
   
   .all-stock_current-price {
     display: flex;

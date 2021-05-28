@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
-import './BuySellStock.css'
+import { addOneList, loadAllList } from '../../store/watchlist';
+import List from '../../components/List';
+import './BuySellStock.css';
 
 function BuySellStock({ symbol, price, stockId }) {
 
@@ -11,20 +13,28 @@ function BuySellStock({ symbol, price, stockId }) {
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
     const [MPDescription, setMPDescription] = useState(false);
-    const [buySell, setBuySell] = useState(true)
-    const [cashBalance, setCashBalance] = useState(0)
+    const [buySell, setBuySell] = useState(true);
+    const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const [refresh, setRefresh] = useState(false)
+    const [refresh, setRefresh] = useState(false);
+    const [listForm, setListForm] = useState(false);
+    const [inputField, setInputField] = useState("");
     const ref = useRef(null);
 
-    const userId = useSelector(state => state.session.user.id)
+    const userId = useSelector(state => state.session.user.id);
     const portfolioInfo = useSelector(state => {
-        const portfolio = Object.values(state.portfolio)
-        return portfolio[0]
+        const portfolio = Object.values(state.portfolio);
+        return portfolio[0];
     })
+
     const transactions = useSelector(state => {
-        const trans = Object.values(state.transaction)
+        const trans = Object.values(state.transaction);
         return trans;
+    })
+
+    const allLists = useSelector(state => {
+        const lists = Object.values(state.watchlist)
+        return lists
     })
     // console.log("transactions", transactions)
     // console.log("stockId",stockId)
@@ -51,20 +61,43 @@ function BuySellStock({ symbol, price, stockId }) {
         };
     }, []);
 
+
+    useEffect(() => {
+        dispatch(loadAllList(userId))
+    }, [dispatch])
+
+    const addList = () => {
+        setListForm(!listForm)
+    }
+
+    const handleListSubmit = (e) => {
+        e.preventDefault();
+        const name = inputField;
+        setListForm(!listForm)
+        setInputField("")
+        dispatch(addOneList({ name, userId }));
+    }
+
+    const handleListCancel = (e) => {
+        e.preventDefault();
+        setInputField("")
+        setListForm(!listForm)
+    }
+
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
-        setCashBalance(portfolioInfo.cash_balance)
-        setRefresh(true)
+        setCashBalance(portfolioInfo.cash_balance);
+        setRefresh(true);
     }
 
     const stockSymbol = symbol.toUpperCase();
 
     const orderPrice = parseInt(price.toFixed(2));
     let orderType;
-    const estimatedPrice = orderPrice * shares
+    const estimatedPrice = orderPrice * shares;
 
-    const stockBuys = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 1).map((el => el.order_volume))
-    const stockSells = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 2).map((el => el.order_volume))
+    const stockBuys = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 1).map((el => el.order_volume));
+    const stockSells = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 2).map((el => el.order_volume));
 
     const buyVol = stockBuys.reduce(function (a, b) {
         return a + b;
@@ -74,39 +107,43 @@ function BuySellStock({ symbol, price, stockId }) {
         return a + b;
     }, 0);
 
-    let sharesOwned = buyVol - sellVol
+    let sharesOwned = buyVol - sellVol;
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
-        let orderVolume = parseInt(shares)
+        let orderVolume = parseInt(shares);
 
         let newBal;
         if (buySell === true) {
             orderType = 1;
-            newBal = cashBalance - estimatedPrice
-            dispatch(updateCashBalance({ userId, newBal }))
-            setCashBalance(newBal)
+            newBal = cashBalance - estimatedPrice;
+            dispatch(updateCashBalance({ userId, newBal }));
+            setCashBalance(newBal);
         } else {
             orderType = 2;
-            newBal = cashBalance + estimatedPrice
-            dispatch(updateCashBalance({ userId, newBal }))
-            setCashBalance(newBal)
+            newBal = cashBalance + estimatedPrice;
+            dispatch(updateCashBalance({ userId, newBal }));
+            setCashBalance(newBal);
         }
 
-        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-        setReviewTransactionDropDown(false)
-        setShares(0)
-        setBuySell(true)
-        let input = document.querySelector(".bs-share-input")
-        input.value = ''
+        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }));
+        setReviewTransactionDropDown(false);
+        setShares(0);
+        setBuySell(true);
+        let input = document.querySelector(".bs-share-input");
+        input.value = '';
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
 
     }
 
     const handleReviewTransaction = () => {
-        setReviewTransactionDropDown(true)
+        setReviewTransactionDropDown(true);
     }
 
+    const handleAddToLists = (e) => {
+        e.preventDefault();
+        console.log("hello")
+    }
 
     return (
         <>
@@ -158,24 +195,24 @@ function BuySellStock({ symbol, price, stockId }) {
                                 </div>
                                 <div className="bs-form-inputs underline bs-form-inputs-mp"
                                     style={{ position: 'relative' }}
-                                    onClick={() => {
-                                        setMPDescription(true)
-                                        setIsVisible(!isVisible)
-                                    }
-                                    }>
+                                // onClick={() => {
+                                //     setMPDescription(true)
+                                //     setIsVisible(!isVisible)
+                                // }
+                                // }
+                                >
                                     <span style={{ color: '#00c805' }}>
                                         Market Price
                                         <i className="far fa-question-circle"></i>
                                     </span>
                                     <span>${orderPrice}</span>
-                                    {MPDescription && isVisible &&
+                                    {/* {MPDescription && isVisible &&
                                         <div className="market-price-info" ref={ref}>
-                                            {/* hello */}
                                             <p style={{ fontSize: '13px' }}>
                                                 The consolidated FAKE-time market data for AGTC across all US stock exchanges is:
                                             </p>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                                 <div className="bs-form-inputs bold">
                                     <span>Estimated {buySell ? "Cost" : "Credit"}</span>
@@ -213,8 +250,41 @@ function BuySellStock({ symbol, price, stockId }) {
                     </form>
                     <div className="bs-form-bspower">
                         <span>{buySell ? "$" + cashBalance.toFixed(2) + " buying power available" : sharesOwned + " Share(s) Available"} </span>
+
+                        <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}>
+                            + Add to Lists
+                        </button>
+                        {isVisible &&
+                            <div className="add-to-list-div" ref={ref}>
+                                <div id="add-to-lists-container">
+                                    <form className="add-to-list-form">
+                                        <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button>
+                                        <h2>Add {stockSymbol} to Your Lists</h2>
+                                        {allLists && allLists.map((list) => {
+                                            return (
+                                                <>
+                                                    <div className='list-text-container-2'>
+                                                        <input
+                                                            type="checkbox"
+                                                            className="add-to-list-input"
+                                                            name="list-input"
+                                                        >
+                                                        </input>
+                                                        <i className="fa fa-building check-symbol-2" aria-hidden="true"></i>
+                                                        <label htmlFor="list-input" className='single-list-txt-2'>{list.name}</label>
+                                                    </div>
+                                                </>
+                                            )
+                                        })}
+                                    </form>
+                                </div>
+
+                                <button type="submit">Save</button>
+                            </div>
+                        }
                     </div>
                 </div>
+
             </div>
         </>
     )

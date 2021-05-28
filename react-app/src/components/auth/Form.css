@@ -35,7 +35,7 @@
   letter-spacing: .03em;
 }
 
-.form-input{
+.login-signup-input {
   width: 35em;
   height: 2.7em;
   border-radius: 4px;
@@ -44,7 +44,7 @@
   transition: all 0.1s ease;
 }
 
-.form-input:focus {
+.login-signup-input:focus {
   outline: none;
   box-shadow: 0 0 0 .5px rgb(24, 214, 56);
 }

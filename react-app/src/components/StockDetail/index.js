@@ -150,14 +150,6 @@ function StockDetail() {
                 <div className="buy-sell__wrapper">
                     <BuySellStock symbol={symbol} price={companyInfo.price} stockId={companyInfo.stock_id} />
                 </div>
-                <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}> 
-                    + Add to Lists
-                    {isVisible &&
-                        <div className="add-to-list-div" ref={ref}>
-                            <div>Insert Lists and add to lists buttons</div>
-                        </div>
-                    }
-                </button>
             </div>
         </>
     )

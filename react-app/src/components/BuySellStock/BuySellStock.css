@@ -94,6 +94,7 @@
     font-size: 13px;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 /*------Market Price---------------------------------------------*/
@@ -141,5 +142,71 @@
     height: 48px;
     border-radius: 5px;
     margin-bottom: 12px;
+    
+}
 
+
+/*-------Add to Watchlist-----------------------------------------------------------------------*/
+
+.add-to-list-clicker {
+    position: absolute;
+    margin-top: 70px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #00C805;
+    background-color: white;
+    color: #00C805;
+}
+
+.add-to-list-clicker:hover {
+    background-color: rgba(0, 184, 6, 0.8);
+    color: white;
+    cursor: pointer;
+}
+
+#add-to-lists-container {
+    margin-top: 5px;
+    color: black;
+
+}
+
+#close-add-div {
+    position: fixed;
+    margin-left: 320px;
+    background-color: white;
+    border-style: none;
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+.add-to-list-div {
+    position: fixed;
+    top: 200px;
+    left: 500px;
+    padding: 24px;
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
+    overflow: scroll;
+}
+
+
+#close-add-div:hover {
+    border-radius: 5px;
+    background-color: #d9dcdf;
+}
+
+.list-text-container-2 {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+.check-symbol-2 {
+    padding: 15px;
+}
+
+.list-text-container-2 .single-list-txt-2 {
+    font-size: 15px;
 }

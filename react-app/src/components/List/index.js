@@ -55,12 +55,10 @@ function List({ list }) {
 		setDeleteBtn(true)
 	}
 
-
 	return (
 		<div className="one-list">
-
 			<div className='list-text-container'>
-				<button className='text-emoji'>:)</button>
+				<i className="fa fa-building check-symbol" aria-hidden="true"></i>
 				<h2 className='single-list-txt'>{list.name}</h2>
 			</div>
 

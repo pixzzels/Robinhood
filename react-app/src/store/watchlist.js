@@ -117,7 +117,7 @@ export const updateOneList = (newList) => async (dispatch) => {
 /* -----reducer-------------------------------------------------- */
 const initialState = {};
 
-const listReducer = (state = initialState, action) => {
+const watchListReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_LIST:
@@ -155,4 +155,4 @@ const listReducer = (state = initialState, action) => {
   }
 }
 
-export default listReducer;
+export default watchListReducer;

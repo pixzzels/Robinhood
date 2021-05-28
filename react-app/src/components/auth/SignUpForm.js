@@ -64,7 +64,7 @@ const SignUpForm = () => {
         <h2 className='form-text'>Welcome to Robinhood</h2>
         <div>
           <input
-            className="form-input"
+            className="login-signup-input"
             type="text"
             name="first_name"
             onChange={updateFirstName}
@@ -74,7 +74,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <input
-            className="form-input"
+            className="login-signup-input"
             type="text"
             name="last_name"
             onChange={updateLastName}
@@ -84,7 +84,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <input
-            className="form-input"
+            className="login-signup-input"
             type="text"
             name="email"
             onChange={updateEmail}
@@ -94,7 +94,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <input
-            className="form-input"
+            className="login-signup-input"
             type="password"
             name="password"
             onChange={updatePassword}
@@ -104,7 +104,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <input
-            className="form-input"
+            className="login-signup-input"
             type="password"
             name="repeat_password"
             onChange={updateRepeatPassword}
