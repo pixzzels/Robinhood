@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import PageNotFound from "./components/PageNotFound";
 import StockDetail from "./components/StockDetail/index";
 import NavBar from "./components/NavBar";
+import AccountPage from "./components/AccountPage";
 
 function App() {
   const user = useSelector(state => state.session.user)
@@ -61,6 +62,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/dashboard" exact={true} >
             <Dashboard />
+          </ProtectedRoute>
+          <ProtectedRoute>
+            <AccountPage path="/account" exact={true}/>
           </ProtectedRoute>
           <Route>
             <PageNotFound />

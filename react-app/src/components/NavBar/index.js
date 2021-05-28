@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
@@ -7,13 +7,30 @@ import blackleaf from '../../images/robinhood-2.svg';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
-  const [showDropdown, setShowDropdown] = useState(false);
 
-  // console.log('user', user)
+  const [showDropdown, setShowDropdown] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
+
+  const ref = useRef(null);
 
   const handleDropdown = () => {
     setShowDropdown(!showDropdown)
+    // setIsVisible(!isVisible)
   }
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
 
   return (
     <nav className="nav-wrapper">
@@ -50,12 +67,19 @@ const NavBar = () => {
 
 
         <div className="portfolio-nav__links">
-          <button type="button" onClick={handleDropdown} id="account-link">
+          <button
+            type="button"
+            onClick={() => {
+              // setShowDropdown(!showDropdown)
+              handleDropdown()
+            }}
+            id="account-link"
+          >
             Account
           </button>
         </div>
         {showDropdown &&
-          <div className="account-options-dropdown">
+          <div className="account-options-dropdown" ref={ref}>
 
             <div className="drop-container1">
               <div id="users-name">{user.first_name} {user.last_name}</div>
