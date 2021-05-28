@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import './Search.css';
 
 function Search() {
-  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([]);
 
@@ -11,7 +9,7 @@ function Search() {
   console.log(searchTerm)
   let results;
 
-  useEffect( async (e)=> {
+  useEffect(async (e) => {
     const iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
     const res = await fetch(`https://cloud.iexapis.com/stable/search/${searchTerm}?token=${iex_api_key}`)
     const response = await res.json()
@@ -35,10 +33,6 @@ function Search() {
   // iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
   // api_url = `https://cloud.iexapis.com/stable/search/${searchTerm}?token=${iex_api_key}`
 
-  const handleClick = () => {
-
-  }
-
   console.log(results)
 
   return (
@@ -50,18 +44,24 @@ function Search() {
           placeholder='Search'
           onChange={setTerm}
           value={searchTerm}
-          // required
         />
       </form>
-      <div>
+
+      <div className='results-container'>
         {searchResults.map((result) => {
           return (
-            <a href={`/stocks/${result.symbol}`} onClick={handleClick} value={result.symbol}>
-              {result.symbol} {result.name}
-            </a>
+            <div>
+              <a href={`/stocks/${result.symbol}`} value={result.symbol} className='results-text'>
+                <div className="result-text-container">
+                  <div>{result.symbol}</div>
+                  <div>{result.name}</div>
+                </div>
+              </a>
+            </div>
           )
         })}
       </div>
+
     </>
   )
 }
