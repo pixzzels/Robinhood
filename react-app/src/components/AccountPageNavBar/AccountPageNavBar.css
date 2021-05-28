@@ -8,16 +8,6 @@
     font-size: 32px;
 }
 
-.account-page-option1 {
-    text-decoration: none;
-    color: black;
-    margin-right: 12px;
-    padding-bottom: 12px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-
 .account-page-option {
     text-decoration: none;
     color: black;
@@ -25,4 +15,12 @@
     padding-bottom: 12px;
     font-size: 13px;
     font-weight: bold;
+}
+
+#apo-1 {
+    margin-left: 0px;
+}
+
+.account-page-option:hover {
+    color: #00C805;
 }
