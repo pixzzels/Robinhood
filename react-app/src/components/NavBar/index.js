@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
 import blackleaf from '../../images/robinhood-2.svg';
+import Search from '../Search/index';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
@@ -42,14 +43,7 @@ const NavBar = () => {
       </div>
 
       <div className="portfolio-search-container">
-        <form>
-          <input
-            className='portfolio-search'
-            type='text'
-            placeholder='Search'
-            required
-          />
-        </form>
+        <Search />
       </div>
 
       <div className="right-nav-container">
