@@ -9,6 +9,8 @@ function Search() {
   console.log(searchTerm)
   let results;
 
+  // const ref = useRef(null);
+
   useEffect(async (e) => {
     const iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
     const res = await fetch(`https://cloud.iexapis.com/stable/search/${searchTerm}?token=${iex_api_key}`)
@@ -18,9 +20,13 @@ function Search() {
     console.log(results)
   })
 
-  handleCancel = () => {
-    
-  }
+  // useEffect(() => {
+  //   document.addEventListener('click', handleClickOutside, true);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside, true);
+  //   };
+  // }, []);
+
 
   // const handleClick = async (e) => {
   //   e.preventDefault()
