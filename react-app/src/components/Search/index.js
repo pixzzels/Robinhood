@@ -18,6 +18,10 @@ function Search() {
     console.log(results)
   })
 
+  handleCancel = () => {
+    
+  }
+
   // const handleClick = async (e) => {
   //   e.preventDefault()
   //   if( searchTerm == '') {
