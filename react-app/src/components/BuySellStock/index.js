@@ -140,6 +140,10 @@ function BuySellStock({ symbol, price, stockId }) {
         setReviewTransactionDropDown(true);
     }
 
+    const handleAddToLists = (e) => {
+        e.preventDefault();
+        console.log("hello")
+    }
 
     return (
         <>
@@ -257,11 +261,13 @@ function BuySellStock({ symbol, price, stockId }) {
                                     {allLists && allLists.map((list) => {
                                         return (
                                             <>
-                                                <List list={list} checkButton={true}/>
+                                                <List list={list} checkButton={true} handleAddToLists={handleAddToLists}/>
                                             </>
                                         )
                                     })}
                                 </div>
+
+                                <button type="submit" form="add-to-lists">Save</button>
                             </div>
                         }
                     </div>

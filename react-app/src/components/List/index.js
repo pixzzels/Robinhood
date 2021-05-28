@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal';
 
 import './List.css';
 
-function List({ list, checkButton=false }) {
+function List({ list, checkButton=false, handleAddToLists=false }) {
 
 	const dispatch = useDispatch()
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -59,8 +59,8 @@ function List({ list, checkButton=false }) {
 		<div className="one-list">
 			<div className='list-text-container'>
 				{ checkButton && 
-					<form>
-						<input type="checkbox" className="check-symbol"></input>
+					<form id="add-to-lists" onSubmit={handleAddToLists}>
+						<input type="checkbox" className="check-symbol" value={(e) => e.target.value}></input>
 					</form>
 				}
 				{ !checkButton &&
