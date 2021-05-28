@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useSelector } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useDispatch } from 'react-redux';
 import './StockChart.css';
@@ -13,6 +13,12 @@ function StockChart({dateRange, symbol, history}) {
   // useEffect(()=> {
   //   // dispatch(stockReducer.getStockHistory(symbol))
   // }, [dispatch])
+  let lineColor;
+  if (history[symbol][dateRange][0] > history[symbol][dateRange][history[symbol][dateRange].length - 1]) {
+    lineColor = 'rgb(255, 80, 0)';
+  } else {
+    lineColor = 'rgb(0, 200, 5)';
+  }
 
   const data = {
     // labels: ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
@@ -22,8 +28,8 @@ function StockChart({dateRange, symbol, history}) {
         label: 'Price',
         data: history[symbol][dateRange],
         fill: false,
-        backgroundColor: 'rgb(0, 0, 0)',
-        borderColor: 'rgb(0, 0, 0)',
+        backgroundColor: 'rgb(, 0, 0)',
+        borderColor: lineColor,
         borderWidth: '1.5',
       },
     ],
