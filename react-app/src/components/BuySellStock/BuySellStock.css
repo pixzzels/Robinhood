@@ -171,3 +171,17 @@
     width: 400px;
     box-shadow: 1px 1px 10px 1px #e4e4e4b7;
 }
+
+#close-add-div {
+    position: fixed;
+    margin-left: 320px;
+    background-color: white;
+    border-style: none;
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+#close-add-div:hover {
+    border-radius: 5px;
+    background-color: #d9dcdf;
+}

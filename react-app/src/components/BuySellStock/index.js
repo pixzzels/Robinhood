@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
-import './BuySellStock.css'
+import './BuySellStock.css';
 
 function BuySellStock({ symbol, price, stockId }) {
 
@@ -11,19 +11,19 @@ function BuySellStock({ symbol, price, stockId }) {
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
     const [MPDescription, setMPDescription] = useState(false);
-    const [buySell, setBuySell] = useState(true)
-    const [cashBalance, setCashBalance] = useState(0)
+    const [buySell, setBuySell] = useState(true);
+    const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const [refresh, setRefresh] = useState(false)
+    const [refresh, setRefresh] = useState(false);
     const ref = useRef(null);
 
-    const userId = useSelector(state => state.session.user.id)
+    const userId = useSelector(state => state.session.user.id);
     const portfolioInfo = useSelector(state => {
-        const portfolio = Object.values(state.portfolio)
-        return portfolio[0]
+        const portfolio = Object.values(state.portfolio);
+        return portfolio[0];
     })
     const transactions = useSelector(state => {
-        const trans = Object.values(state.transaction)
+        const trans = Object.values(state.transaction);
         return trans;
     })
     // console.log("transactions", transactions)
@@ -53,18 +53,18 @@ function BuySellStock({ symbol, price, stockId }) {
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
-        setCashBalance(portfolioInfo.cash_balance)
-        setRefresh(true)
+        setCashBalance(portfolioInfo.cash_balance);
+        setRefresh(true);
     }
 
     const stockSymbol = symbol.toUpperCase();
 
     const orderPrice = parseInt(price.toFixed(2));
     let orderType;
-    const estimatedPrice = orderPrice * shares
+    const estimatedPrice = orderPrice * shares;
 
-    const stockBuys = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 1).map((el => el.order_volume))
-    const stockSells = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 2).map((el => el.order_volume))
+    const stockBuys = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 1).map((el => el.order_volume));
+    const stockSells = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 2).map((el => el.order_volume));
 
     const buyVol = stockBuys.reduce(function (a, b) {
         return a + b;
@@ -74,37 +74,37 @@ function BuySellStock({ symbol, price, stockId }) {
         return a + b;
     }, 0);
 
-    let sharesOwned = buyVol - sellVol
+    let sharesOwned = buyVol - sellVol;
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
-        let orderVolume = parseInt(shares)
+        let orderVolume = parseInt(shares);
 
         let newBal;
         if (buySell === true) {
             orderType = 1;
-            newBal = cashBalance - estimatedPrice
-            dispatch(updateCashBalance({ userId, newBal }))
-            setCashBalance(newBal)
+            newBal = cashBalance - estimatedPrice;
+            dispatch(updateCashBalance({ userId, newBal }));
+            setCashBalance(newBal);
         } else {
             orderType = 2;
-            newBal = cashBalance + estimatedPrice
-            dispatch(updateCashBalance({ userId, newBal }))
-            setCashBalance(newBal)
+            newBal = cashBalance + estimatedPrice;
+            dispatch(updateCashBalance({ userId, newBal }));
+            setCashBalance(newBal);
         }
 
-        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
-        setReviewTransactionDropDown(false)
-        setShares(0)
-        setBuySell(true)
-        let input = document.querySelector(".bs-share-input")
-        input.value = ''
+        dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }));
+        setReviewTransactionDropDown(false);
+        setShares(0);
+        setBuySell(true);
+        let input = document.querySelector(".bs-share-input");
+        input.value = '';
         // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
 
     }
 
     const handleReviewTransaction = () => {
-        setReviewTransactionDropDown(true)
+        setReviewTransactionDropDown(true);
     }
 
 
@@ -219,7 +219,7 @@ function BuySellStock({ symbol, price, stockId }) {
                         </button>
                         {isVisible &&
                             <div className="add-to-list-div" ref={ref}>
-                                <div>Insert Lists and add to lists buttons</div>
+                                <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button> 
                             </div>
                         }
 
