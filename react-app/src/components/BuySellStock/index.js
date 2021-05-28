@@ -213,8 +213,17 @@ function BuySellStock({ symbol, price, stockId }) {
                     </form>
                     <div className="bs-form-bspower">
                         <span>{buySell ? "$" + cashBalance.toFixed(2) + " buying power available" : sharesOwned + " Share(s) Available"} </span>
+                        <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}> 
+                            + Add to Lists
+                            {isVisible &&
+                                <div className="add-to-list-div" ref={ref}>
+                                    <div>Insert Lists and add to lists buttons</div>
+                                </div>
+                            }
+                        </button>
                     </div>
                 </div>
+
             </div>
         </>
     )

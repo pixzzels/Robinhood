@@ -94,6 +94,7 @@
     font-size: 13px;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 /*------Market Price---------------------------------------------*/
@@ -142,4 +143,31 @@
     border-radius: 5px;
     margin-bottom: 12px;
 
+}
+
+.add-to-list-clicker {
+    position: absolute;
+    margin-top: 70px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #00C805;
+    background-color: white;
+    color: #00C805;
+}
+
+.add-to-list-clicker:hover {
+    background-color: rgba(0, 184, 6, 0.8);
+    color: white;
+    cursor: pointer;
+}
+
+.add-to-list-div {
+    position: fixed;
+    top: 200px;
+    left: 500px;
+    padding: 24px;
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
 }
