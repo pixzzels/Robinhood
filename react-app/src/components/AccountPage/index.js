@@ -6,19 +6,22 @@ import './AccountPage.css'
 
 function AccountPage() {
     const [content, setContent] = useState('')
-    
+
     let component;
     const changeContent = (type) => {
         if (type === "history") {
             // setContent("history")
-            component = (<AccountHistory/>)
+            component = (<AccountHistory />)
         }
     }
 
 
     return (
         <>
-            <AccountPageNavBar changeContent={changeContent} />
+            <nav className="sticky-account-nav">
+
+                <AccountPageNavBar changeContent={changeContent} />
+            </nav>
             <div className="account-page-wrapper">
                 <AccountHistory />
             </div>
