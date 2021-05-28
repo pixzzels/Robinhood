@@ -1,0 +1,108 @@
+
+.history-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.transaction-wrapper {
+    display: grid;
+    border-top: 1px solid #e3e9ed;
+    border-bottom: 1px solid #e3e9ed;
+    height: 91px;
+    width: 650px;
+
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+}
+
+.transaction-content-1 {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+
+.transaction-content-2 {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 15px;
+    margin-bottom: 2px;
+
+}
+
+.transaction-content-3 {
+    grid-row: 2/3;
+    grid-column: 1/1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 13px;
+    margin-top: 2px;
+
+}
+
+.transaction-content-4 {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    font-size: 13px;
+    margin-top: 2px;
+
+}
+
+
+.history-filter-container {
+    height: 154px;
+    width: 30vh;
+    border: 1px solid #e3e9ed;
+    padding: 24px;
+    font-size: 13px;
+}
+
+.history-filter-container h4 {
+    margin-top: 0px;
+}
+
+.history-filter-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#history-filter-orders {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    padding: 2px;
+    height: 40px;
+    margin-right: 12px;
+    border-bottom: 1px solid #e3e9ed;
+}
+
+#history-filter-rewards {
+    grid-row: 2/3;
+    grid-column: 1/2;
+    padding: 2px;
+    height: 40px;
+    margin-right: 12px;
+    border-bottom: 1px solid #e3e9ed;
+}
+
+#history-filter-transfers {
+    grid-row: 1/2;
+    grid-column: 2/2;
+    padding: 2px;
+    height: 40px;
+    margin-right: 12px;
+    border-bottom: 1px solid #e3e9ed;
+}
