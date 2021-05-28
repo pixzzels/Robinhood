@@ -158,24 +158,24 @@ function BuySellStock({ symbol, price, stockId }) {
                                 </div>
                                 <div className="bs-form-inputs underline bs-form-inputs-mp"
                                     style={{ position: 'relative' }}
-                                    onClick={() => {
-                                        setMPDescription(true)
-                                        setIsVisible(!isVisible)
-                                    }
-                                    }>
+                                // onClick={() => {
+                                //     setMPDescription(true)
+                                //     setIsVisible(!isVisible)
+                                // }
+                                // }
+                                >
                                     <span style={{ color: '#00c805' }}>
                                         Market Price
                                         <i className="far fa-question-circle"></i>
                                     </span>
                                     <span>${orderPrice}</span>
-                                    {MPDescription && isVisible &&
+                                    {/* {MPDescription && isVisible &&
                                         <div className="market-price-info" ref={ref}>
-                                            {/* hello */}
                                             <p style={{ fontSize: '13px' }}>
                                                 The consolidated FAKE-time market data for AGTC across all US stock exchanges is:
                                             </p>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                                 <div className="bs-form-inputs bold">
                                     <span>Estimated {buySell ? "Cost" : "Credit"}</span>
@@ -213,14 +213,16 @@ function BuySellStock({ symbol, price, stockId }) {
                     </form>
                     <div className="bs-form-bspower">
                         <span>{buySell ? "$" + cashBalance.toFixed(2) + " buying power available" : sharesOwned + " Share(s) Available"} </span>
-                        <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}> 
+
+                        <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}>
                             + Add to Lists
-                            {isVisible &&
-                                <div className="add-to-list-div" ref={ref}>
-                                    <div>Insert Lists and add to lists buttons</div>
-                                </div>
-                            }
                         </button>
+                        {isVisible &&
+                            <div className="add-to-list-div" ref={ref}>
+                                <div>Insert Lists and add to lists buttons</div>
+                            </div>
+                        }
+
                     </div>
                 </div>
 
