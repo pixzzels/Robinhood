@@ -6,25 +6,43 @@ import BuySellStock from '../BuySellStock';
 import * as stockReducer from '../../store/stock'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 function StockDetail() {
     const dispatch = useDispatch();
     const ticker = useParams();
-    const symbol = ticker['ticker']
-    const [dateRange, setDateRange] = useState('1d')
-    const setDate = (e) => setDateRange(e.target.value)
+    const symbol = ticker['ticker'];
+    const [dateRange, setDateRange] = useState('1d');
+    const [isVisible, setIsVisible] = useState(false);
 
-    const stock = useSelector(state => state.stock.currentStock)
+    const ref = useRef(null);
+
+    const setDate = (e) => setDateRange(e.target.value);
+
+    const stock = useSelector(state => state.stock.currentStock);
+
+    const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setIsVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, []);
 
     useEffect(()=> {
-        dispatch(stockReducer.getStockCompany(symbol))
+        dispatch(stockReducer.getStockCompany(symbol));
     }, [dispatch, symbol])
 
     if(!stock) {
-        return null
+        return null;
     }
+
 
     function nFormatter(num, digits) {
         var si = [
@@ -46,10 +64,10 @@ function StockDetail() {
         return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
     }
 
-    const companyInfo = stock[symbol]['company_info']
-    const companyStatistics = stock[symbol]['company_statistics']
-    const news = stock[symbol]['company_news']
-    const history = stock[symbol]['price_history']
+    const companyInfo = stock[symbol]['company_info'];
+    const companyStatistics = stock[symbol]['company_statistics'];
+    const news = stock[symbol]['company_news'];
+    const history = stock[symbol]['price_history'];
 
     return(
         <>
@@ -132,10 +150,15 @@ function StockDetail() {
                 <div className="buy-sell__wrapper">
                     <BuySellStock symbol={symbol} price={companyInfo.price} stockId={companyInfo.stock_id} />
                 </div>
+                <button className="add-to-list-clicker" onClick={() => setIsVisible(!isVisible)}> 
+                    + Add to Lists
+                    {isVisible &&
+                        <div className="add-to-list-div" ref={ref}>
+                            <div>Insert Lists and add to lists buttons</div>
+                        </div>
+                    }
+                </button>
             </div>
-            {/* <button onClick={handleClick}>
-                testing
-            </button> */}
         </>
     )
 }

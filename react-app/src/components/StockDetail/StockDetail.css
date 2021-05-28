@@ -88,3 +88,31 @@
     width: 300px;
     /* border: 1px solid red; */
 }
+
+.add-to-list-clicker {
+    position: fixed;
+    top: 620px;
+    left: 1065px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #00C805;
+    background-color: white;
+    color: #00C805;
+}
+
+.add-to-list-clicker:hover {
+    background-color: rgba(0, 184, 6, 0.8);
+    color: white;
+    cursor: pointer;
+}
+
+.add-to-list-div {
+    position: fixed;
+    top: 200px;
+    left: 500px;
+    padding: 24px;
+    background-color: white;
+    height: 500px;
+    width: 400px;
+    box-shadow: 1px 1px 10px 1px #e4e4e4b7;
+}
