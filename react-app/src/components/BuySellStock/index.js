@@ -64,25 +64,25 @@ function BuySellStock({ symbol, price, stockId }) {
 
     useEffect(() => {
         dispatch(loadAllList(userId))
-      }, [dispatch])
-    
-      const addList = () => {
+    }, [dispatch])
+
+    const addList = () => {
         setListForm(!listForm)
-      }
-    
-      const handleListSubmit = (e) => {
+    }
+
+    const handleListSubmit = (e) => {
         e.preventDefault();
         const name = inputField;
         setListForm(!listForm)
         setInputField("")
         dispatch(addOneList({ name, userId }));
-      }
-    
-      const handleListCancel = (e) => {
+    }
+
+    const handleListCancel = (e) => {
         e.preventDefault();
         setInputField("")
         setListForm(!listForm)
-      }
+    }
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
@@ -256,18 +256,30 @@ function BuySellStock({ symbol, price, stockId }) {
                         </button>
                         {isVisible &&
                             <div className="add-to-list-div" ref={ref}>
-                                <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button> 
                                 <div id="add-to-lists-container">
-                                    {allLists && allLists.map((list) => {
-                                        return (
-                                            <>
-                                                <List list={list} checkButton={true} handleAddToLists={handleAddToLists}/>
-                                            </>
-                                        )
-                                    })}
+                                    <form className="add-to-list-form">
+                                        <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button>
+                                        <h2>Add {stockSymbol} to Your Lists</h2>
+                                        {allLists && allLists.map((list) => {
+                                            return (
+                                                <>
+                                                    <div className='list-text-container-2'>
+                                                        <input
+                                                            type="checkbox"
+                                                            className="add-to-list-input"
+                                                            name="list-input"
+                                                        >
+                                                        </input>
+                                                        <i className="fa fa-building check-symbol-2" aria-hidden="true"></i>
+                                                        <label htmlFor="list-input" className='single-list-txt-2'>{list.name}</label>
+                                                    </div>
+                                                </>
+                                            )
+                                        })}
+                                    </form>
                                 </div>
 
-                                <button type="submit" form="add-to-lists">Save</button>
+                                <button type="submit">Save</button>
                             </div>
                         }
                     </div>
