@@ -256,7 +256,9 @@ function BuySellStock({ symbol, price, stockId }) {
                                 <div id="add-to-lists-container">
                                     {allLists && allLists.map((list) => {
                                         return (
-                                            <List list={list} />
+                                            <>
+                                                <List list={list} checkButton={true}/>
+                                            </>
                                         )
                                     })}
                                 </div>

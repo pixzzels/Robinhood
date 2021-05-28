@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal';
 
 import './List.css';
 
-function List({ list }) {
+function List({ list, checkButton=false }) {
 
 	const dispatch = useDispatch()
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -55,12 +55,17 @@ function List({ list }) {
 		setDeleteBtn(true)
 	}
 
-
 	return (
 		<div className="one-list">
-
 			<div className='list-text-container'>
-				<button className='text-emoji'>:)</button>
+				{ checkButton && 
+					<form>
+						<input type="checkbox" className="check-symbol"></input>
+					</form>
+				}
+				{ !checkButton &&
+					<button className='check-symbol'>:)</button>
+				}
 				<h2 className='single-list-txt'>{list.name}</h2>
 			</div>
 
