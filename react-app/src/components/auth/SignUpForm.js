@@ -63,7 +63,6 @@ const SignUpForm = () => {
       <form className='form-container' onSubmit={onSignUp}>
         <h2 className='form-text'>Welcome to Robinhood</h2>
         <div>
-          <label></label>
           <input
             className="login-signup-input"
             type="text"
@@ -74,7 +73,6 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label></label>
           <input
             className="login-signup-input"
             type="text"
@@ -85,7 +83,6 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label></label>
           <input
             className="login-signup-input"
             type="text"
@@ -96,7 +93,6 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label></label>
           <input
             className="login-signup-input"
             type="password"
@@ -107,7 +103,6 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label></label>
           <input
             className="login-signup-input"
             type="password"

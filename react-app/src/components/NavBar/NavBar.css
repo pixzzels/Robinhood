@@ -33,10 +33,7 @@
   grid-column: 3/7;
 }
 
-.portfolio-search{
-  padding: 0px 25px;
-  letter-spacing: .01em;
-}
+
 
 .right-nav-container {
   grid-column: 11/14;
@@ -70,6 +67,7 @@
   font-size: 1.25em;
   font-weight: 800;
   letter-spacing: .02em;
+  outline: none;
 }
 
 /* -----------------dropdown--------------------- */
