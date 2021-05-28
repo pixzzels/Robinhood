@@ -4,7 +4,7 @@ import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import './BuySellStock.css'
 
-function BuySellStock({ symbol, price }) {
+function BuySellStock({ symbol, price, stockId }) {
 
     const dispatch = useDispatch();
     const [shares, setShares] = useState(0);
@@ -27,6 +27,7 @@ function BuySellStock({ symbol, price }) {
         return trans;
     })
     // console.log("transactions", transactions)
+    // console.log("stockId",stockId)
 
 
     useEffect(() => {
@@ -56,25 +57,29 @@ function BuySellStock({ symbol, price }) {
         setRefresh(true)
     }
 
-    const sharesOwned = 0
     const stockSymbol = symbol.toUpperCase();
-    const stockId = 52;
 
     const orderPrice = parseInt(price.toFixed(2));
     let orderType;
     const estimatedPrice = orderPrice * shares
 
-    const stockTransactions = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol)
-    // console.log("transfa", stockTransactions)
-    // let stockId;
-    // if (stockTransactions[0].stock_id) {
-    //     stockId = stockTransactions[0].stock_id.id
-    // }
+    const stockBuys = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 1).map((el => el.order_volume))
+    const stockSells = transactions.filter((transaction) => transaction.stock_id.ticker === stockSymbol && transaction.order_type === 2).map((el => el.order_volume))
+
+    const buyVol = stockBuys.reduce(function (a, b) {
+        return a + b;
+    }, 0);
+
+    const sellVol = stockSells.reduce(function (a, b) {
+        return a + b;
+    }, 0);
+
+    let sharesOwned = buyVol - sellVol
 
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares)
-        
+
         let newBal;
         if (buySell === true) {
             orderType = 1;
@@ -87,7 +92,7 @@ function BuySellStock({ symbol, price }) {
             dispatch(updateCashBalance({ userId, newBal }))
             setCashBalance(newBal)
         }
-        
+
         dispatch(buyStock({ userId, stockId, orderPrice, orderVolume, orderType }))
         setReviewTransactionDropDown(false)
         setShares(0)
@@ -112,11 +117,14 @@ function BuySellStock({ symbol, price }) {
                         setReviewTransactionDropDown(false)
                     }
                     }>Buy {stockSymbol}</span>
-                    <span className={(buySell === false ? 'atv-header' : '')} onClick={() => {
-                        setBuySell(false)
-                        setReviewTransactionDropDown(false)
+
+                    {sharesOwned != 0 &&
+                        <span className={(buySell === false ? 'atv-header' : '')} onClick={() => {
+                            setBuySell(false)
+                            setReviewTransactionDropDown(false)
+                        }
+                        }>Sell {stockSymbol}</span>
                     }
-                    }>Sell {stockSymbol}</span>
                     <button className="down-arrow-btn">
                         <i className="fas fa-chevron-down"></i>
                     </button>
