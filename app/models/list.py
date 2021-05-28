@@ -9,3 +9,11 @@ class List(db.Model):
 
     watchlist = db.relationship('Watchlist')
     stock = db.relationship('Stock')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "watchlist_id": self.watchlist_id,
+            "stock_id": self.stock_id,
+            "stock": self.stock.to_dict()
+        }

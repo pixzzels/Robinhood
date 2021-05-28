@@ -5,13 +5,15 @@ import watchlist from "./watchlist";
 import stockReducer from './stock';
 import transaction from "./transaction";
 import portfolio from "./portfolio";
+import list from "./list";
 
 const rootReducer = combineReducers({
     session,
     watchlist,
     stock: stockReducer,
     transaction,
-    portfolio
+    portfolio,
+    list,
 });
 
 let enhancer;
