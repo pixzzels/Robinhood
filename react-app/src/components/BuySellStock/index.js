@@ -36,8 +36,6 @@ function BuySellStock({ symbol, price, stockId }) {
         const lists = Object.values(state.watchlist)
         return lists
     })
-    // console.log("transactions", transactions)
-    // console.log("stockId",stockId)
 
 
     useEffect(() => {
@@ -60,7 +58,6 @@ function BuySellStock({ symbol, price, stockId }) {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-
 
     useEffect(() => {
         dispatch(loadAllList(userId))
@@ -149,22 +146,31 @@ function BuySellStock({ symbol, price, stockId }) {
         <>
             <div className="buy-sell-container">
                 <div className="buy-sell-header bold">
-                    <span className={(buySell ? 'atv-header' : '')} onClick={() => {
+                    <span className={(buySell ? 'atv-header' : '') + (!buySell && reviewTransactionDropDown ? 'hidden' : '')}
+                    onClick={() => {
                         setBuySell(true)
                         setReviewTransactionDropDown(false)
                     }
                     }>Buy {stockSymbol}</span>
 
                     {sharesOwned != 0 &&
-                        <span className={(buySell === false ? 'atv-header' : '')} onClick={() => {
+                        <span className={(buySell === false ? 'atv-header' : '') + (buySell && reviewTransactionDropDown ? 'hidden' : '')}
+                        onClick={() => {
                             setBuySell(false)
                             setReviewTransactionDropDown(false)
                         }
                         }>Sell {stockSymbol}</span>
                     }
-                    <button className="down-arrow-btn">
-                        <i className="fas fa-chevron-down"></i>
-                    </button>
+                    {reviewTransactionDropDown === false &&
+                        < button className="down-arrow-btn">
+                            <i className="fas fa-chevron-down"></i>
+                        </button>
+                    }
+                    {reviewTransactionDropDown === true &&
+                        < button className="down-arrow-btn">
+                            <i className="fas fa-lock"></i>
+                        </button>
+                    }
                 </div>
                 <div className="buy-sell-content">
                     <form className="buy-sell-form" onSubmit={handleTransactionSubmit}>
@@ -183,8 +189,8 @@ function BuySellStock({ symbol, price, stockId }) {
                                         className="bs-share-input"
                                         type="number"
                                         min="0"
+                                        max={shares > 0 ? shares : 1000000}
                                         placeholder="0"
-                                        // value={(e)=> e.target.value}
                                         onChange={(e) => {
                                             setShares(e.target.value)
                                             setReviewTransactionDropDown(false)
@@ -195,24 +201,13 @@ function BuySellStock({ symbol, price, stockId }) {
                                 </div>
                                 <div className="bs-form-inputs underline bs-form-inputs-mp"
                                     style={{ position: 'relative' }}
-                                // onClick={() => {
-                                //     setMPDescription(true)
-                                //     setIsVisible(!isVisible)
-                                // }
-                                // }
                                 >
                                     <span style={{ color: '#00c805' }}>
                                         Market Price
                                         <i className="far fa-question-circle"></i>
                                     </span>
                                     <span>${orderPrice}</span>
-                                    {/* {MPDescription && isVisible &&
-                                        <div className="market-price-info" ref={ref}>
-                                            <p style={{ fontSize: '13px' }}>
-                                                The consolidated FAKE-time market data for AGTC across all US stock exchanges is:
-                                            </p>
-                                        </div>
-                                    } */}
+
                                 </div>
                                 <div className="bs-form-inputs bold">
                                     <span>Estimated {buySell ? "Cost" : "Credit"}</span>
@@ -221,21 +216,61 @@ function BuySellStock({ symbol, price, stockId }) {
 
                                 {reviewTransactionDropDown && shares > 0 &&
                                     <>
-                                        <p>You are placing a good for day market order to {buySell ? "buy" : "sell"} {shares} share(s) of {stockSymbol}.</p>
-                                        <footer className="review-transaction-buy-edit">
-                                            <button className="review-transaction-buy-btn rtbe-btn bold" type="submit">{buySell ? "Buy" : "Sell"} </button>
-                                            <button className="review-transaction-edit-btn rtbe-btn bold" type="button" onClick={() => setReviewTransactionDropDown(false)}>Edit</button>
+                                        {buySell === true &&
+                                            <>
+                                                <p>You are placing a good for day market order to buy {shares} {parseInt(shares) === 1 ? "share" : "shares"}  of {stockSymbol}.</p>
+                                                <footer className="review-transaction-buy-edit">
+                                                    <button className="review-transaction-buy-btn rtbe-btn bold" type="submit">{buySell ? "Buy" : "Sell"} </button>
+                                                    <button className="review-transaction-edit-btn rtbe-btn bold" type="button" onClick={() => setReviewTransactionDropDown(false)}>Edit</button>
 
-                                        </footer>
+                                                </footer>
+                                            </>
+                                        }
+
+                                        {buySell === false && shares <= sharesOwned &&
+                                            <>
+                                                <p>You are placing a good for day market order to sell {shares} {parseInt(shares) === 1 ? "share" : "shares"}  of {stockSymbol}.</p>
+                                                <footer className="review-transaction-buy-edit">
+                                                    <button className="review-transaction-buy-btn rtbe-btn bold" type="submit">{buySell ? "Buy" : "Sell"} </button>
+                                                    <button className="review-transaction-edit-btn rtbe-btn bold" type="button" onClick={() => setReviewTransactionDropDown(false)}>Edit</button>
+
+                                                </footer>
+                                            </>
+                                        }
+
                                     </>
 
                                 }
-
-                                {reviewTransactionDropDown && shares === 0 &&
-                                    <p>Please enter a valid number of shares.</p>
+                                {reviewTransactionDropDown && shares > 0 && shares > sharesOwned && buySell === false &&
+                                    <>
+                                        <span className="bold">
+                                            <i className="fas fa-exclamation-circle"></i>
+                                            {" " + "Not Enough Shares"}
+                                        </span>
+                                        <p>
+                                            You can only sell up to {sharesOwned} shares of {stockSymbol}.
+                                        </p>
+                                        <button type="button" className="bs-submit-btn bold" onClick={() => setReviewTransactionDropDown(false)}>
+                                            Back
+                                        </button>
+                                    </>
                                 }
 
-                                <button className={"bs-submit-btn bold " + (reviewTransactionDropDown && shares > 0 ? 'hidden' : '')} type="button" onClick={handleReviewTransaction}>
+
+                                {reviewTransactionDropDown && shares <= 0 &&
+                                    <>
+                                        <span className="bold">
+                                            <i className="fas fa-exclamation-circle"></i>
+                                            {" " + "Error"}
+                                        </span>
+                                        <p>Please enter a valid number of shares.</p>
+                                        <button type="button" className="bs-submit-btn bold" onClick={() => setReviewTransactionDropDown(false)}>
+                                            Back
+                                        </button>
+                                    </>
+                                }
+
+                                <button className={"bs-submit-btn bold " + (reviewTransactionDropDown && shares > 0 || reviewTransactionDropDown && shares <= 0 || reviewTransactionDropDown && shares > 0 && shares > sharesOwned && buySell === false ? 'hidden' : '')} type="button" onClick={handleReviewTransaction}>
                                     Review Order
                                 </button>
 
