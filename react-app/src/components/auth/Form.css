@@ -42,6 +42,7 @@
   border: 1px rgb(228, 228, 228) solid;
   /* margin: 10px 0px; */
   transition: all 0.1s ease;
+  margin: 8px 0px;
 }
 
 .login-signup-input:focus {
