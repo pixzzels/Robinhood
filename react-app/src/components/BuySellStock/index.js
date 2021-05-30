@@ -4,7 +4,7 @@ import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import { addOneList, loadAllList } from '../../store/watchlist';
 import List from '../../components/List';
-import { addStocksList } from '../../store/list';
+import { addStocksList, addOneStock, loadStocksList } from '../../store/list';
 import './BuySellStock.css';
 
 function BuySellStock({ symbol, price, stockId }) {
@@ -41,12 +41,21 @@ function BuySellStock({ symbol, price, stockId }) {
         return lists
     })
 
+    const defaultWatchlist = useSelector(state => {
+        const stocks = Object.values(state.list)
+        return stocks;
+    })
+
     useEffect(() => {
         dispatch(loadPortfolio(userId))
     }, [dispatch])
 
     useEffect(() => {
         dispatch(loadTransactions(userId))
+    }, [dispatch])
+
+    useEffect(() =>{
+        dispatch(loadStocksList(1))
     }, [dispatch])
 
     const handleClickOutside = (event) => {
@@ -109,16 +118,26 @@ function BuySellStock({ symbol, price, stockId }) {
 
     let sharesOwned = buyVol - sellVol;
 
+    console.log("defaultWatchlist", defaultWatchlist)
+    const ifExists = defaultWatchlist.filter((el => el.watchlist_id === 1 && el.stock_id === stockId))
+    // console.log("ifExists", ifExists)
+    
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares);
-
+        
         let newBal;
         if (buySell === true) {
+            let watchlistOne = 1;
             orderType = 1;
             newBal = cashBalance - estimatedPrice;
             dispatch(updateCashBalance({ userId, newBal }));
             setCashBalance(newBal);
+
+            if (ifExists.length === 0) {
+                dispatch(addOneStock({watchlistOne, stockId}))
+            }
+            
         } else {
             orderType = 2;
             newBal = cashBalance + estimatedPrice;

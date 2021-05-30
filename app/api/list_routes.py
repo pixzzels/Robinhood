@@ -16,11 +16,27 @@ def load_list(watchlist_id):
 # POST route
 
 
-@list_routes.route("/add", methods=["POST"])
-@login_required
-def add_list():
-    oneList = List(**request.json)
+# @list_routes.route("/add", methods=["POST"])
+# @login_required
+# def add_list():
+#     oneList = List(**request.json)
 
-    db.session.add(oneList)
+#     db.session.add(oneList)
+#     db.session.commit()
+#     return oneList.to_dict()
+
+# Add one list to default 'stocks' watchlist when buying stock to keep
+# track of stocks a user owns
+@list_routes.route("/add-default", methods=["POST"])
+@login_required
+def add_one_list():
+    # findOne = List.query.filter(List.watchlist_id == 1 and List.stock_id == request.json("stock_id")).all()
+    # if findOne:
+    #     return findOne.to_dict()    
+
+    oneListDefault = List(**request.json)
+    db.session.add(oneListDefault)
     db.session.commit()
-    return oneList.to_dict()
+    return oneListDefault.to_dict()
+    
+
