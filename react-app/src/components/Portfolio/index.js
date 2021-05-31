@@ -46,13 +46,10 @@ if (!refresh && cashBalance === 0) {
   const depositFunds = (e) => {
     e.preventDefault();
     let newBal = portfolioInfo.cash_balance
-
     newBal = parseInt(newBal) + parseInt(funds)
     setCashBalance(newBal)
-    // console.log('newBal', newBal)
-    updateCashBalance({ userId, newBal })
+    dispatch(updateCashBalance({ userId, newBal }))
     setShowDepositModal(false)
-
   }
 
   const handleDepositCancel = (e) => {

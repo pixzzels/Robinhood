@@ -2,8 +2,6 @@
 const LOAD = "portfolio/LOAD";
 const UPDATE = "portfolio/UPDATE";
 
-
-
 /* -----action creator-------------------------------------------------- */
 const load = (portfolio) => ({
   type: LOAD,
@@ -19,7 +17,6 @@ const update = (cashBalance) => ({
 /* -----thunk-------------------------------------------------- */
 
 export const loadPortfolio = (userId) => async (dispatch) => {
-  // console.log("HELLO WORLD")
 
   const response = await fetch(`/api/portfolio/${userId}`, {
     headers: { 'Content-Type': 'application/json' }
@@ -38,7 +35,6 @@ export const loadPortfolio = (userId) => async (dispatch) => {
 
 export const updateCashBalance = (info) => async (dispatch) => {
   const {userId, newBal} = info
-  // console.log("redux", newBal)
 
   const response = await fetch(`/api/portfolio/update/${userId}`, {
 
