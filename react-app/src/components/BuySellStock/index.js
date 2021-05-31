@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import { addOneList, loadAllList } from '../../store/watchlist';
-import List from '../../components/List';
 import { addStocksList, addOneStock, loadStocksList } from '../../store/list';
 import './BuySellStock.css';
 
@@ -118,9 +117,8 @@ function BuySellStock({ symbol, price, stockId }) {
 
     let sharesOwned = buyVol - sellVol;
 
-    console.log("defaultWatchlist", defaultWatchlist)
+    // checks to see if stock is already in owned list
     const ifExists = defaultWatchlist.filter((el => el.watchlist_id === 1 && el.stock_id === stockId))
-    // console.log("ifExists", ifExists)
     
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
@@ -161,7 +159,7 @@ function BuySellStock({ symbol, price, stockId }) {
 
     const handleAddToLists = (e) => {
         e.preventDefault();
-        console.log("hello")
+        // console.log("hello")
 
         // dispatch(addStocksList(currentWatchlist, ))
     }
