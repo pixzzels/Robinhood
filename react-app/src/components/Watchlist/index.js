@@ -90,7 +90,7 @@ function Watchlist() {
 
         {allLists && allLists.map((list) => {
           return (
-            <List list={list} />
+            <List list={list} key={Math.random()}/>
           )
         })}
 
