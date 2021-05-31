@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadStocksList } from '../../store/list';
 import { loadTransactions } from '../../store/transaction';
 
-
 import './StockList.css'
 
 function StockList() {
@@ -19,11 +18,7 @@ function StockList() {
         return stocks;
     })
 
-    console.log("stocks", stocks)
-
-
     const userId = useSelector(state => state.session.user.id)
-
 
     const watchlistId = 1;
 
@@ -34,12 +29,6 @@ function StockList() {
     useEffect(() => {
         dispatch(loadTransactions(userId))
     }, [dispatch])
-
-
-    // an array of stocks owned by stock id
-    // const stocksArray = stocks.map((stock => stock.stock_id))
-    // console.log('stocksArray', stocksArray)
-
 
     // create an object with the stock id as key, 
     // and the number of shares owned as it's value
@@ -52,31 +41,38 @@ function StockList() {
             if (transaction.order_type === 1) {
                 stocksOwned[transaction.stock_id.id] += transaction.order_volume
             }
+            else if (transaction.order_type === 2) {
+                stocksOwned[transaction.stock_id.id] -= transaction.order_volume
+            }
         }
     }))
 
+    // let verify = true;
 
-    console.log("stocksOwned", stocksOwned)
-    console.log("transactions", transactions)
+    // if (stocksOwned[stock.stock.id] === 0) {
+    //     verify = false
+    // }
+
 
     return (
         <>
             {stocks.map((stock) => {
-                { console.log("stockinside", stock) }
                 return (
-
                     <>
-                        <div className="all-stock__stock">
-                            <div className="stock-name-shares-owned">
-                                <span>{stock.stock.name}</span>
-                                <span>{stocksOwned[stock.stock.id]} Shares</span>
+                        {/* only display stocks that are owned by the user */}
+                        {stocksOwned[stock.stock.id] != undefined && stocksOwned[stock.stock.id] != 0 &&
+                            <div className="all-stock__stock">
+                                <div className="stock-name-shares-owned">
+                                    <span>{stock.stock.name}</span>
+                                    <span>{stocksOwned[stock.stock.id]} Shares</span>
+                                </div>
+                                {/* <div className="all-stock__graph-container"></div> */}
+                                <div className="all-stock_current-price">
+                                    <span>{"$" + stock.stock.market_price}</span>
+                                    {/* <span>-3.29%</span> */}
+                                </div>
                             </div>
-                            {/* <div className="all-stock__graph-container"></div> */}
-                            <div className="all-stock_current-price">
-                                <span>{"$" + stock.stock.market_price}</span>
-                                {/* <span>-3.29%</span> */}
-                            </div>
-                        </div>
+                        }
                     </>
                 )
             })
