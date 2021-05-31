@@ -42,16 +42,27 @@
 
 .list-input {
   width: auto;
-  margin-left: 10px;
-  padding: 10px 0px 10px 10px;
   height: 2.8em;
-  background-color: rgba(245, 245, 245, 0.829);
+
+  margin-left: 10px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  padding: 10px 0px 10px 10px;
+  
+  outline: none;
   border: white;
+  background-color: rgba(245, 245, 245, 0.829);
+  border-radius: 3px;
 }
 
 .list-input:hover{
   background-color: white;
   border: green;
+}
+
+.list-input:focus {
+  border: 1px solid #00C805;
+  border-radius: 3px;
 }
 
 
@@ -62,6 +73,7 @@
   border: none;
   font-size: 15px;
   font-weight: bold;
+  outline: none;
 }
 
 .add-btn {
