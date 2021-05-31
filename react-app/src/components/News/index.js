@@ -17,7 +17,7 @@ function NewsStory({news, symbol}) {
                                     <div id="story-content">{story.summary.slice(0, 140)}...</div>
                                 </div>
                                 <div id="story-image">
-                                    <img src={story.image} id="story-img"></img>
+                                    <img src={story.image} alt='news story' id="story-img"></img>
                                 </div>
                             </div>
                         </a>

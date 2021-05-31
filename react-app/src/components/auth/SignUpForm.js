@@ -57,7 +57,7 @@ const SignUpForm = () => {
   return (
     <div className='form-wrapper'>
       <div className='form-image__container'>
-        <img alt='login image' className='form-image' src={formImg}></img>
+        <img alt='login' className='form-image' src={formImg}></img>
       </div>
 
       <form className='form-container' onSubmit={onSignUp}>
