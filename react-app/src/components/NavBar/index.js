@@ -54,7 +54,7 @@ const NavBar = () => {
         </div>
 
         <div className="portfolio-nav__links">
-          <a href="https://github.com/pixzzels/Robinhood" target="_blank" id="github-link" activeClassName="active">
+          <a href="https://github.com/pixzzels/Robinhood" rel="noopener noreferrer" target="_blank" id="github-link" activeClassName="active">
             Our GitHub Repository
           </a>
         </div>

@@ -28,7 +28,7 @@ const NavBar = () => {
 
       {/* links to profile ? drop down ??? */}
       <div className="nav-link greens" id="contact-link">
-        <a href="https://github.com/pixzzels/Robinhood" target="_blank" exact={true} activeClassName="active">
+        <a href="https://github.com/pixzzels/Robinhood" rel="noopener noreferrer" target="_blank" exact={true} activeClassName="active">
           Check Out Our Work
         </a>
       </div>

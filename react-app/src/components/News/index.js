@@ -9,7 +9,7 @@ function NewsStory({news, symbol}) {
             {stories.map((story) => {
                 return (
                     <div className="news-container" key={Math.random()}>
-                        <a href={story.url} target="_blank">
+                        <a href={story.url} rel="noopener noreferrer" target="_blank">
                             <div className="news-story">
                                 <div className="story-info">
                                     <div id="story-origin">{story.source}</div>
