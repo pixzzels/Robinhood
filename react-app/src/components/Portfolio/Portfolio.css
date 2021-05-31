@@ -15,6 +15,7 @@
 }
 
 .portfolio-timeline-bar {
+  margin-left: 15px;
   margin-top: 15px;
   border-bottom: 1px solid rgb(227,233,237);
 }
@@ -99,12 +100,12 @@
 
 .deposit-modal-content {
   /* border: 3px solid blue; */
-  
+
   position: fixed;
   margin: 130px 280px;
   padding: 40px;
   border-radius: 4px;
-  
+
   background-color:rgb(245, 245, 245);
   top: 0;
   right: 0;
@@ -134,4 +135,8 @@
 
 .deposit-btn:hover{
   background-color: #00B803;
+}
+
+.portfolio-timeline {
+  margin-bottom: 150px;
 }

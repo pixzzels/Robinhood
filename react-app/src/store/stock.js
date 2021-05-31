@@ -2,7 +2,7 @@
 //Action Verbs
 
 const SET_STOCK = 'stock/setStock'
-
+const SET_PORTFOLIO = 'stock/setPortfolio'
 
 
 //Action Creater
@@ -11,6 +11,13 @@ const setStocks = (stock) => {
     return {
         type: SET_STOCK,
         stock
+    }
+}
+
+const setPortfolio = (stockInfo) => {
+    return {
+        type: SET_PORTFOLIO,
+        stockInfo
     }
 }
 
@@ -26,7 +33,13 @@ export const getStockCompany = (symbol) => async (dispatch) => {
     }
 }
 
-
+export const getPortfolioStocks = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/dashboard/stockinfo/${userId}`)
+    if(response.ok) {
+        const portfolioPerformance = await response.json()
+        dispatch(setPortfolio(portfolioPerformance))
+    }
+}
 
 
 
@@ -43,7 +56,11 @@ const stockReducer = (state = initialState, action) => {
             // console.log('newState', newerState)
 
             return newerState
+        case SET_PORTFOLIO:
+            newerState = { ...state }
+            newerState.portfolioInfo = action.stockInfo
 
+            return newerState
         default:
             return state;
     }

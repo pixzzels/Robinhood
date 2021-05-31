@@ -14,18 +14,33 @@ dashboard_routes = Blueprint('dashboard', __name__)
 
 # c = p.Client(api_token='pk_7f972a2636b841c489f3cf32f9a06575', version='stable')
 
-@dashboard_routes.route('/stockinfo/<int:user>', methods=['POST'])
+@dashboard_routes.route('/stockinfo/<int:user>')
 # @login_required
 def stock(user):
-    print(user)
+    # print(user)
     # stocks = request.json['stock']
     stocks = []
+    prices = {'1d': [], '5d': [], '1m': [], '3m': [], '1y': [], '5y': [], 'stock_amount': {'total': 0}}
     temp = Transaction.query.filter_by(user_id=user).all()
     for i in range(len(temp)):
         temp2 = temp[i].to_dict()
-        stocks.append(temp2['stock_id']['ticker'])
+        print(temp2)
+        if temp2['stock_id']['ticker'] not in stocks:
+            stocks.append(temp2['stock_id']['ticker'])
+            prices['stock_amount'] = {**prices['stock_amount'], temp2['stock_id']['ticker']: temp2['order_volume']}
+            # print(stock_amount)
+        elif temp2['stock_id']['ticker'] in stocks:
+            prices['stock_amount'][temp2['stock_id']['ticker']] += temp2['order_volume']
+
         # print(temp[i].to_dict())
-    print(stocks)
+    for stock in stocks:
+        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        api_url = f'https://cloud.iexapis.com/stable/stock/{stock}/price?token={iex_api_key}'
+        df2 = requests.get(api_url).json()
+        prices['stock_amount']['total'] += df2 * prices['stock_amount'][stock]
+
+    print(prices['stock_amount'])
+    # print(stocks)
 
     def get_latest_updates(symbols):
         seperator = ','
@@ -53,7 +68,7 @@ def stock(user):
 
         # FIX BEFORE PRODCUTION
 
-        prices = {'1d': [], '5d': [], '1m': [], '1y': [], '5y': []}
+
 
         # for i in symbols:
         #     ticker = i
@@ -63,6 +78,7 @@ def stock(user):
         attributes = ['1d',
                     '5d',
                     '1m',
+                    '3m',
                     '1y',
                     '5y']
 
@@ -75,7 +91,7 @@ def stock(user):
 
         for date_range in attributes:
 
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+
             api_url = f'https://cloud.iexapis.com/stable/stock/market/batch?symbols={seperator.join(symbols)}&types=chart&filter=close&range={date_range}&token={iex_api_key}'
             df = requests.get(api_url).json()
 
@@ -99,7 +115,7 @@ def stock(user):
 
 
     response = get_latest_updates(stocks)
-    print(response)
+    # print(response)
     return response
 
 
