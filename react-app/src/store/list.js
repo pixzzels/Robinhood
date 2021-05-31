@@ -1,14 +1,25 @@
 /* -----action verbs-------------------------------------------------- */
 const LOAD_LIST = "list/LOAD_LIST";
+const ADD_ONE = "list/ADD_ONE";
+const LOAD_ALL = "list/LOAD_ALL";
+
 
 /* -----action creator-------------------------------------------------- */
-
 
 const loadList = (list) => ({
     type: LOAD_LIST,
     list
 })
 
+const addOneList = (list) => ({
+    type: ADD_ONE,
+    list
+})
+
+const loadAll = (list) => ({
+    type: LOAD_ALL,
+    list
+})
 
 /* -----thunk-------------------------------------------------- */
 
@@ -32,6 +43,28 @@ export const loadStocksList = (watchlistId) => async (dispatch) => {
 }
 
 
+export const addOneStock = (stockInfo) => async (dispatch) => {
+    const {watchlistOne, stockId} = stockInfo;
+
+    const response = await fetch(`/api/list/add-default`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            watchlist_id: watchlistOne,
+            stock_id: stockId,
+        })
+    })
+
+    if (!response.ok) {
+        throw response
+    }
+
+    const data = await response.json();
+    dispatch(addOneList(data));
+    return data;
+}
+
+
 /* -----reducer-------------------------------------------------- */
 const initialState = {};
 
@@ -46,6 +79,14 @@ const listReducer = (state = initialState, action) => {
             return {
                 ...newState, ...state
             }
+        }
+
+        case ADD_ONE: {
+            newState = {
+                ...state,
+                [action.list.id]: action.list
+            };
+            return newState;
         }
 
         default:

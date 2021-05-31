@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { removeOneList, updateOneList } from '../../store/watchlist';
 import { Modal } from '../../context/Modal';
@@ -8,13 +8,16 @@ import './List.css';
 function List({ list }) {
 
 	const dispatch = useDispatch()
-	const [showDropdown, setShowDropdown] = useState(false);
 	const [editForm, setEditForm] = useState(false);
 	const [inputField, setInputField] = useState(list.name);
+
+	const [showDropdown, setShowDropdown] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
 
 	const [editBtn, setEditBtn] = useState(true);
 	const [deleteBtn, setDeleteBtn] = useState(true);
 
+	const ref = useRef(null);
 
 	// delete list
 	const deleteList = () => {
@@ -37,6 +40,7 @@ function List({ list }) {
 	// show/hide list options dropdown
 	const handleDropdown = () => {
 		setShowDropdown(!showDropdown)
+		// setIsVisible(false)
 		setEditBtn(true)
 		setDeleteBtn(true)
 	}
@@ -55,6 +59,20 @@ function List({ list }) {
 		setDeleteBtn(true)
 	}
 
+	// const handleClickOutside = (event) => {
+	// 	if (ref.current && !ref.current.contains(event.target)) {
+	// 		setIsVisible(false);
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	document.addEventListener('click', handleClickOutside, true);
+	// 	return () => {
+	// 		document.removeEventListener('click', handleClickOutside, true);
+	// 	};
+	// }, []);
+
+
 	return (
 		<div className="one-list">
 			<div className='list-text-container'>
@@ -63,7 +81,10 @@ function List({ list }) {
 			</div>
 
 			<div className='list-all-btns-container'>
-				<button className="edit-btn" type="button" onClick={handleDropdown}>
+				<button className="edit-btn" type="button" onClick={() => {
+					handleDropdown()
+					setIsVisible(!isVisible)
+				}}>
 					<i className="fas fa-ellipsis-h"></i>
 				</button>
 				<button className="edit-btn">
@@ -71,8 +92,8 @@ function List({ list }) {
 				</button>
 			</div>
 
-			{showDropdown &&
-				<div className='edit-options-dropdown'>
+			{showDropdown && isVisible &&
+				<div className='edit-options-dropdown' ref={ref}>
 					{/* <Modal onClose={() => setShowDropdown(false)}> */}
 					<div className='list-edit-modal'>
 						<div className="button-flex-container">
@@ -88,7 +109,7 @@ function List({ list }) {
 										<form className="edit-list-form" onSubmit={handleEditSubmit}>
 											<div>
 												<h2 className='edit-list-txt'>Edit List</h2>
-												<button>emoji</button>
+												{/* <button>emoji</button> */}
 												<input
 													className='list-input'
 													name='list'

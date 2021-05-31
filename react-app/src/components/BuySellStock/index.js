@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { buyStock, loadTransactions } from '../../store/transaction';
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import { addOneList, loadAllList } from '../../store/watchlist';
-import List from '../../components/List';
+import { addStocksList, addOneStock, loadStocksList } from '../../store/list';
 import './BuySellStock.css';
 
 function BuySellStock({ symbol, price, stockId }) {
@@ -12,14 +12,12 @@ function BuySellStock({ symbol, price, stockId }) {
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
-    const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true);
     const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    const [listForm, setListForm] = useState(false);
-    const [inputField, setInputField] = useState("");
     const ref = useRef(null);
+
 
     const userId = useSelector(state => state.session.user.id);
     const portfolioInfo = useSelector(state => {
@@ -37,6 +35,10 @@ function BuySellStock({ symbol, price, stockId }) {
         return lists
     })
 
+    const defaultWatchlist = useSelector(state => {
+        const stocks = Object.values(state.list)
+        return stocks;
+    })
 
     useEffect(() => {
         dispatch(loadPortfolio(userId))
@@ -44,6 +46,10 @@ function BuySellStock({ symbol, price, stockId }) {
 
     useEffect(() => {
         dispatch(loadTransactions(userId))
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(loadStocksList(1))
     }, [dispatch])
 
     const handleClickOutside = (event) => {
@@ -63,23 +69,6 @@ function BuySellStock({ symbol, price, stockId }) {
         dispatch(loadAllList(userId))
     }, [dispatch])
 
-    const addList = () => {
-        setListForm(!listForm)
-    }
-
-    const handleListSubmit = (e) => {
-        e.preventDefault();
-        const name = inputField;
-        setListForm(!listForm)
-        setInputField("")
-        dispatch(addOneList({ name, userId }));
-    }
-
-    const handleListCancel = (e) => {
-        e.preventDefault();
-        setInputField("")
-        setListForm(!listForm)
-    }
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
@@ -106,16 +95,25 @@ function BuySellStock({ symbol, price, stockId }) {
 
     let sharesOwned = buyVol - sellVol;
 
+    // checks to see if stock is already in owned list
+    const ifExists = defaultWatchlist.filter((el => el.watchlist_id === 1 && el.stock_id === stockId))
+
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares);
 
         let newBal;
         if (buySell === true) {
+            let watchlistOne = 1;
             orderType = 1;
             newBal = cashBalance - estimatedPrice;
             dispatch(updateCashBalance({ userId, newBal }));
             setCashBalance(newBal);
+
+            if (ifExists.length === 0) {
+                dispatch(addOneStock({ watchlistOne, stockId }))
+            }
+
         } else {
             orderType = 2;
             newBal = cashBalance + estimatedPrice;
@@ -137,9 +135,23 @@ function BuySellStock({ symbol, price, stockId }) {
         setReviewTransactionDropDown(true);
     }
 
+    const userWatchlists = allLists.map((list => list.name))
+    userWatchlists.shift()
+    console.log("userWatchlists", userWatchlists)
+
     const handleAddToLists = (e) => {
         e.preventDefault();
-        console.log("hello")
+        userWatchlists.forEach((watchlist => {
+            let curr = document.getElementById(`${watchlist}`)
+            let isChecked = curr.checked
+            if (isChecked) {
+                let watchlistOne = parseInt(curr.value)
+                dispatch(addOneStock({ watchlistOne, stockId }))
+                // console.log("watchlistId:", watchlistOne, "stockId", stockId)
+            }
+            // console.log("checked", curr.checked)
+            // console.log("curr", curr)
+        }))
     }
 
     return (
@@ -147,19 +159,19 @@ function BuySellStock({ symbol, price, stockId }) {
             <div className="buy-sell-container">
                 <div className="buy-sell-header bold">
                     <span className={(buySell ? 'atv-header' : '') + (!buySell && reviewTransactionDropDown ? 'hidden' : '')}
-                    onClick={() => {
-                        setBuySell(true)
-                        setReviewTransactionDropDown(false)
-                    }
-                    }>Buy {stockSymbol}</span>
+                        onClick={() => {
+                            setBuySell(true)
+                            setReviewTransactionDropDown(false)
+                        }
+                        }>Buy {stockSymbol}</span>
 
                     {sharesOwned != 0 &&
                         <span className={(buySell === false ? 'atv-header' : '') + (buySell && reviewTransactionDropDown ? 'hidden' : '')}
-                        onClick={() => {
-                            setBuySell(false)
-                            setReviewTransactionDropDown(false)
-                        }
-                        }>Sell {stockSymbol}</span>
+                            onClick={() => {
+                                setBuySell(false)
+                                setReviewTransactionDropDown(false)
+                            }
+                            }>Sell {stockSymbol}</span>
                     }
                     {reviewTransactionDropDown === false &&
                         < button className="down-arrow-btn">
@@ -292,17 +304,21 @@ function BuySellStock({ symbol, price, stockId }) {
                         {isVisible &&
                             <div className="add-to-list-div" ref={ref}>
                                 <div id="add-to-lists-container">
-                                    <form className="add-to-list-form">
+
+                                    <form className="add-to-list-form" id="add-stock-to-list" onSubmit={handleAddToLists}>
                                         <button id="close-add-div" onClick={() => setIsVisible(!isVisible)}> X </button>
                                         <h2>Add {stockSymbol} to Your Lists</h2>
                                         {allLists && allLists.map((list) => {
                                             return (
                                                 <>
                                                     <div className='list-text-container-2'>
+                                                        {/* {console.log(list)} */}
                                                         <input
                                                             type="checkbox"
                                                             className="add-to-list-input"
                                                             name="list-input"
+                                                            id={list.name}
+                                                            value={list.id}
                                                         >
                                                         </input>
                                                         <i className="fa fa-building check-symbol-2" aria-hidden="true"></i>
@@ -312,9 +328,9 @@ function BuySellStock({ symbol, price, stockId }) {
                                             )
                                         })}
                                     </form>
-                                </div>
 
-                                <button type="submit">Save</button>
+                                </div>
+                                <button type="submit" form="add-stock-to-list">Save</button>
                             </div>
                         }
                     </div>
