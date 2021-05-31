@@ -70,7 +70,7 @@ function Watchlist() {
           {listForm &&
             <form className="new-list-form" onSubmit={handleListSubmit}>
               <div>
-                <button>emoji</button>
+                {/* <button>emoji</button> */}
                 <input
                   className='list-input'
                   name='list'

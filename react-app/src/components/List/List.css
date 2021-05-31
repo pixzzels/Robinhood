@@ -52,6 +52,7 @@
   background-color: transparent;
   border: 0px;
   padding: 10px;
+  outline: none;
 }
 
 .edit-btn:hover{
@@ -66,6 +67,7 @@
   top: 42px;
   right: 36px;
 
+  outline: none;
   background-color: white;
   padding: 19px 12px;
   box-shadow: 2px 2px 20px 6px rgba(180, 180, 180, 0.295)
@@ -88,6 +90,7 @@
   background-color: transparent;
   padding-left: 10px;
   font-weight: 700;
+  outline: none;
 }
 
 .edit-form-btn-style:hover{
@@ -120,14 +123,12 @@
 }
 
 
-
-
-
 /* --------------FORM----------------------- */
 
 .edit-list-form input{
   background-color: rgba(231, 231, 231, 0.637);
   width: 355px;
+  outline: none;
 }
 
 .edit-list-form input:hover{
