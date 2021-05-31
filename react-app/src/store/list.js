@@ -1,7 +1,7 @@
 /* -----action verbs-------------------------------------------------- */
 const LOAD_LIST = "list/LOAD_LIST";
-const ADD_LIST = "list/ADD_LIST";
 const ADD_ONE = "list/ADD_ONE";
+const LOAD_ALL = "list/LOAD_ALL";
 
 
 /* -----action creator-------------------------------------------------- */
@@ -11,13 +11,13 @@ const loadList = (list) => ({
     list
 })
 
-const addList = (list) => ({
-    type: ADD_LIST,
+const addOneList = (list) => ({
+    type: ADD_ONE,
     list
 })
 
-const addOneList = (list) => ({
-    type: ADD_ONE,
+const loadAll = (list) => ({
+    type: LOAD_ALL,
     list
 })
 
@@ -42,27 +42,6 @@ export const loadStocksList = (watchlistId) => async (dispatch) => {
     return data;
 }
 
-// POST 
-export const addStocksList = (listInfo) => async (dispatch) => {
-    const { watchlistId, listId } = listInfo;
-
-    const response = await fetch(`/api/list/add`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            watchlist_id: watchlistId,
-            list_id: listId
-        })
-    })
-
-    if (!response.ok) {
-        throw response
-    }
-
-    const data = await response.json();
-    dispatch(addList(data));
-    return data;
-}
 
 export const addOneStock = (stockInfo) => async (dispatch) => {
     const {watchlistOne, stockId} = stockInfo;
@@ -100,14 +79,6 @@ const listReducer = (state = initialState, action) => {
             return {
                 ...newState, ...state
             }
-        }
-
-        case ADD_LIST: {
-            newState = {
-                ...state,
-                [action.list.id]: action.list
-            };
-            return newState;
         }
 
         case ADD_ONE: {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { loadStocksList } from '../../store/list';
 import { loadTransactions } from '../../store/transaction';
 
@@ -30,6 +31,8 @@ function StockList() {
         dispatch(loadTransactions(userId))
     }, [dispatch])
 
+    // console.log("userId", userId)
+
     // create an object with the stock id as key, 
     // and the number of shares owned as it's value
     const stocksOwned = {}
@@ -47,13 +50,6 @@ function StockList() {
         }
     }))
 
-    // let verify = true;
-
-    // if (stocksOwned[stock.stock.id] === 0) {
-    //     verify = false
-    // }
-
-
     return (
         <>
             {stocks.map((stock) => {
@@ -61,17 +57,19 @@ function StockList() {
                     <>
                         {/* only display stocks that are owned by the user */}
                         {stocksOwned[stock.stock.id] != undefined && stocksOwned[stock.stock.id] != 0 &&
-                            <div className="all-stock__stock">
-                                <div className="stock-name-shares-owned">
-                                    <span>{stock.stock.name}</span>
-                                    <span>{stocksOwned[stock.stock.id]} Shares</span>
+                            <NavLink className="navlink-stock-owned" to={`/stocks/${stock.stock.ticker}`}>
+                                <div className="all-stock__stock">
+                                    <div className="stock-name-shares-owned">
+                                        <span>{stock.stock.name}</span>
+                                        <span>{stocksOwned[stock.stock.id]} Shares</span>
+                                    </div>
+                                    {/* <div className="all-stock__graph-container"></div> */}
+                                    <div className="all-stock_current-price">
+                                        <span>{"$" + stock.stock.market_price}</span>
+                                        {/* <span>-3.29%</span> */}
+                                    </div>
                                 </div>
-                                {/* <div className="all-stock__graph-container"></div> */}
-                                <div className="all-stock_current-price">
-                                    <span>{"$" + stock.stock.market_price}</span>
-                                    {/* <span>-3.29%</span> */}
-                                </div>
-                            </div>
+                            </NavLink>
                         }
                     </>
                 )

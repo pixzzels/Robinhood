@@ -12,16 +12,11 @@ function BuySellStock({ symbol, price, stockId }) {
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
-    const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true);
     const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    const [listForm, setListForm] = useState(false);
-    const [inputField, setInputField] = useState("");
-    const [watchlistId, setWatchlistId] = useState(null);
     const ref = useRef(null);
-
 
 
     const userId = useSelector(state => state.session.user.id);
@@ -53,7 +48,7 @@ function BuySellStock({ symbol, price, stockId }) {
         dispatch(loadTransactions(userId))
     }, [dispatch])
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(loadStocksList(1))
     }, [dispatch])
 
@@ -74,23 +69,6 @@ function BuySellStock({ symbol, price, stockId }) {
         dispatch(loadAllList(userId))
     }, [dispatch])
 
-    // const addList = () => {
-    //     setListForm(!listForm)
-    // }
-
-    // const handleListSubmit = (e) => {
-    //     e.preventDefault();
-    //     const name = inputField;
-    //     setListForm(!listForm)
-    //     setInputField("")
-    //     dispatch(addOneList({ name, userId }));
-    // }
-
-    // const handleListCancel = (e) => {
-    //     e.preventDefault();
-    //     setInputField("")
-    //     setListForm(!listForm)
-    // }
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
@@ -119,11 +97,11 @@ function BuySellStock({ symbol, price, stockId }) {
 
     // checks to see if stock is already in owned list
     const ifExists = defaultWatchlist.filter((el => el.watchlist_id === 1 && el.stock_id === stockId))
-    
+
     const handleTransactionSubmit = (e) => {
         e.preventDefault();
         let orderVolume = parseInt(shares);
-        
+
         let newBal;
         if (buySell === true) {
             let watchlistOne = 1;
@@ -133,9 +111,9 @@ function BuySellStock({ symbol, price, stockId }) {
             setCashBalance(newBal);
 
             if (ifExists.length === 0) {
-                dispatch(addOneStock({watchlistOne, stockId}))
+                dispatch(addOneStock({ watchlistOne, stockId }))
             }
-            
+
         } else {
             orderType = 2;
             newBal = cashBalance + estimatedPrice;
@@ -157,11 +135,23 @@ function BuySellStock({ symbol, price, stockId }) {
         setReviewTransactionDropDown(true);
     }
 
+    const userWatchlists = allLists.map((list => list.name))
+    userWatchlists.shift()
+    console.log("userWatchlists", userWatchlists)
+
     const handleAddToLists = (e) => {
         e.preventDefault();
-        // console.log("hello")
-
-        // dispatch(addStocksList(currentWatchlist, ))
+        userWatchlists.forEach((watchlist => {
+            let curr = document.getElementById(`${watchlist}`)
+            let isChecked = curr.checked
+            if (isChecked) {
+                let watchlistOne = parseInt(curr.value)
+                dispatch(addOneStock({ watchlistOne, stockId }))
+                // console.log("watchlistId:", watchlistOne, "stockId", stockId)
+            }
+            // console.log("checked", curr.checked)
+            // console.log("curr", curr)
+        }))
     }
 
     return (
@@ -322,10 +312,13 @@ function BuySellStock({ symbol, price, stockId }) {
                                             return (
                                                 <>
                                                     <div className='list-text-container-2'>
+                                                        {/* {console.log(list)} */}
                                                         <input
                                                             type="checkbox"
                                                             className="add-to-list-input"
                                                             name="list-input"
+                                                            id={list.name}
+                                                            value={list.id}
                                                         >
                                                         </input>
                                                         <i className="fa fa-building check-symbol-2" aria-hidden="true"></i>
