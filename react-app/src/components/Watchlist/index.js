@@ -62,7 +62,7 @@ function Watchlist() {
         <div className="watchlist__list-header">
           <span>Lists</span>
           <button className="add-btn" type="button" onClick={addList}>
-            <i class="fas fa-plus"></i>
+            <i className="fas fa-plus"></i>
           </button>
         </div>
 

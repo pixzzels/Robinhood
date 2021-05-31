@@ -82,18 +82,18 @@ const NavBar = () => {
 
             <div className="drop-container2">
               <NavLink to="/account" exact={true} activeClassName="active" className="account-list history-link">
-                <i class="fas fa-toolbox drop-icon"></i>
+                <i className="fas fa-toolbox drop-icon"></i>
                 Account
               </NavLink>
 
               <NavLink to="/history" exact={true} activeClassName="active" className="account-list history-link">
-                <i class="fas fa-history drop-icon"></i>
+                <i className="fas fa-history drop-icon"></i>
                 History
                </NavLink>
             </div>
 
             <div className="drop-container3 account-list">
-              <i class="fas fa-sign-out-alt drop-icon"></i>
+              <i className="fas fa-sign-out-alt drop-icon"></i>
               <LogoutButton />
             </div>
 
