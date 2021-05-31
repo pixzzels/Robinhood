@@ -69,6 +69,7 @@
   border: none;
   font-size: 13px;
   font-weight: 400;
+  outline: none;
 }
 
 .add-btn:hover{
@@ -76,7 +77,7 @@
 }
 
 .plus-btn:hover{
-  fill:rgb(16, 180, 24)
+  fill:rgb(16, 180, 24);
 }
 /* --------------------BUTTONS end--------------------- */
 
