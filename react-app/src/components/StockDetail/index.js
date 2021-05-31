@@ -7,6 +7,7 @@ import * as stockReducer from '../../store/stock'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useEffect, useState, useRef } from "react";
+import { Suspense } from "react";
 
 
 function StockDetail() {
@@ -81,7 +82,10 @@ function StockDetail() {
                     </div>
 
                     <div className="chart-container">
-                        <StockChart dateRange={dateRange} symbol={symbol} history={history}/>
+                        <Suspense fallback={<div>Loading...</div>}>
+
+                            <StockChart dateRange={dateRange} symbol={symbol} history={history}/>
+                        </Suspense>
                         <div className="stock-chart-bar">
                             {/* <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
                             <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1W</button>
@@ -143,7 +147,7 @@ function StockDetail() {
                             </div>
                         </div>
                     </div>
-                    
+
                     <NewsStory news={news} symbol={symbol}/>
                 </div>
 

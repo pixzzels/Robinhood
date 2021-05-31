@@ -16,6 +16,7 @@ stock_routes = Blueprint('stock', __name__)
 # @login_required
 def stockprices(symbol):
     company_details = {symbol: {}}
+    symbol = symbol.upper()
 
 
     def get_company_data(symbol):

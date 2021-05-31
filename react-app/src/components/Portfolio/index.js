@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
+import StockChart from "../StockChart/index";
 import { Modal } from '../../context/Modal';
 import './Portfolio.css'
 
-function Portfolio() {
+function Portfolio({portfolioPerformance}) {
   const dispatch = useDispatch();
   const [bpDivExpand, setbpDivExpand] = useState(false);
   const [funds, setFunds] = useState(0);
   const [cashBalance, setCashBalance] = useState(0)
   const [refresh, setRefresh] = useState(false)
   const [showDepositModal, setShowDepositModal] = useState(false);
-  // console.log(funds)
+  const [dateRange, setDateRange] = useState('1d');
+  // console.log(portfolioPerformance)
 
   const userId = useSelector(state => state.session.user.id)
 
@@ -30,6 +32,8 @@ if (!refresh && cashBalance === 0) {
   setCashBalance(portfolioInfo.cash_balance)
   setRefresh(true)
 }
+
+  const setDate = (e) => setDateRange(e.target.value);
 
   const buyingPowerExpand = () => {
     setbpDivExpand(!bpDivExpand)
@@ -60,34 +64,22 @@ if (!refresh && cashBalance === 0) {
     setShowDepositModal(!showDepositModal)
   }
 
+
   return (
     <div className="portfolio-container">
       <div className="total-investment">
         $400.34
                 </div>
       <div className="portfolio-timeline">
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-
-                </div>
+        <StockChart dateRange={dateRange} />
+      </div>
       <div className="portfolio-timeline-bar">
-        <button className="portfolio-timeline-options btn tlbtn">1D</button>
-        <button className="portfolio-timeline-options btn tlbtn">1W</button>
-        <button className="portfolio-timeline-options btn tlbtn">1M</button>
-        <button className="portfolio-timeline-options btn tlbtn">1Y</button>
-        <button className="portfolio-timeline-options btn tlbtn">ALL</button>
-
+        <button onClick={setDate} value={'1d'} className="portfolio-timeline-options btn tlbtn">1D</button>
+        <button onClick={setDate} value={'5d'} className="portfolio-timeline-options btn tlbtn">1W</button>
+        <button onClick={setDate} value={'1m'} className="portfolio-timeline-options btn tlbtn">1M</button>
+        <button onClick={setDate} value={'3m'} className="portfolio-timeline-options btn tlbtn">3M</button>
+        <button onClick={setDate} value={'1y'} className="portfolio-timeline-options btn tlbtn">1Y</button>
+        <button onClick={setDate} value={'5y'} className="portfolio-timeline-options btn tlbtn">5Y</button>
       </div>
       <button className={"buying-power-container-btn " + (bpDivExpand ? 'grey' : '')} type="button" onClick={buyingPowerExpand}>
         <div className={"buying-power-header " + (bpDivExpand ? 'grey' : '')}>
