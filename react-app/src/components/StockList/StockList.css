@@ -1,28 +1,32 @@
-
 .all-stock__stock {
-    padding: 0px 24px;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    font-size: 13px;
-    line-height: 20px;
-    border-bottom: 1px solid rgb(227,233,237);
-    display: flex;
-    justify-content: space-between;
-  }
+  padding: 0px 24px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  font-size: 13px;
+  line-height: 20px;
+  border-bottom: 1px solid rgb(227,233,237);
+  display: flex;
+  justify-content: space-between;
+}
+
+.all-stock__stock:hover {
+  background-color: #d1cdcd4b;
+}
   
-  .stock-name-shares-owned {
-    display: flex;
-    flex-direction: column;
-  }
+.stock-name-shares-owned {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .all-stock__graph-container {
+  width: 120px;
+
+  border: 1px solid red;
+} */
+
+.all-stock_current-price {
+  display: flex;
+  flex-direction: column;
   
-  /* .all-stock__graph-container {
-    width: 120px;
-  
-    border: 1px solid red;
-  } */
-  
-  .all-stock_current-price {
-    display: flex;
-    flex-direction: column;
-  }
+}
