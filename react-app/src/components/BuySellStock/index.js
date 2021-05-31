@@ -12,16 +12,11 @@ function BuySellStock({ symbol, price, stockId }) {
     const [shares, setShares] = useState(0);
     const [investmentType, setInvestmentType] = useState('Shares');
     const [reviewTransactionDropDown, setReviewTransactionDropDown] = useState(false);
-    const [MPDescription, setMPDescription] = useState(false);
     const [buySell, setBuySell] = useState(true);
     const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    const [listForm, setListForm] = useState(false);
-    const [inputField, setInputField] = useState("");
-    const [watchlistId, setWatchlistId] = useState(null);
     const ref = useRef(null);
-
 
 
     const userId = useSelector(state => state.session.user.id);
@@ -74,23 +69,6 @@ function BuySellStock({ symbol, price, stockId }) {
         dispatch(loadAllList(userId))
     }, [dispatch])
 
-    // const addList = () => {
-    //     setListForm(!listForm)
-    // }
-
-    // const handleListSubmit = (e) => {
-    //     e.preventDefault();
-    //     const name = inputField;
-    //     setListForm(!listForm)
-    //     setInputField("")
-    //     dispatch(addOneList({ name, userId }));
-    // }
-
-    // const handleListCancel = (e) => {
-    //     e.preventDefault();
-    //     setInputField("")
-    //     setListForm(!listForm)
-    // }
 
     if (!portfolioInfo) return null;
     if (!refresh && cashBalance === 0) {
@@ -174,13 +152,6 @@ function BuySellStock({ symbol, price, stockId }) {
             // console.log("checked", curr.checked)
             // console.log("curr", curr)
         }))
-        // let curr = document.getElementById("stuff")
-        // console.log("curr", curr)
-
-
-        // console.log("hello")
-
-        // dispatch(addStocksList(currentWatchlist, ))
     }
 
     return (
