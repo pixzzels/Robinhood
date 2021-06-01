@@ -4,24 +4,11 @@ import Portfolio from '../Portfolio';
 import Watchlist from '../Watchlist'
 import * as stockReducer from '../../store/stock'
 import './Dashboard.css';
+import DashNews from '../DashNews/index'
 
 
 
 function Dashboard() {
-
-
-	// const portfolioPerformance = async function get_portfolio () {
-	// 	const response = await fetch(`/api/dashboard/stockinfo/${userId}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type':'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             stock: ['SNAP', 'AAPL', 'TWTR']
-    //         }),
-    //     })
-	// 	return await response.json()
-	// }
 
 
 
@@ -36,6 +23,9 @@ function Dashboard() {
 
 				<div className="dashboard__watchlist-wrapper">
 					<Watchlist />
+				</div>
+				<div>
+					<DashNews />
 				</div>
 
 			</div>

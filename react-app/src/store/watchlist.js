@@ -37,7 +37,6 @@ const updateList = (list) => ({
 // POST ADD
 export const addOneList = (listName) => async (dispatch) => {
   const { name, user_id } = listName;
-  // console.log("test", name, user_id)
 
   const response = await fetch(`/api/watchlist/add`, {
     method: 'POST',
@@ -58,7 +57,6 @@ export const addOneList = (listName) => async (dispatch) => {
 
 // GET
 export const loadAllList = (userId) => async (dispatch) => {
-  // console.log("HELLO WORLD")
 
   const response = await fetch(`/api/watchlist/${userId}`, {
     headers: { 'Content-Type': 'application/json' }

@@ -31,10 +31,6 @@ function StockList() {
         dispatch(loadTransactions(userId))
     }, [dispatch])
 
-    // console.log("userId", userId)
-
-    // create an object with the stock id as key, 
-    // and the number of shares owned as it's value
     const stocksOwned = {}
 
     transactions.forEach((transaction => {
