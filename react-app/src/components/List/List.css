@@ -169,3 +169,18 @@
   bottom: 0;
   background-color: rgba(58, 58, 58, 0.76);
 }
+
+
+/* -------------------all stocks dropdown--------------------- */
+.dropdown-all-stocks {
+  /* padding: 0px 24px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  font-size: 13px;
+  line-height: 20px;
+  border-bottom: 1px solid rgb(227,233,237);
+  display: flex;
+  justify-content: space-between; */
+  /* position: relative; */
+}

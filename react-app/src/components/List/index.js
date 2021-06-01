@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeOneList, updateOneList } from '../../store/watchlist';
 import { Modal } from '../../context/Modal';
 
@@ -23,6 +23,19 @@ function List({ list }) {
 	const [showStocks, setShowStocks] = useState(false);
 
 	const ref = useRef(null);
+
+	// list logic to be continued
+	const allLists = useSelector(state => {
+		const lists = Object.values(state.watchlist)
+		return lists
+	})
+
+	const userWatchlists = allLists.map((list => list.name))
+	userWatchlists.shift()
+
+	// console.log(allLists)
+	// 
+
 
 	// delete list
 	const deleteList = () => {
@@ -98,6 +111,13 @@ function List({ list }) {
 				</button>
 				<button className="edit-btn" onClick={handleArrowClick}>
 					<i className={showStocks ? upIcon : downIcon}></i>
+					{
+						showStocks &&
+						<div className='dropdown-all-stocks'>
+							{/* {allLists.map((list => list.name))} */}
+							{/* hello */}
+						</div>
+					}
 				</button>
 			</div>
 
