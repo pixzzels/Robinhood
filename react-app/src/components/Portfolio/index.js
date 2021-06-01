@@ -13,7 +13,7 @@ function Portfolio() {
   const [cashBalance, setCashBalance] = useState(0)
   const [refresh, setRefresh] = useState(false)
   const [showDepositModal, setShowDepositModal] = useState(false);
-  const [dateRange, setDateRange] = useState('5d');
+  const [dateRange, setDateRange] = useState('1d');
   const [loading, setLoading] = useState(true)
   const portfolioPerformance = useSelector(state => state.stock.portfolioInfo)
 
@@ -22,22 +22,22 @@ function Portfolio() {
   const portfolioInfo = useSelector(state => {
     const portfolio = Object.values(state.portfolio)
     return portfolio[0]
-})
+  })
 
 
   useEffect(() => {
     dispatch(loadPortfolio(userId))
-}, [dispatch])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(stockReducer.getPortfolioStocks(userId)).then(setLoading(false))
   }, [dispatch])
 
-if (!portfolioInfo) return null;
-if (!refresh && cashBalance === 0) {
-  setCashBalance(portfolioInfo.cash_balance)
-  setRefresh(true)
-}
+  if (!portfolioInfo) return null;
+  if (!refresh && cashBalance === 0) {
+    setCashBalance(portfolioInfo.cash_balance)
+    setRefresh(true)
+  }
 
   const setDate = (e) => setDateRange(e.target.value);
 
@@ -67,17 +67,17 @@ if (!refresh && cashBalance === 0) {
     setShowDepositModal(!showDepositModal)
   }
 
-  if(!portfolioPerformance) {
-		return null
-	}
+  if (!portfolioPerformance) {
+    return null
+  }
 
   return (
     <div className="portfolio-container">
       <div className="total-investment">
-        ${portfolioPerformance.stock_amount.total}
-                </div>
+        ${(portfolioPerformance.stock_amount.total).toFixed(2)}
+      </div>
       <div className="portfolio-timeline">
-        <DashChart dateRange={dateRange} history={portfolioPerformance}/>
+        <DashChart dateRange={dateRange} history={portfolioPerformance} />
       </div>
       <div className="portfolio-timeline-bar">
         <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
