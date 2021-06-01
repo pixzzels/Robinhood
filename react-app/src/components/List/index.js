@@ -7,6 +7,9 @@ import './List.css';
 
 function List({ list }) {
 
+	const upIcon = "fas fa-chevron-up"
+	const downIcon = "fas fa-chevron-down"
+
 	const dispatch = useDispatch()
 	const [editForm, setEditForm] = useState(false);
 	const [inputField, setInputField] = useState(list.name);
@@ -16,6 +19,8 @@ function List({ list }) {
 
 	const [editBtn, setEditBtn] = useState(true);
 	const [deleteBtn, setDeleteBtn] = useState(true);
+
+	const [showStocks, setShowStocks] = useState(false);
 
 	const ref = useRef(null);
 
@@ -59,6 +64,10 @@ function List({ list }) {
 		setDeleteBtn(true)
 	}
 
+	const handleArrowClick = () => {
+		setShowStocks(true);
+	}
+
 	// const handleClickOutside = (event) => {
 	// 	if (ref.current && !ref.current.contains(event.target)) {
 	// 		setIsVisible(false);
@@ -87,12 +96,13 @@ function List({ list }) {
 				}}>
 					<i className="fas fa-ellipsis-h"></i>
 				</button>
-				<button className="edit-btn">
-					<i className="fas fa-chevron-down"></i>
+				<button className="edit-btn" onClick={handleArrowClick}>
+					<i className={showStocks ? upIcon : downIcon}></i>
 				</button>
 			</div>
 
-			{showDropdown && isVisible &&
+			{
+				showDropdown && isVisible &&
 				<div className='edit-options-dropdown' ref={ref}>
 					{/* <Modal onClose={() => setShowDropdown(false)}> */}
 					<div className='list-edit-modal'>
@@ -139,7 +149,7 @@ function List({ list }) {
 					{/* </Modal> */}
 				</div>
 			}
-		</div>
+		</div >
 	)
 }
 
