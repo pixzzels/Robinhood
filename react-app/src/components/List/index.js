@@ -88,7 +88,7 @@ function List({ list }) {
 					<i className="fas fa-ellipsis-h"></i>
 				</button>
 				<button className="edit-btn">
-					<i class="fas fa-chevron-down"></i>
+					<i className="fas fa-chevron-down"></i>
 				</button>
 			</div>
 
@@ -99,7 +99,7 @@ function List({ list }) {
 						<div className="button-flex-container">
 
 							<div className="edit-form-btn-container">
-								{editBtn && <i class="fas fa-cog"></i>}
+								{editBtn && <i className="fas fa-cog"></i>}
 								{editBtn && <button className="edit-form-btn-style" type="button" onClick={updateList}>Edit list</button>}
 							</div>
 
@@ -130,7 +130,7 @@ function List({ list }) {
 							}
 
 							<div className="edit-form-btn-container">
-								{editBtn && <i class="far fa-times-circle"></i>}
+								{editBtn && <i className="far fa-times-circle"></i>}
 								{deleteBtn && <button className="edit-form-btn-style" type="button" onClick={deleteList}>Delete list</button>}
 							</div>
 

@@ -16,7 +16,7 @@ const PageNotFound = () => {
         </div>
 
         <div className='error-image__container'>
-          <img alt='error image' className='error-image' src={errorImg}></img>
+          <img alt='error' className='error-image' src={errorImg}></img>
         </div>
       </div>
     </>

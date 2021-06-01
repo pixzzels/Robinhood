@@ -11,7 +11,7 @@ import flask from '../../images/flask.png';
 import postgresql from '../../images/postgresql.png';
 import docker from '../../images/docker.png';
 import shapes from '../../images/shapes.png';
-import video from '../../images/trade.mp4';
+// import video from '../../images/trade.mp4';
 
 
 
@@ -24,7 +24,7 @@ function SplashPage() {
           <div id="message-wrapper">
             <div id="c1-message1">Investing for Everyone</div>
             <div id="c1-message2">Commission-free investing, plus the tools you need to put your money in motion. Sign up and get your first stock for free. Certain limitations apply.</div>
-            <NavLink to="/sign-up" exact={true} id="splash-signup__link" activeClassName="active">
+            <NavLink to="/sign-up" exact={true} id="splash-signup__link">
               Sign Up
             </NavLink>
             <div id="disclaimer">*Robinhood is connected to stocks from the S&P 500 and is NOT intended for professional use of any kind.</div>

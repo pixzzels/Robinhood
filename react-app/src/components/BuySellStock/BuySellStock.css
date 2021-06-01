@@ -164,6 +164,24 @@
     cursor: pointer;
 }
 
+#add-to-list {
+    border-radius: 5px;
+    border: 2px solid #00C805;
+    background-color: white;
+    color: #00C805;
+    height: 30px;
+    width: 50px;
+    margin-left: 40%;
+    margin-top: 15px;
+}
+
+#add-to-list:hover {
+    background-color: rgba(0, 184, 6, 0.8);
+    color: white;
+    cursor: pointer;
+}
+
+
 #add-to-lists-container {
     margin-top: 5px;
     color: black;
