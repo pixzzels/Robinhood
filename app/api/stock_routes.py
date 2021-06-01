@@ -5,12 +5,7 @@ import requests, json
 import pyEX as p
 import pprint
 
-# API_KEY=pk_7f972a2636b841c489f3cf32f9a06575
-
 stock_routes = Blueprint('stock', __name__)
-
-# c = p.Client(api_token='pk_7f972a2636b841c489f3cf32f9a06575', version='stable')
-
 
 @stock_routes.route('/companyinfo/<symbol>')
 # @login_required
@@ -53,9 +48,6 @@ def stockprices(symbol):
         headquarters = df['city'] + ', ' + df['state']
         company_details[symbol] = {'description': description, 'ceo': ceo, 'employees':employees, 'headquarters': headquarters, 'company_name': df['companyName'], 'price': price, 'change': change, 'priceChange': priceChange, 'stock_id':stock.id}
 
-
-        # pp = pprint.PrettyPrinter(indent=4)
-        # pp.pprint(company_details)
         return company_details
 
     def get_company_statistics(symbol):
@@ -70,9 +62,6 @@ def stockprices(symbol):
         avg_volume = df['avg30Volume']
         companystats[symbol] = {'market_cap': market_cap, 'pe_ratio': pe_ratio, 'div_yield':div_yield, 'avg_volume': avg_volume}
 
-
-        # pp = pprint.PrettyPrinter(indent=4)
-        # pp.pprint(companystats)
         return companystats
 
     def get_company_news(symbol):
@@ -81,7 +70,6 @@ def stockprices(symbol):
         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
         api_url = f'https://cloud.iexapis.com/stable/stock/{symbol}/news/last/5?token={iex_api_key}'
         df = requests.get(api_url).json()
-        # print(df)
         companynews[symbol] = []
         for i in range(len(df)):
             headline = df[i]['headline']
@@ -92,24 +80,17 @@ def stockprices(symbol):
             news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
             companynews[symbol].append(news)
 
-        # pp = pprint.PrettyPrinter(indent=4)
-        # pp.pprint(companynews)
         return companynews
 
     def get_latest_updates(symbol):
 
-        # attributes = ['5d',
-        #             '1m',
-        #             '3m',
-        #             '1y',
-        #             '5y']
+        attributes = ['5d',
+                    '1m',
+                    '3m',
+                    '1y',
+                    '5y']
 
         # REMEMBER TO FIX THIS BEFORE PRODUCTION
-
-        attributes = ['2d',
-                    '3d',
-                    '4d',
-                    '5d',]
 
         stockinfo = {symbol: {}}
 
@@ -141,29 +122,6 @@ def stockprices(symbol):
     stats = get_company_statistics(symbol)
     news = get_company_news(symbol)
     price_history = get_latest_updates(symbol)
-    pp = pprint.PrettyPrinter(indent=4)
-    # pp.pprint(details)
-    # pp.pprint(stats)
     company_details[symbol] = {'company_info': details[symbol], 'company_statistics': stats[symbol], 'company_news': news, 'price_history': price_history}
-    pp.pprint(company_details)
 
     return jsonify(company_details)
-
-# @stock_routes.route('/testing/<symbol>')
-# # @login_required
-# def testing(symbol):
-#     print(symbol)
-#     def get_company_statistics_test(symbol):
-#         companystats = {}
-
-#         iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-#         api_url = f'https://cloud.iexapis.com/stable/search/{symbol}?token={iex_api_key}'
-#         df = requests.get(api_url).json()
-#         # print(df)
-
-
-#         pp = pprint.PrettyPrinter(indent=4)
-#         pp.pprint(df)
-#         # return jsonify(companystats)
-#     get_company_statistics_test(symbol)
-#     # return get_company_statistics(symbol)

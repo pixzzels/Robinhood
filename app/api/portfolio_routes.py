@@ -16,7 +16,6 @@ def load_portfolio(user_id):
 @login_required
 def update_portfolio(user_id):
     portfolio = Portfolio.query.get(user_id)
-    # print("HELP", request.json["cash_balance"])
 
     portfolio.cash_balance = request.json["cash_balance"]
     db.session.add(portfolio)

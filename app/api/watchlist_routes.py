@@ -26,7 +26,6 @@ def load_watchlist(user_id):
 @login_required
 def add_watchlist():
     watchlist = Watchlist(**request.json)
-    # print("watchlist!", watchlist)
 
     db.session.add(watchlist)
     db.session.commit()
@@ -36,7 +35,6 @@ def add_watchlist():
 @watchlist_routes.route("/delete/<int:listId>", methods=["DELETE"])
 @login_required
 def remove_watchlist(listId):
-    # print("TESTING HELLO WORKING?")
     watchlist = Watchlist.query.get(listId)
 
     db.session.delete(watchlist)
@@ -47,7 +45,6 @@ def remove_watchlist(listId):
 @watchlist_routes.route("/update/<int:listId>", methods=["PUT"])
 @login_required
 def update_watchlist(listId):
-    # print("TESTING HELLO WORKING?")
     watchlist = Watchlist.query.get(listId)
 
     watchlist.name = request.json["name"]

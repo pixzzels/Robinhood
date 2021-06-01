@@ -24,11 +24,9 @@ const setPortfolio = (stockInfo) => {
 
 //Thunk
 export const getStockCompany = (symbol) => async (dispatch) => {
-    // console.log(symbol)
     const response = await fetch(`/api/stock/companyinfo/${symbol}`)
     if(response.ok) {
         const companyInfo = await response.json();
-        // console.log(companyInfo)
         dispatch(setStocks(companyInfo))
     }
 }
@@ -50,10 +48,8 @@ const stockReducer = (state = initialState, action) => {
     let newerState;
     switch (action.type) {
         case SET_STOCK:
-            // console.log(action.stock)
             newerState = { ... state }
             newerState.currentStock = action.stock
-            // console.log('newState', newerState)
 
             return newerState
         case SET_PORTFOLIO:

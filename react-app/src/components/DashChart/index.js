@@ -6,9 +6,6 @@ import './DashChart.css'
 // import * as stockReducer from '../../store/stock'
 
 function DashChart({dateRange, history}) {
-  const dispatch = useDispatch();
-  
-
   let lineColor;
   if (history[dateRange][0] > history[dateRange][history[dateRange].length - 1]) {
     lineColor = 'rgb(255, 80, 0)';

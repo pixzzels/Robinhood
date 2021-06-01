@@ -83,24 +83,15 @@ function StockDetail() {
 
                     <div className="chart-container">
                         <Suspense fallback={<div>Loading...</div>}>
-
                             <StockChart dateRange={dateRange} symbol={symbol} history={history}/>
                         </Suspense>
                         <div className="stock-chart-bar">
-                            {/* <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
+                            <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
                             <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1W</button>
                             <button onClick={setDate} value={'1m'} className="stock-timeline-options btn tlbtn">1M</button>
                             <button onClick={setDate} value={'3m'} className="stock-timeline-options btn tlbtn">3M</button>
                             <button onClick={setDate} value={'1y'} className="stock-timeline-options btn tlbtn">1Y</button>
-                            <button onClick={setDate} value={'5y'} className="stock-timeline-options btn tlbtn">5Y</button> */}
-
-                            <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
-                            <button onClick={setDate} value={'2d'} className="stock-timeline-options btn tlbtn">1W</button>
-                            <button onClick={setDate} value={'3d'} className="stock-timeline-options btn tlbtn">1M</button>
-                            <button onClick={setDate} value={'4d'} className="stock-timeline-options btn tlbtn">3M</button>
-                            <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1Y</button>
-                            <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">5Y</button>
-
+                            <button onClick={setDate} value={'5y'} className="stock-timeline-options btn tlbtn">5Y</button>
                         </div>
                     </div>
 

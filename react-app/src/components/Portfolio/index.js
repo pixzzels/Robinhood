@@ -16,7 +16,6 @@ function Portfolio() {
   const [dateRange, setDateRange] = useState('5d');
   const [loading, setLoading] = useState(true)
   const portfolioPerformance = useSelector(state => state.stock.portfolioInfo)
-  // console.log(portfolioPerformance)
 
   const userId = useSelector(state => state.session.user.id)
 

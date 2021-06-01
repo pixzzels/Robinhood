@@ -8,7 +8,6 @@ transaction_routes = Blueprint("Transactions", __name__)
 @login_required
 def load_transactions(user_id):
     transactions = Transaction.query.filter(Transaction.user_id == user_id).all()
-    # print("FLAG", jsonify([transaction.to_dict() for transaction in transactions]))
     return jsonify([transaction.to_dict() for transaction in transactions])
 
 
@@ -22,13 +21,4 @@ def buy_transaction():
     db.session.commit()
     return transaction.to_dict()
 
-
-# @transaction_routes.route("/sell", methods=["POST"])
-# @login_required
-# def sell_transaction():
-#     transaction = Transaction(**request.json)
-
-#     db.session.add(transaction)
-#     db.session.commit()
-#     return transaction.to_dict()
 
