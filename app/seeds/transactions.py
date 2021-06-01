@@ -1,7 +1,7 @@
 from app.models import db, Transaction, transaction
 import datetime
 
-def seed_watchlists():
+def seed_transactions():
 
     transaction = Transaction(
         user_id=1, stock_id=52, order_price=124, order_volume=4, order_type=1, time_created=datetime.datetime.now()
@@ -15,6 +15,6 @@ def seed_watchlists():
 # the auto incrementing primary key
 
 
-def undo_watchlists():
+def undo_transactions():
     db.session.execute('TRUNCATE Watchlists RESTART IDENTITY CASCADE;')
     db.session.commit()
