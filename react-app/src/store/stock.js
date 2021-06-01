@@ -3,6 +3,7 @@
 
 const SET_STOCK = 'stock/setStock'
 const SET_PORTFOLIO = 'stock/setPortfolio'
+const SET_DASH_NEWS = 'dash/setDashNews'
 
 
 //Action Creater
@@ -18,6 +19,13 @@ const setPortfolio = (stockInfo) => {
     return {
         type: SET_PORTFOLIO,
         stockInfo
+    }
+}
+
+const setDashNews = (newsInfo) => {
+    return {
+        type: SET_DASH_NEWS,
+        newsInfo
     }
 }
 
@@ -39,6 +47,14 @@ export const getPortfolioStocks = (userId) => async (dispatch) => {
     }
 }
 
+export const getDashNews = () => async (dispatch) => {
+    const response = await fetch(`/api/dashboard/stocknews`)
+    if(response.ok) {
+        const dashNews = await response.json()
+        dispatch(setDashNews(dashNews))
+    }
+}
+
 
 
 // Reducer
@@ -56,6 +72,11 @@ const stockReducer = (state = initialState, action) => {
             newerState = { ...state }
             newerState.portfolioInfo = action.stockInfo
 
+            return newerState
+        case SET_DASH_NEWS:
+            newerState = { ...state }
+            newerState.dashNews = action.newsInfo
+            
             return newerState
         default:
             return state;

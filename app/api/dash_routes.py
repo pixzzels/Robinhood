@@ -71,22 +71,25 @@ def stock(user):
     return response
 
 
-@dashboard_routes.route('/stockprices', methods=['POST'])
+@dashboard_routes.route('/stocknews')
 # @login_required
 def stockprices():
-    stocks = request.json['stock']
+    print('here')
+    news_list = {'news': []}
 
-    def get_daily_historical_data(symbols):
-        stockinfo = {}
-        for i in symbols:
-            ticker = i
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-            api_url = f'https://cloud.iexapis.com/stable/stock/{ticker}/intraday-prices?token={iex_api_key}'
-            df = requests.get(api_url).json()
-            prices = []
-            for i in range(len(df)):
-                prices.append(df[i]['average'])
-            stockinfo[ticker] = {'prices': prices}
-        return stockinfo
+    iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+    api_url = f'https://cloud.iexapis.com/stable/time-series/news?range=1m&limit=5&token={iex_api_key}'
+    df = requests.get(api_url).json()
+    pp = pprint.PrettyPrinter(indent=4)
+    # pp.pprint(df)
 
-    get_daily_historical_data(stocks)
+    for i in range(len(df)):
+        headline = df[i]['headline']
+        source = df[i]['source']
+        url = df[i]['url']
+        summary = df[i]['summary']
+        image = df[i]['image']
+        news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
+        news_list['news'].append(news)
+    pp.pprint(news_list)
+    return news_list
