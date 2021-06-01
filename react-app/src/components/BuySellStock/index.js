@@ -16,6 +16,7 @@ function BuySellStock({ symbol, price, stockId }) {
     const [cashBalance, setCashBalance] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [watchlistId, setWatchlistId] = useState(0);
     const ref = useRef(null);
 
 
@@ -133,19 +134,25 @@ function BuySellStock({ symbol, price, stockId }) {
         setReviewTransactionDropDown(true);
     }
 
-    const userWatchlists = allLists.map((list => list.name))
-    userWatchlists.shift()
+    // const userWatchlists = allLists.map((list => list.name))
+    // userWatchlists.shift()
 
     const handleAddToLists = (e) => {
         e.preventDefault();
-        userWatchlists.forEach((watchlist => {
-            let curr = document.getElementById(`${watchlist}`)
-            let isChecked = curr.checked
-            if (isChecked) {
-                let watchlistOne = parseInt(curr.value)
-                dispatch(addOneStock({ watchlistOne, stockId }))
-            }
-        }))
+        // let curr = document.getElementById(`${watchlist}`)
+        // let watchlistOne = parseInt(curr.value)
+        const watchlistOne = watchlistId
+        dispatch(addOneStock({ watchlistOne, stockId }))
+
+
+        // userWatchlists.forEach((watchlist => {
+        //     let curr = document.getElementById(`${watchlist}`)
+        //     let isChecked = curr.checked
+        //     if (isChecked) {
+        //         let watchlistOne = parseInt(curr.value)
+        //         dispatch(addOneStock({ watchlistOne, stockId }))
+        //     }
+        // }))
     }
 
     return (
@@ -306,14 +313,15 @@ function BuySellStock({ symbol, price, stockId }) {
                                             return (
                                                 <>
                                                     <div className='list-text-container-2'>
-                                                        <input
-                                                            type="checkbox"
+                                                        <button
+                                                            type="submit"
                                                             className="add-to-list-input"
                                                             name="list-input"
                                                             id={list.name}
                                                             value={list.id}
-                                                        >
-                                                        </input>
+                                                            onClick={()=> setWatchlistId(list.id)}
+                                                        > Add
+                                                        </button>
                                                         <i className="fa fa-building check-symbol-2" aria-hidden="true"></i>
                                                         <label htmlFor="list-input" className='single-list-txt-2'>{list.name}</label>
                                                     </div>
@@ -323,7 +331,7 @@ function BuySellStock({ symbol, price, stockId }) {
                                     </form>
 
                                 </div>
-                                <button type="submit" form="add-stock-to-list" id="add-to-list">Save</button>
+                                {/* <button type="submit" form="add-stock-to-list" id="add-to-list">Save</button> */}
                             </div>
                         }
                     </div>
