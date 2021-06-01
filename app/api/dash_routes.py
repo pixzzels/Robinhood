@@ -3,114 +3,93 @@ from typing import Dict
 from flask import Blueprint, jsonify, session, request
 from requests.models import ReadTimeoutError
 from flask_login import login_required
-from app.models import User, Stock, Portfolio, Transaction, Watchlist, List
+from app.models import User, Stock, Portfolio, Transaction, Watchlist, List, transaction
 import requests, json
 import pyEX as p
 import pprint
 
-# API_KEY=pk_7f972a2636b841c489f3cf32f9a06575
-
 dashboard_routes = Blueprint('dashboard', __name__)
 
-# c = p.Client(api_token='pk_7f972a2636b841c489f3cf32f9a06575', version='stable')
-
-@dashboard_routes.route('/stockinfo', methods=['POST'])
+@dashboard_routes.route('/stockinfo/<int:user>')
 # @login_required
-def stock():
+def stock(user):
+    stocks = []
+    prices = {'1d': [], '5d': [], '1m': [], '3m': [], '1y': [], '5y': [], 'stock_amount': {'total': 0}}
+    temp = Transaction.query.filter_by(user_id=user).all()
+    for i in range(len(temp)):
+        temp2 = temp[i].to_dict()
+        if temp2['stock_id']['ticker'] not in stocks:
+            stocks.append(temp2['stock_id']['ticker'])
+            prices['stock_amount'] = {**prices['stock_amount'], temp2['stock_id']['ticker']: temp2['order_volume']}
+        elif temp2['stock_id']['ticker'] in stocks:
+            prices['stock_amount'][temp2['stock_id']['ticker']] += temp2['order_volume']
 
-    stocks = request.json['stock']
-
-
+    for stock in stocks:
+        iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+        api_url = f'https://cloud.iexapis.com/stable/stock/{stock}/price?token={iex_api_key}'
+        df2 = requests.get(api_url).json()
+        prices['stock_amount']['total'] += df2 * prices['stock_amount'][stock]
 
     def get_latest_updates(symbols):
-        # print(symbols)
-        for i in symbols:
-            ticker = i
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-            api_url = f'https://cloud.iexapis.com/stable/stock/{ticker}/quote?token={iex_api_key}'
+        seperator = ','
+
+
+        attributes = ['1d',
+                    '5d',
+                    '1m',
+                    '3m',
+                    '1y',
+                    '5y']
+
+
+        for date_range in attributes:
+
+
+            api_url = f'https://cloud.iexapis.com/stable/stock/market/batch?symbols={seperator.join(symbols)}&types=chart&filter=close&range={date_range}&token={iex_api_key}'
             df = requests.get(api_url).json()
-            attributes = ['symbol',
-                        'latestPrice',
-                        'change']
-            # for i in attributes:
-            #     print(df[i])
-            # print('--------------\n')
-    get_latest_updates(stocks)
+
+            for symbol in symbols:
+                if len(prices[date_range]) == 0:
+                    for i in range(len(df[symbol]['chart'])):
+                        prices[date_range].append(df[symbol]['chart'][i]['close'])
+
+                elif len(prices[date_range]):
+                    for i in range(len(prices[date_range])):
+                        if prices[date_range][i] == None:
+                            prices[date_range][i] = df[symbol]['chart'][i]['close']
+                        elif df[symbol]['chart'][i]['close'] == None:
+                            continue
+                        else:
+                            prices[date_range][i] += df[symbol]['chart'][i]['close']
 
 
 
-@dashboard_routes.route('/stockprices', methods=['POST'])
+        return prices
+
+
+    response = get_latest_updates(stocks)
+    return response
+
+
+@dashboard_routes.route('/stocknews')
 # @login_required
 def stockprices():
-    stocks = request.json['stock']
+    print('here')
+    news_list = {'news': []}
 
-    def get_daily_historical_data(symbols):
-        stockinfo = {}
-        for i in symbols:
-            ticker = i
-            iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-            api_url = f'https://cloud.iexapis.com/stable/stock/{ticker}/intraday-prices?token={iex_api_key}'
-            df = requests.get(api_url).json()
-            prices = []
-            for i in range(len(df)):
-                prices.append(df[i]['average'])
-            # print(prices)
-            # print('--------------\n')
-            # print(stockinfo)
-            stockinfo[ticker] = {'prices': prices}
-        return stockinfo
+    iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
+    api_url = f'https://cloud.iexapis.com/stable/time-series/news?range=1m&limit=5&token={iex_api_key}'
+    df = requests.get(api_url).json()
+    pp = pprint.PrettyPrinter(indent=4)
+    # pp.pprint(df)
 
-    get_daily_historical_data(stocks)
-
-
-        # def get_historic_data(symbol):
-    #     ticker = symbol
-    #     iex_api_key = 'pk_7f972a2636b841c489f3cf32f9a06575'
-    #     api_url = f'https://cloud.iexapis.com/stable/stock/{ticker}/chart/max?token={iex_api_key}'
-    #     df = requests.get(api_url).json()
-
-    #     date = []
-    #     open = []
-    #     high = []
-    #     low = []
-    #     close = []
-
-    #     for i in range(len(df)):
-    #         date.append(df[i]['date'])
-    #         open.append(df[i]['open'])
-    #         high.append(df[i]['high'])
-    #         low.append(df[i]['low'])
-    #         close.append(df[i]['close'])
-
-    # NEWS
-    # sym='GS'
-    # df = c.newsDF(symbol=sym, count=10)[['headline', 'source']]
-
-    # OUTPUT
-
-    # datetime                headline                                            source
-    # 2020-07-22 03:22:10.000 Snapʼs (SNAP) CEO Evan Spiegel on Q2 2020 Resu...   Seeking Alpha
-    # 2020-07-21 19:58:38.000 Slack board member and former Goldman Sachs ex...   Fortune
-    # 2020-07-21 16:03:21.498 Former Goldman Sachs Exec Tabbed as USOPC Comp...   New York Times
-    # 2020-07-21 15:15:25.000 High Voltage? Some Wonder If Teslaʼs High Flyi...   Benzinga Feeds
-    # 2020-07-21 15:03:12.000 The 5 slides that the public was never suppose...   Business Insider
-    # 2020-07-21 13:29:08.000 Goldman Sachs Has the Right Stuff to Make Mone...   The Street RealMoney
-    # 2020-07-21 12:00:00.000 Weʼre seeking nominations for the 2020 Rising ...   Business Insider
-    # 2020-07-21 10:02:53.000 AI startup Eigen says the coronavirus recessio...   Business Insider
-    # 2020-07-21 09:13:10.000 Finance professionals not keen on getting back...   PrivateEquityWire
-    # 2020-07-21 08:15:26.000 Goldman Execs Enter Malaysia for 1MDB Negotiat...   Finews.Asia
-
-
-    # REDUX STORE ROUTE
-
-    # const handleClick = async () => {
-    #     await fetch('/api/dashboard/stockinfo', {
-    #         method: 'POST',
-    #         headers: {
-    #             'Content-Type':'application/json'
-    #         },
-    #         body: JSON.stringify({
-    #             stock: ['SNAP', 'AAPL', 'TWTR']
-    #         }),
-    #     })
-    # }
+    for i in range(len(df)):
+        headline = df[i]['headline']
+        source = df[i]['source']
+        url = df[i]['url']
+        summary = df[i]['summary']
+        image = df[i]['image']
+        news = {'headline': headline, 'source': source, 'url':url, 'summary': summary, 'image': image}
+        news_list['news'].append(news)
+    pp.pprint(news_list)
+    return news_list

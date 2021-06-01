@@ -127,8 +127,6 @@ function BuySellStock({ symbol, price, stockId }) {
         setBuySell(true);
         let input = document.querySelector(".bs-share-input");
         input.value = '';
-        // console.log("userId:", userId, "stockId:", stockId, "orderPrice:", orderPrice, "orderVolume:", orderVolume, "orderType:", orderType)
-
     }
 
     const handleReviewTransaction = () => {
@@ -137,7 +135,6 @@ function BuySellStock({ symbol, price, stockId }) {
 
     const userWatchlists = allLists.map((list => list.name))
     userWatchlists.shift()
-    console.log("userWatchlists", userWatchlists)
 
     const handleAddToLists = (e) => {
         e.preventDefault();
@@ -147,10 +144,7 @@ function BuySellStock({ symbol, price, stockId }) {
             if (isChecked) {
                 let watchlistOne = parseInt(curr.value)
                 dispatch(addOneStock({ watchlistOne, stockId }))
-                // console.log("watchlistId:", watchlistOne, "stockId", stockId)
             }
-            // console.log("checked", curr.checked)
-            // console.log("curr", curr)
         }))
     }
 
@@ -312,7 +306,6 @@ function BuySellStock({ symbol, price, stockId }) {
                                             return (
                                                 <>
                                                     <div className='list-text-container-2'>
-                                                        {/* {console.log(list)} */}
                                                         <input
                                                             type="checkbox"
                                                             className="add-to-list-input"

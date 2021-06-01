@@ -16,7 +16,6 @@ function AccountHistory() {
         return trans.reverse();
     })
 
-    // console.log(transactions)
 
     useEffect(() => {
         dispatch(loadTransactions(userId))

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { loadPortfolio, updateCashBalance } from '../../store/portfolio';
 import { Modal } from '../../context/Modal';
 import './Portfolio.css'
+import DashChart from '../DashChart';
+import * as stockReducer from '../../store/stock'
 
 function Portfolio() {
   const dispatch = useDispatch();
@@ -11,7 +13,9 @@ function Portfolio() {
   const [cashBalance, setCashBalance] = useState(0)
   const [refresh, setRefresh] = useState(false)
   const [showDepositModal, setShowDepositModal] = useState(false);
-  // console.log(funds)
+  const [dateRange, setDateRange] = useState('5d');
+  const [loading, setLoading] = useState(true)
+  const portfolioPerformance = useSelector(state => state.stock.portfolioInfo)
 
   const userId = useSelector(state => state.session.user.id)
 
@@ -25,11 +29,17 @@ function Portfolio() {
     dispatch(loadPortfolio(userId))
 }, [dispatch])
 
+  useEffect(() => {
+    dispatch(stockReducer.getPortfolioStocks(userId)).then(setLoading(false))
+  }, [dispatch])
+
 if (!portfolioInfo) return null;
 if (!refresh && cashBalance === 0) {
   setCashBalance(portfolioInfo.cash_balance)
   setRefresh(true)
 }
+
+  const setDate = (e) => setDateRange(e.target.value);
 
   const buyingPowerExpand = () => {
     setbpDivExpand(!bpDivExpand)
@@ -57,34 +67,25 @@ if (!refresh && cashBalance === 0) {
     setShowDepositModal(!showDepositModal)
   }
 
+  if(!portfolioPerformance) {
+		return null
+	}
+
   return (
     <div className="portfolio-container">
       <div className="total-investment">
-        $400.34
+        ${portfolioPerformance.stock_amount.total}
                 </div>
       <div className="portfolio-timeline">
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-        | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-
-                </div>
+        <DashChart dateRange={dateRange} history={portfolioPerformance}/>
+      </div>
       <div className="portfolio-timeline-bar">
-        <button className="portfolio-timeline-options btn tlbtn">1D</button>
-        <button className="portfolio-timeline-options btn tlbtn">1W</button>
-        <button className="portfolio-timeline-options btn tlbtn">1M</button>
-        <button className="portfolio-timeline-options btn tlbtn">1Y</button>
-        <button className="portfolio-timeline-options btn tlbtn">ALL</button>
-
+        <button onClick={setDate} value={'1d'} className="stock-timeline-options btn tlbtn">1D</button>
+        <button onClick={setDate} value={'5d'} className="stock-timeline-options btn tlbtn">1W</button>
+        <button onClick={setDate} value={'1m'} className="stock-timeline-options btn tlbtn">1M</button>
+        <button onClick={setDate} value={'3m'} className="stock-timeline-options btn tlbtn">3M</button>
+        <button onClick={setDate} value={'1y'} className="stock-timeline-options btn tlbtn">1Y</button>
+        <button onClick={setDate} value={'5y'} className="stock-timeline-options btn tlbtn">5Y</button>
       </div>
       <button className={"buying-power-container-btn " + (bpDivExpand ? 'grey' : '')} type="button" onClick={buyingPowerExpand}>
         <div className={"buying-power-header " + (bpDivExpand ? 'grey' : '')}>
