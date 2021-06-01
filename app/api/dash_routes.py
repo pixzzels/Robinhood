@@ -46,6 +46,7 @@ def stock(user):
 
 
             api_url = f'https://cloud.iexapis.com/stable/stock/market/batch?symbols={seperator.join(symbols)}&types=chart&filter=close&range={date_range}&token={iex_api_key}'
+            print(seperator.join(symbols))
             df = requests.get(api_url).json()
 
             for symbol in symbols:
