@@ -195,7 +195,7 @@ function BuySellStock({ symbol, price, stockId }) {
                                         className="bs-share-input"
                                         type="number"
                                         min="0"
-                                        max={shares > 0 ? shares : 1000000}
+                                        // max={shares > 0 ? shares : 1000000}
                                         placeholder="0"
                                         onChange={(e) => {
                                             setShares(e.target.value)
@@ -323,7 +323,7 @@ function BuySellStock({ symbol, price, stockId }) {
                                     </form>
 
                                 </div>
-                                <button type="submit" form="add-stock-to-list">Save</button>
+                                <button type="submit" form="add-stock-to-list" id="add-to-list">Save</button>
                             </div>
                         }
                     </div>

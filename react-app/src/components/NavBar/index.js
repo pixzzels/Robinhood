@@ -37,7 +37,7 @@ const NavBar = () => {
     <nav className="nav-wrapper">
 
       <div className="portfolio-nav__links">
-        <NavLink to="/dashboard" exact={true} id="home-link" activeClassName="active">
+        <NavLink to="/dashboard" exact={true} id="home-link">
           <img src={blackleaf} alt='black leaf logo' id='blackleaf'></img>
         </NavLink>
       </div>
@@ -48,13 +48,13 @@ const NavBar = () => {
 
       <div className="right-nav-container">
         <div className="portfolio-nav__links">
-          <NavLink to="/dashboard" exact={true} id="portfolio-link" activeClassName="active">
+          <NavLink to="/dashboard" exact={true} id="portfolio-link">
             Portfolio
           </NavLink>
         </div>
 
         <div className="portfolio-nav__links">
-          <a href="https://github.com/pixzzels/Robinhood" target="_blank" id="github-link" activeClassName="active">
+          <a href="https://github.com/pixzzels/Robinhood" rel="noopener noreferrer" target="_blank" id="github-link">
             Our GitHub Repository
           </a>
         </div>
@@ -81,19 +81,19 @@ const NavBar = () => {
             </div>
 
             <div className="drop-container2">
-              <NavLink to="/account" exact={true} activeClassName="active" className="account-list history-link">
-                <i class="fas fa-toolbox drop-icon"></i>
+              <NavLink to="/account" exact={true} className="account-list history-link">
+                <i className="fas fa-toolbox drop-icon"></i>
                 Account
               </NavLink>
 
-              <NavLink to="/history" exact={true} activeClassName="active" className="account-list history-link">
-                <i class="fas fa-history drop-icon"></i>
+              <NavLink to="/history" exact={true} className="account-list history-link">
+                <i className="fas fa-history drop-icon"></i>
                 History
                </NavLink>
             </div>
 
             <div className="drop-container3 account-list">
-              <i class="fas fa-sign-out-alt drop-icon"></i>
+              <i className="fas fa-sign-out-alt drop-icon"></i>
               <LogoutButton />
             </div>
 

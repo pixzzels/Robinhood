@@ -9,7 +9,7 @@ function NewsStory({news, symbol}) {
             {stories.map((story) => {
                 return (
                     <div className="news-container" key={Math.random()}>
-                        <a href={story.url} target="_blank">
+                        <a href={story.url} rel="noopener noreferrer" target="_blank">
                             <div className="news-story">
                                 <div className="story-info">
                                     <div id="story-origin">{story.source}</div>
@@ -17,7 +17,7 @@ function NewsStory({news, symbol}) {
                                     <div id="story-content">{story.summary.slice(0, 140)}...</div>
                                 </div>
                                 <div id="story-image">
-                                    <img src={story.image} id="story-img"></img>
+                                    <img src={story.image} alt='news story' id="story-img"></img>
                                 </div>
                             </div>
                         </a>
