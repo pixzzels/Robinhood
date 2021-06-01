@@ -330,7 +330,7 @@ function BuySellStock({ symbol, price, stockId }) {
                                     </form>
 
                                 </div>
-                                <button type="submit" form="add-stock-to-list">Save</button>
+                                <button type="submit" form="add-stock-to-list" id="add-to-list">Save</button>
                             </div>
                         }
                     </div>
