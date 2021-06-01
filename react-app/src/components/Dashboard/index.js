@@ -24,7 +24,7 @@ function Dashboard() {
 				<div className="dashboard__watchlist-wrapper">
 					<Watchlist />
 				</div>
-				<div>
+				<div className="dashboard__news-wrapper">
 					<DashNews />
 				</div>
 

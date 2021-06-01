@@ -3,7 +3,7 @@
     padding: 100px 0px 0px;
     
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
     height: 100vh;
     
@@ -14,9 +14,17 @@
     grid-column: 1/3;
 }
 
+.dashboard__news-wrapper {
+    grid-column: 1/3;
+}
+
 .dashboard__watchlist-wrapper {
     grid-column: 3/4;
+    padding-left: 60px;
+    margin-left: 150px;
+    /* border: red solid 1px; */
 }
+
 
 .grey {
     background-color: rgb(240, 240, 240);
