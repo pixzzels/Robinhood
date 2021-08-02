@@ -17,9 +17,10 @@
 }
 
 #blackleaf{
-  padding: 0px 15px;
+  padding: 10px 15px;
+  padding-bottom: 0px;
   height: 71px;
-  filter: brightness(0%);
+  /* filter: brightness(0%); */
   position: relative;
   bottom: 20px;
 
