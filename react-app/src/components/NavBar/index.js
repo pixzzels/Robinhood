@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
-import blackleaf from '../../images/robinhood-2.svg';
+import blackleaf from '../../images/black-leaf.png';
 import Search from '../Search/index';
 
 const NavBar = () => {
